@@ -27,9 +27,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // this line hides the top bar
-        getSupportActionBar().hide();
-
         setContentView((R.layout.activity_login));
 
         etUsername = findViewById((R.id.etUsername));
