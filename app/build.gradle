@@ -38,4 +38,8 @@ dependencies {
 
     implementation 'com.parse:parse-android:1.17.3'
 
+    // for the recyclerview in room page
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    // for swiping
+    implementation 'com.lorentzos.swipecards:library:X.X.X@aar'
 }

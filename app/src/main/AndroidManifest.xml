@@ -29,6 +29,15 @@
         <activity android:name=".MainActivity">
 
         </activity>
+
+        <activity android:name=".RoomActivity">
+        </activity>
+
+        <activity android:name=".CommentActivity">
+        </activity>
+
+        <activity android:name=".SwipeActivity">
+        </activity>
     </application>
 
 </manifest>
