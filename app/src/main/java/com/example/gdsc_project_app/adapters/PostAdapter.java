@@ -1,5 +1,6 @@
 package com.example.gdsc_project_app.adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import com.example.gdsc_project_app.R;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
 
+    // TODO: resolve "Cannot resolve symbol 'Post' error
     Context context;
     List<Post> posts;
 
