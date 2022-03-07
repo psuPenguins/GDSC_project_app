@@ -37,6 +37,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     implementation 'com.parse:parse-android:1.17.3'
+
+    // for the recyclerview in room page
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
 
 }
