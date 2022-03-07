@@ -40,5 +40,6 @@ dependencies {
 
     // for the recyclerview in room page
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
-
+    // for swiping
+    implementation 'com.mindorks:placeholderview:0.7.3'
 }
