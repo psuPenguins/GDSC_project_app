@@ -35,4 +35,16 @@
         android:textSize="12sp"
         tools:text="I love pizza." />
 
+    <Button
+        android:id="@+id/buttonViewReply"
+        android:layout_width="wrap_content"
+        android:layout_height="33dp"
+        android:layout_below="@+id/tvPostContent"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:text="Replies"
+        android:textSize="11sp"
+        app:iconTint="#03A9F4" />
+
 </RelativeLayout>
