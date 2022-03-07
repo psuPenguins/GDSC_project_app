@@ -15,7 +15,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" />
 
-    // not sure what the swipe indicators are for but the example had them
+    <!-- not sure what the swipe indicators are for but the example had them-->
     <View
         android:id="@+id/item_swipe_left_indicator"
         android:layout_width="20dp"
