@@ -1,22 +1,19 @@
 package com.example.gdsc_project_app;
 
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Bundle;
-import android.util.Log;
+public class CommentActivity extends AppCompatActivity {
 
-
-public class MainActivity extends AppCompatActivity {
-
-    public static final String TAG = "MainActivity";
+    public static final String TAG = "CommentActivity";
 
     //TODO: create private variables (btn, tv..)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Log.i(TAG, "I'm in MainActivity");
+        setContentView((R.layout.activity_comment));
 
         // TODO: link the private variables to the elements in the xml files
     }
