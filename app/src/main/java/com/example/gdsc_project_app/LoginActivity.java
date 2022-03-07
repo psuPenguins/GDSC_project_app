@@ -60,6 +60,7 @@ public class LoginActivity extends AppCompatActivity {
     }
     private void goMainActivity(){
         Intent i = new Intent(this, MainActivity.class);
+        Log.i(TAG, "Going into MainActivity");
         startActivity(i);
     }
 
