@@ -36,7 +36,7 @@
         tools:text="I love pizza." />
 
     <Button
-        android:id="@+id/buttonViewReply"
+        android:id="@+id/btnViewReply"
         android:layout_width="wrap_content"
         android:layout_height="33dp"
         android:layout_below="@+id/tvPostContent"
