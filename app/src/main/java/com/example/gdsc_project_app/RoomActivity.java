@@ -17,7 +17,7 @@ public class RoomActivity extends AppCompatActivity {
     //TODO: create private variables (btn, tv..)
     private Button btnViewReply;
     private Button btnReturnFromRoom;
-    private FloatingActionButton btnPost;
+    private FloatingActionButton btnAddPost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +28,7 @@ public class RoomActivity extends AppCompatActivity {
         // link the private variables to the elements in the xml files
         btnViewReply = findViewById(R.id.btnViewReply);
         btnReturnFromRoom = findViewById(R.id.btnReturnFromRoom);
-        btnPost = findViewById(R.id.btnPost);
+        btnAddPost = findViewById(R.id.btnAddPost);
 
         // create onclicklistener for the button to the change the activity
         //btnViewReply.setOnClickListener(new View.OnClickListener() {
@@ -47,7 +47,7 @@ public class RoomActivity extends AppCompatActivity {
             }
         });
 
-        btnPost.setOnClickListener(new View.OnClickListener() {
+        btnAddPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View view){
                 Log.i(TAG, "onClick post button");
