@@ -38,6 +38,9 @@
 
         <activity android:name=".SwipeActivity">
         </activity>
+
+        <activity android:name=".PostActivity">
+        </activity>
     </application>
 
 </manifest>

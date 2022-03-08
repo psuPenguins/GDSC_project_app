@@ -47,4 +47,7 @@ dependencies {
     implementation 'com.mindorks.android:placeholderview:1.0.3'
     annotationProcessor 'com.mindorks.android:placeholderview-compiler:1.0.3'
     // implementation 'com.android.support:recyclerview-v7:<current-version>'
+
+    // for floating action button
+    implementation 'com.google.android.material:material:1.5.0-alpha02'
 }
