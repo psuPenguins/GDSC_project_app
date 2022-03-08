@@ -9,6 +9,8 @@
         android:id="@+id/imageView"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="-2dp"
         tools:srcCompat="@tools:sample/avatars[2]" />
@@ -31,7 +33,7 @@
         android:id="@+id/tvPostingName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_alignTop="@+id/imageView"
         android:layout_marginStart="5dp"
         android:layout_marginTop="0dp"
         android:layout_toEndOf="@+id/imageView"
@@ -51,9 +53,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tiContentInput"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="0dp">
-        </com.google.android.material.textfield.TextInputEditText>
+            android:layout_height="80dp"
+            android:layout_marginStart="0dp"></com.google.android.material.textfield.TextInputEditText>
     </com.google.android.material.textfield.TextInputLayout>
 
 </RelativeLayout>
