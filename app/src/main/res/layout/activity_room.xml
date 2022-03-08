@@ -24,7 +24,7 @@
         android:layout_marginTop="55dp"
         android:textSize="24sp"
         android:textStyle="bold"
-        tools:text="@string/strRoomTopic"/>
+        tools:text="@string/strRoomTopic" />
 
     <Button
         android:id="@+id/btnReturnFromRoom"

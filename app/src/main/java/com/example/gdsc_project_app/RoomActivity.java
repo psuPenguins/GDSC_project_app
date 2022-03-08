@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,6 +19,7 @@ public class RoomActivity extends AppCompatActivity {
     private Button btnViewReply;
     private Button btnReturnFromRoom;
     private FloatingActionButton btnAddPost;
+    private TextView tvRoomTopic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,9 @@ public class RoomActivity extends AppCompatActivity {
         btnViewReply = findViewById(R.id.btnViewReply);
         btnReturnFromRoom = findViewById(R.id.btnReturnFromRoom);
         btnAddPost = findViewById(R.id.btnAddPost);
+        tvRoomTopic = findViewById(R.id.tvRoomTopic);
+
+        tvRoomTopic.setText("Topic: Food");
 
         // create onclicklistener for the button to the change the activity
         //btnViewReply.setOnClickListener(new View.OnClickListener() {

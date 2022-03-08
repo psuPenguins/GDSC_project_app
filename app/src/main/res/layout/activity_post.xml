@@ -28,7 +28,7 @@
         tools:layout_editor_absoluteX="310dp" />
 
     <TextView
-        android:id="@+id/tvUserName"
+        android:id="@+id/tvPostingName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -42,7 +42,7 @@
         android:id="@+id/tiContentLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvUserName"
+        android:layout_below="@+id/tvPostingName"
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
         android:layout_toEndOf="@+id/imageView"
@@ -52,8 +52,7 @@
             android:id="@+id/tiContentInput"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="0dp">
-        </com.google.android.material.textfield.TextInputEditText>
+            android:layout_marginStart="0dp"></com.google.android.material.textfield.TextInputEditText>
     </com.google.android.material.textfield.TextInputLayout>
 
 </RelativeLayout>
