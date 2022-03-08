@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         Log.i(TAG, "Going into SwipeActivity");
         startActivity(i);
     }
+
     private void goRoomActivity(){
         Intent i = new Intent(this, RoomActivity.class);
         Log.i(TAG, "Going into RoomActivity");
