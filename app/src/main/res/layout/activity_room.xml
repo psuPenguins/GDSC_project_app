@@ -7,7 +7,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvPosts"
         android:layout_width="match_parent"
-        android:layout_height="600dp"
+        android:layout_height="700dp"
         android:layout_marginStart="0dp"
         android:layout_marginTop="100dp"
         android:layout_marginEnd="0dp"
@@ -23,7 +23,7 @@
         android:layout_marginTop="55dp"
         android:textSize="24sp"
         android:textStyle="bold"
-        tools:text="Topic: Food" />
+        tools:text="@string/strRoomTopic"/>
 
     <Button
         android:id="@+id/btnReturnFromRoom"
@@ -33,6 +33,14 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="1dp"
         android:layout_marginTop="0dp"
-        android:text="Back"
+        android:text="@string/strReturnFromRoom"
         android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/btnPost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:text="@string/strAddPost"/>
 </RelativeLayout>

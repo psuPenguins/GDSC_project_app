@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">GDSC_project_app</string>
+
+    // for activity_room
+    <string name="strAddPost">+</string>
+    <string name="strReturnFromRoom">Back</string>
+    <string name="strRoomTopic">Topic: Food</string>
+
+    // for item_Post
+    <string name="strViewReply">Replies</string>
 </resources>
