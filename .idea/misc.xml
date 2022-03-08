@@ -3,17 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Chen-Kuan Liao/GDSC_project_app/app/src/main/res/layout/activity_comment.xml" value="0.259375" />
-        <entry key="..\:/Users/Chen-Kuan Liao/GDSC_project_app/app/src/main/res/layout/activity_room.xml" value="0.259375" />
-        <entry key="..\:/Users/Chen-Kuan Liao/GDSC_project_app/app/src/main/res/layout/item_post.xml" value="0.259375" />
         <entry key="..\:/Users/Chen-Kuan Liao/android apps/app/src/main/res/layout/activity_main.xml" value="0.259375" />
-        <entry key="..\:/Users/vedtw/StudioProjects/GDSC_project_app/app/src/main/res/layout/activity_comment.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/vedtw/StudioProjects/GDSC_project_app/app/src/main/res/layout/activity_main.xml" value="0.264" />
-        <entry key="..\:/Users/vedtw/StudioProjects/GDSC_project_app/app/src/main/res/layout/activity_room.xml" value="0.23854166666666668" />
-        <entry key="..\:/Users/vedtw/StudioProjects/GDSC_project_app/app/src/main/res/layout/activity_swipe.xml" value="0.23854166666666668" />
-        <entry key="..\:/Users/vedtw/StudioProjects/GDSC_project_app/app/src/main/res/layout/item_comment.xml" value="0.264" />
-        <entry key="..\:/Users/vedtw/StudioProjects/GDSC_project_app/app/src/main/res/layout/item_post.xml" value="0.25416666666666665" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/selin/AndroidStudioProjects/GDSC_project_app/app/src/main/res/drawable/ic_android.xml" value="0.176" />
+        <entry key="..\:/Users/selin/AndroidStudioProjects/GDSC_project_app/app/src/main/res/layout/activity_comment.xml" value="0.17916666666666667" />
+        <entry key="..\:/Users/selin/AndroidStudioProjects/GDSC_project_app/app/src/main/res/layout/activity_login.xml" value="0.15416666666666667" />
+        <entry key="..\:/Users/selin/AndroidStudioProjects/GDSC_project_app/app/src/main/res/layout/activity_main.xml" value="0.17916666666666667" />
+        <entry key="..\:/Users/selin/AndroidStudioProjects/GDSC_project_app/app/src/main/res/layout/activity_post.xml" value="0.4466666666666667" />
+        <entry key="..\:/Users/selin/AndroidStudioProjects/GDSC_project_app/app/src/main/res/layout/activity_room.xml" value="0.1" />
+        <entry key="..\:/Users/selin/AndroidStudioProjects/GDSC_project_app/app/src/main/res/layout/activity_swipe.xml" value="0.1" />
+        <entry key="..\:/Users/selin/AndroidStudioProjects/GDSC_project_app/app/src/main/res/layout/item_post.xml" value="0.22" />
       </map>
     </option>
   </component>

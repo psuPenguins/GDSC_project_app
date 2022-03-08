@@ -8,4 +8,8 @@
 
     // for item_Post
     <string name="strViewReply">Replies</string>
+
+    // for activity_post
+    <string name="strMakePost">Post</string>
+    <string name="strPostHint">description..."</string>
 </resources>
