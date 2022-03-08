@@ -11,6 +11,18 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
+
+        <!-- for add post button in room screen-->
+        <item name="floatingActionButtonStyle">@style/FloatingActionButtonStyle</item>
+
+    </style>
+
+    <!-- for add post button in room screen-->
+    <style name="FloatingActionButtonStyle" parent="Widget.Design.FloatingActionButton">
+        <item name="shapeAppearanceOverlay">@style/Circle</item>
+    </style>
+
+    <style name="Circle" parent="ShapeAppearance.Material3.SmallComponent">
+        <item name="cornerSize">50%</item>
     </style>
 </resources>

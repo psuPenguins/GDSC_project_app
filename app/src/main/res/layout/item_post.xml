@@ -43,7 +43,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="5dp"
-        android:text="Replies"
+        android:text="@string/strViewReply"
         android:textSize="11sp"
         app:iconTint="#03A9F4" />
 
