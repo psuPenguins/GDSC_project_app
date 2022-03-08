@@ -1,6 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:background="#D7332E2E">
+    <!--Add context to link (tools:context=".CommentItem)-->
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/tvUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:text="Username here"
+        android:textSize="14dp" />
+
+    <TextView
+        android:id="@+id/tvTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="10dp"
+        android:text="Time comes here"
+        android:textSize="14dp" />
+
+    <TextView
+        android:id="@+id/tvCommentText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvUsername"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toLeftOf="@id/rgVote"
+        android:text="CommentComesHere" />
+
+    <RadioGroup
+        android:id="@+id/rgVote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvTime"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="10dp">
+
+        <RadioButton
+            android:id="@+id/rbPromote"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:button="@android:drawable/ic_input_add"
+            android:textSize="10sp" />
+
+        <RadioButton
+            android:id="@+id/rbDemote"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:button="@android:drawable/ic_delete"
+            android:textAlignment="center"
+            android:textSize="10sp" />
+    </RadioGroup>
+
+
+</RelativeLayout>
