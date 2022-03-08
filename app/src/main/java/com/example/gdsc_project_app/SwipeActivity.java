@@ -28,7 +28,7 @@ public class SwipeActivity extends AppCompatActivity {
         someContext = getApplicationContext();
 
         swipeView.getBuilder()
-                .setSwipeType(SwipePlaceHolderView.SWIPE_TYPE_DEFAULT);
+                .setSwipeType(SwipePlaceHolderView.SWIPE_TYPE_HORIZONTAL);
 
         // question samples
         questions = new ArrayList<>();
