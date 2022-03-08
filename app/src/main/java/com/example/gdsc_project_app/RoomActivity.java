@@ -8,6 +8,8 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 public class RoomActivity extends AppCompatActivity {
 
     public static final String TAG = "RoomActivity";
@@ -15,7 +17,7 @@ public class RoomActivity extends AppCompatActivity {
     //TODO: create private variables (btn, tv..)
     private Button btnViewReply;
     private Button btnReturnFromRoom;
-    private Button btnPost;
+    private FloatingActionButton btnPost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
