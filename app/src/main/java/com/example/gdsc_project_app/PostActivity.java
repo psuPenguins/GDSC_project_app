@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +22,7 @@ public class PostActivity extends AppCompatActivity {
     private TextView tvPostingName;
     private TextInputEditText tiContentInput;
     private TextInputLayout tiContentLayout;
+    private ImageView ivPostUserPic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +31,12 @@ public class PostActivity extends AppCompatActivity {
         Log.i(TAG, "I'm in PostActivity");
 
         // link the private variables to the elements in the xml files
+
         btnMakePost=findViewById(R.id.btnMakePost);
         tvPostingName=findViewById(R.id.tvPostingName);
         tiContentInput=findViewById(R.id.tiContentInput);
         tiContentLayout=findViewById(R.id.tiContentLayout);
+        ivPostUserPic=findViewById(R.id.ivPostUserPic);
 
         tvPostingName.setText("Doggo371");
 
