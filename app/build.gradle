@@ -41,7 +41,7 @@ dependencies {
     // for the recyclerview in room page
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     // for swiping
-    implementation 'com.mindorks:placeholderview:0.7.3'
+    implementation 'com.mindorks.android:placeholderview:1.0.3'
     annotationProcessor 'com.mindorks.android:placeholderview-compiler:1.0.3'
-    // implementation 'com.android.support:recyclerview-v7:<current-version>'   
+    // implementation 'com.android.support:recyclerview-v7:<current-version>'
 }

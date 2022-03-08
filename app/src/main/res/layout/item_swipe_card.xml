@@ -1,36 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_gravity="center"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/helloText"
-        android:textSize="20sp"
-        android:textColor="@android:color/white"
-        android:background="#E339"
-        android:gravity="center"
-        tools:text="Question"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" />
-
-    <!-- not sure what the swipe indicators are for but the example had them-->
-    <View
-        android:id="@+id/item_swipe_left_indicator"
-        android:layout_width="20dp"
-        android:layout_height="16dp"
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_margin="10dp"
-        android:alpha="0"
-        android:background="#A5F" />
+        android:background="@color/white"
+        android:orientation="vertical"
+        app:cardCornerRadius="7dp"
+        app:cardElevation="4dp"
+        app:cardPreventCornerOverlap="false">
+<!--
+        <ImageView
+            android:id="@+id/imageForQuestion"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY" />
 
-    <View
-        android:id="@+id/item_swipe_right_indicator"
-        android:alpha="0"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_margin="10dp"
-        android:layout_gravity="right"
-        android:background="#5AF" />
+-->
+        <TextView
+            android:id="@+id/questionText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:gravity = "center"/>
 
+    </androidx.cardview.widget.CardView>
 </FrameLayout>
