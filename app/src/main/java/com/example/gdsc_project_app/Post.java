@@ -35,11 +35,11 @@ public class Post extends ParseObject{
         put(KEY_DISLIKE_COUNT, dislikeCount);
     }
 
-    public ParseUser getUser() {
+    public ParseUser getUserID() {
         return getParseUser(KEY_USERID);
     }
 
-    public void setUser(ParseUser user) {
+    public void setUserID(ParseUser user) {
         put(KEY_USERID, user);
     }
 }
