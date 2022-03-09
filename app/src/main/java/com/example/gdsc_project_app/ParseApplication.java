@@ -18,7 +18,7 @@ public class ParseApplication extends Application {
         ParseObject.registerSubclass(Comment.class);
 
         // register for swipe class
-        ParseObject.registerSubclass(Swipe.class);
+        ParseObject.registerSubclass(Question.class);
 
         Parse.initialize(new Parse.Configuration.Builder(this)
                 .applicationId(getString(R.string.back4app_app_id))
