@@ -3,12 +3,17 @@ package com.example.gdsc_project_app;
 import android.content.Context;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.mindorks.placeholderview.SwipePlaceHolderView;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SwipeActivity extends AppCompatActivity {
 
@@ -32,6 +37,7 @@ public class SwipeActivity extends AppCompatActivity {
 
         // question samples
         questions = new ArrayList<>();
+        /*
         questions.add("Do you like grapes?");
         questions.add("Pineapple on pizza?");
         questions.add("Do you pee in the shower?");
@@ -40,11 +46,13 @@ public class SwipeActivity extends AppCompatActivity {
         questions.add("Lukewarm water is better than cold water.");
         questions.add("Rap music is music");
         questions.add("URg?");
-
+         */
+        // Define the class we would like to query
         // for later
-        Point p = new Point(0,0);
+        Point p = new Point(0, 0);
 
-        for (String q: questions){
+        queryQuestion();
+        for (String q : questions) {
             swipeView.addView(new SwipeItem(someContext, q, p));
         }
 
@@ -52,5 +60,12 @@ public class SwipeActivity extends AppCompatActivity {
         // TODO: link the private variables to the elements in the xml files
     }
 
+    private void queryQuestion(){
+        ParseQuery<Question> query = ParseQuery.getQuery("Question");
+        query.findInBackground((dbQs, e) -> {
+            for (Question q : dbQs){ questions.add(q.getQuestion()); }
+        });
+
+    }
     // TODO: create onclicklistener for the button to the change the activity
 }
