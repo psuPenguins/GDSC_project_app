@@ -6,6 +6,10 @@ import com.parse.ParseUser;
 
 @ParseClassName("Post")
 public class Post extends ParseObject{
+    public String description;
+    public Integer likeCount;
+    public Integer dislikeCount;
+
     public static final String KEY_DESCRIPTION = "description";
     public static final String KEY_USERID = "userID";
     public static final String KEY_LIKE_COUNT = "likeCount";
@@ -27,11 +31,11 @@ public class Post extends ParseObject{
         put(KEY_LIKE_COUNT, likeCount);
     }
 
-    public String getDisLike() {
+    public String getDislike() {
         return getString(KEY_DISLIKE_COUNT);
     }
 
-    public void setDescription() {
+    public void setDislike() {
         put(KEY_DISLIKE_COUNT, dislikeCount);
     }
 
