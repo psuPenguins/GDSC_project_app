@@ -107,7 +107,7 @@ public class RoomActivity extends AppCompatActivity {
 
     // Get the posts from the data
     private void queryPosts() {
-        ParseQuery<ParseObject> query = new ParseQuery<>("Post");
+        ParseQuery<Post> query = new ParseQuery<>("Post");
         query.orderByDescending("createdAt");
         query.findInBackground((objects, e) -> {
             if (e == null) {

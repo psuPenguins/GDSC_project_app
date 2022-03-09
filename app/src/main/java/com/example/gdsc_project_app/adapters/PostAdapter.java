@@ -20,9 +20,9 @@ import com.example.gdsc_project_app.R;
 
 public class PostAdapter extends RecyclerView.Adapter<PostHolder>{
    private Context context;
-   private List<ParseObject> list;
+   private List<Post> list;
 
-   public PostAdapter(Context context, List<ParseObject> list) {
+   public PostAdapter(Context context, List<Post> list) {
       this.list = list;
       this.context = context;
    }
@@ -42,8 +42,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostHolder>{
    @SuppressLint("SetText18n")
    @Override
    public void onBindViewHolder(@NonNull PostHolder holder, int position) {
-      ParseObject profile = list.get(position);
-      holder.UserID.setText(profile.getString("userID"));
+      Post post = list.get(position);
+      holder.UserID.setText(post.getString("userID"));
+      holder.Content.setText(post.getDescription());
    }
 
 
