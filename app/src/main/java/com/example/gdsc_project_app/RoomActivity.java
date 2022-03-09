@@ -7,12 +7,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.gdsc_project_app.adapters.PostAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -108,13 +107,13 @@ public class RoomActivity extends AppCompatActivity {
 
     // Get the posts from the data
     private void queryPosts() {
-        ParseQuery<Post> query = new ParseQuery<>("Post");
+        ParseQuery<ParseObject> query = new ParseQuery<>("Post");
         query.orderByDescending("createdAt");
         query.findInBackground((objects, e) -> {
             if (e == null) {
-                //adapter = new PostAdapter(this, objects);
-                //resultList.setLayoutManager(new LinearLayoutManager(this));
-                //resultList.setAdapter(adapter);
+                PostAdapter adapter = new PostAdapter(this, objects);
+                rvPosts.setLayoutManager(new LinearLayoutManager(this));
+                rvPosts.setAdapter(adapter);
                 Log.d(TAG, "New adapter. Objects: " + objects);
                 return;
             } else {
