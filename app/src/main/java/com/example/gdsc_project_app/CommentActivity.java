@@ -7,6 +7,13 @@ import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
+
+import java.util.List;
 
 public class CommentActivity extends AppCompatActivity {
 
@@ -14,6 +21,7 @@ public class CommentActivity extends AppCompatActivity {
 
     private Button btnBack;
     private Button btnAddComment;
+    private RecyclerView rvComments;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,12 +48,33 @@ public class CommentActivity extends AppCompatActivity {
 //                goSwipeActivity();
 //            }
 //        });
+
+        queryComment();
+
+
+    }
+
+    private void queryComment() {
+        ParseQuery<Comment> query = ParseQuery.getQuery(Comment.class);
+        query.include(Comment.KEY_COMMENT_USER_ID);
+
+        query.findInBackground(new FindCallback<Comment>() {
+            @Override
+            public void done(List<Comment> comments, ParseException e) {
+                if(e != null){
+                    Log.e(TAG, "Issue with getting comments", e);
+                    return;
+                }
+                for (Comment comment : comments){
+                    Log.i(TAG, "Comment: " + comment.getCommentDescription() + ", username: " + comment.getCommentUserName());
+                }
+            }
+        });
     }
 
     // create onclicklistener for the button to the change the activity
     private void goMainActivity(){
         Intent i = new Intent(this, MainActivity.class);
-        // Intent temp = new Intent(this, SwipeActivity.class);
         Log.i(TAG, "Going into MainActivity");
         startActivity(i);
     }
