@@ -11,6 +11,9 @@ public class ParseApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
+        // register for post class
+        ParseObject.registerSubclass(Post.class);
+
         // register for comment class
         ParseObject.registerSubclass(Comment.class);
 
