@@ -9,6 +9,7 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.gdsc_project_app.adapters.CommentsAdapter;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -22,6 +23,7 @@ public class CommentActivity extends AppCompatActivity {
     private Button btnBack;
     private Button btnAddComment;
     private RecyclerView rvComments;
+    private CommentsAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +47,7 @@ public class CommentActivity extends AppCompatActivity {
 //            @Override
 //            public void onClick (View view){
 //                Log.i(TAG, "onClick Add Comment button");
-//                goSwipeActivity();
+//                goAddCommentActivity();
 //            }
 //        });
 
@@ -79,10 +81,9 @@ public class CommentActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-//    private void goMainActivity(){
+//    private void goAddCommentActivity(){
 //        Intent i = new Intent(this, MainActivity.class);
-//        // Intent temp = new Intent(this, SwipeActivity.class);
-//        Log.i(TAG, "Going into MainActivity");
+//        Log.i(TAG, "Going into AddCommentActivity");
 //        startActivity(i);
 //        // startActivity(temp);
 //    }

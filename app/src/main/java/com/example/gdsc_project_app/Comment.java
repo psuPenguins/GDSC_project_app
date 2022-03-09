@@ -13,6 +13,7 @@ public class Comment extends ParseObject {
     public static final String KEY_COMMENT_LIKE_COUNT = "likeCount";
     public static final String KEY_COMMENT_DISLIKE_COUNT = "dislikeCount";
     public static final String KEY_COMMENT_USER_NAME = "userName";
+    public static final String KEY_COMMENT_TIME = "createdAt";
 
     public String getCommentDescription(){
         return getString(KEY_COMMENT_DESCRIPTION);
@@ -36,6 +37,10 @@ public class Comment extends ParseObject {
 
     public Integer getCommentDislikeCount(){
         return getInt(KEY_COMMENT_DISLIKE_COUNT);
+    }
+
+    public String getCommentTime(){
+        return getString(KEY_COMMENT_TIME);
     }
 
     public void setUser(ParseUser user){
