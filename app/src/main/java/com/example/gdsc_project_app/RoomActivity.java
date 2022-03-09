@@ -10,11 +10,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import java.util.List;
@@ -33,7 +35,6 @@ public class RoomActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView((R.layout.activity_room));
         Log.i(TAG, "I'm in RoomActivity");
 
@@ -46,6 +47,9 @@ public class RoomActivity extends AppCompatActivity {
         tvRoomTopic.setText("Topic: Food");
 
 
+
+
+
         //for recycler view
         rvPosts = findViewById(R.id.rvPosts);
         // 1 Create layout for one row in the list
@@ -54,6 +58,7 @@ public class RoomActivity extends AppCompatActivity {
         // 4 Set the adapter on the recycler view
         // 5 Set the layout manager on the recycler view
         queryPosts();
+
 
 
         // create onclicklistener for the button to the change the activity
@@ -101,19 +106,19 @@ public class RoomActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+    // Get the posts from the data
     private void queryPosts() {
-        ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
-        query.include(Post.KEY_USERID);
-        query.findInBackground(new FindCallback<Post>() {
-            @Override
-            public void done(List<Post> posts, ParseException e) {
-                if (e != null) {
-                    Log.e(TAG, "Issue with getting posts", e);
-                    return;
-                }
-                for (Post post : posts) {
-                    Log.i(TAG, "Post: " + post.getDescription() + ", userID: " + post.getUserID().getUsername());
-                }
+        ParseQuery<Post> query = new ParseQuery<>("Post");
+        query.orderByDescending("createdAt");
+        query.findInBackground((objects, e) -> {
+            if (e == null) {
+                //adapter = new PostAdapter(this, objects);
+                //resultList.setLayoutManager(new LinearLayoutManager(this));
+                //resultList.setAdapter(adapter);
+                Log.d(TAG, "New adapter. Objects: " + objects);
+                return;
+            } else {
+                Log.e(TAG, "Something is wrong with querying data!");
             }
         });
     }
