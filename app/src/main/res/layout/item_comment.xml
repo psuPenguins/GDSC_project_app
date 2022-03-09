@@ -20,19 +20,30 @@
         android:id="@+id/tvTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="10dp"
         android:text="Time comes here"
         android:textSize="14dp" />
+
+    <ImageView
+        android:id="@+id/ivProfilePic"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="5dp"
+        android:layout_below="@id/tvUsername"
+        tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/tvCommentText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvUsername"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
         android:layout_marginTop="10dp"
+        android:layout_toRightOf="@id/ivProfilePic"
         android:layout_toLeftOf="@id/rgVote"
         android:text="CommentComesHere" />
 
