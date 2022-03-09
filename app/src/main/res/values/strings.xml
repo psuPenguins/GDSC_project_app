@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">GDSC_project_app</string>
 
+    // for Parse SDK
+    <string name="back4app_server_url">https://parseapi.back4app.com/</string>
+    <string name="back4app_app_id">yvEO7yE9aWqxurhUv65BAvD6zCVqw4sPNgRySxLF</string>
+    <string name="back4app_client_key">eY6e8cxClOEFf7s4vzvCNFJEoXSdZT3pYuHKzanj</string>
+
     // for activity_room
     <string name="strAddPost">+</string>
     <string name="strReturnFromRoom">Back</string>
@@ -12,4 +17,5 @@
     // for activity_post
     <string name="strMakePost">Post</string>
     <string name="strPostHint">description..."</string>
+
 </resources>

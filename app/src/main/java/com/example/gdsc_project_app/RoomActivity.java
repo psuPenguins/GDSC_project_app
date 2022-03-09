@@ -34,16 +34,6 @@ public class RoomActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //for recycler view
-        rvPosts = findViewById(R.id.rvPosts);
-        // 1 Create layout for one row in the list
-        // 2 Create the adapter
-        // 3 Create the data source
-        // 4 Set the adapter on the recycler view
-        // 5 Set the layout manager on the recycler view
-        queryPosts();
-
-
         setContentView((R.layout.activity_room));
         Log.i(TAG, "I'm in RoomActivity");
 
@@ -54,6 +44,17 @@ public class RoomActivity extends AppCompatActivity {
         tvRoomTopic = findViewById(R.id.tvRoomTopic);
 
         tvRoomTopic.setText("Topic: Food");
+
+
+        //for recycler view
+        rvPosts = findViewById(R.id.rvPosts);
+        // 1 Create layout for one row in the list
+        // 2 Create the adapter
+        // 3 Create the data source
+        // 4 Set the adapter on the recycler view
+        // 5 Set the layout manager on the recycler view
+        queryPosts();
+
 
         // create onclicklistener for the button to the change the activity
         //btnViewReply.setOnClickListener(new View.OnClickListener() {
