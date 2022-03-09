@@ -7,15 +7,24 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
+
+import java.util.List;
 
 public class RoomActivity extends AppCompatActivity {
 
     public static final String TAG = "RoomActivity";
 
     //TODO: create private variables (btn, tv..)
+    private RecyclerView rvPosts;
     private Button btnViewReply;
     private Button btnReturnFromRoom;
     private FloatingActionButton btnAddPost;
@@ -24,6 +33,17 @@ public class RoomActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //for recycler view
+        rvPosts = findViewById(R.id.rvPosts);
+        // 1 Create layout for one row in the list
+        // 2 Create the adapter
+        // 3 Create the data source
+        // 4 Set the adapter on the recycler view
+        // 5 Set the layout manager on the recycler view
+        queryPosts();
+
+
         setContentView((R.layout.activity_room));
         Log.i(TAG, "I'm in RoomActivity");
 
@@ -80,4 +100,20 @@ public class RoomActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+    private void queryPosts() {
+        ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
+        query.include(Post.KEY_USERID);
+        query.findInBackground(new FindCallback<Post>() {
+            @Override
+            public void done(List<Post> posts, ParseException e) {
+                if (e != null) {
+                    Log.e(TAG, "Issue with getting posts", e);
+                    return;
+                }
+                for (Post post : posts) {
+                    Log.i(TAG, "Post: " + post.getDescription() + ", userID: " + post.getUserID().getUsername());
+                }
+            }
+        });
+    }
 }

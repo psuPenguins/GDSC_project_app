@@ -41,6 +41,10 @@
 
         <activity android:name=".PostActivity">
         </activity>
+
+        <activity android:name=".AddCommentActivity">
+        </activity>
+
     </application>
 
 </manifest>
