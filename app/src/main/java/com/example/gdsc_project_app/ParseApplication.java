@@ -17,6 +17,9 @@ public class ParseApplication extends Application {
         // register for comment class
         ParseObject.registerSubclass(Comment.class);
 
+        // register for swipe class
+        ParseObject.registerSubclass(Swipe.class);
+
         Parse.initialize(new Parse.Configuration.Builder(this)
                 .applicationId("yvEO7yE9aWqxurhUv65BAvD6zCVqw4sPNgRySxLF")
                 .clientKey("eY6e8cxClOEFf7s4vzvCNFJEoXSdZT3pYuHKzanj")
