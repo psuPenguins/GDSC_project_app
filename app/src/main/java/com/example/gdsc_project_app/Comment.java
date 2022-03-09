@@ -12,6 +12,7 @@ public class Comment extends ParseObject {
     public static final String KEY_COMMENT_POST_ID = "postID";
     public static final String KEY_COMMENT_LIKE_COUNT = "likeCount";
     public static final String KEY_COMMENT_DISLIKE_COUNT = "dislikeCount";
+    public static final String KEY_COMMENT_USER_NAME = "userName";
 
     public String getCommentDescription(){
         return getString(KEY_COMMENT_DESCRIPTION);
@@ -19,6 +20,10 @@ public class Comment extends ParseObject {
 
     public String getCommentUserId(){
         return getString(KEY_COMMENT_USER_ID);
+    }
+
+    public String getCommentUserName(){
+        return getString(KEY_COMMENT_USER_NAME);
     }
 
     public String getCommentPostId(){
