@@ -4,9 +4,11 @@ import android.content.Context;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.gdsc_project_app.adapters.CommentsAdapter;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -20,8 +22,6 @@ public class SwipeActivity extends AppCompatActivity {
     public static final String TAG = "SwipeActivity";
     private SwipePlaceHolderView swipeView;
     private Context someContext; // not sure if I need this
-    private ArrayList<String> questions; // question bank
-
     //TODO: create private variables (btn, tv..)
 
     @Override
@@ -36,7 +36,6 @@ public class SwipeActivity extends AppCompatActivity {
                 .setSwipeType(SwipePlaceHolderView.SWIPE_TYPE_HORIZONTAL);
 
         // question samples
-        questions = new ArrayList<>();
         /*
         questions.add("Do you like grapes?");
         questions.add("Pineapple on pizza?");
@@ -52,20 +51,27 @@ public class SwipeActivity extends AppCompatActivity {
         Point p = new Point(0, 0);
 
         queryQuestion();
-        for (String q : questions) {
-            swipeView.addView(new SwipeItem(someContext, q, p));
-        }
 
 
         // TODO: link the private variables to the elements in the xml files
     }
 
     private void queryQuestion(){
-        ParseQuery<Question> query = ParseQuery.getQuery("Question");
-        query.findInBackground((dbQs, e) -> {
-            for (Question q : dbQs){ questions.add(q.getQuestion()); }
+        ParseQuery<Question> query = new ParseQuery<>("Question");
+        query.findInBackground(new FindCallback<Question>() {
+        @Override
+        public void done(List<Question> dbQs, ParseException e) {
+            Point p = new Point(0,0);
+            if (e == null) {
+                for (Question q : dbQs) {
+                    Log.i(TAG, q.getQuestion());
+                    swipeView.addView(new SwipeItem(someContext, q.getQuestion(), p));
+                }
+            } else {
+                Log.e(TAG,"ERROR getting data");
+            }
+        }
         });
-
     }
     // TODO: create onclicklistener for the button to the change the activity
 }
