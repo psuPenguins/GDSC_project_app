@@ -78,6 +78,9 @@ public class CommentActivity extends AppCompatActivity {
     private void queryComment() {
         ParseQuery<Comment> query = ParseQuery.getQuery(Comment.class);
         query.include(Comment.KEY_COMMENT_USER_ID);
+        // TODO:
+        //query.whereEqualTo(Comment.KEY_COMMENT_POST_ID, );
+        query.orderByDescending(Comment.KEY_COMMENT_TIME);
 
         query.findInBackground(new FindCallback<Comment>() {
             @Override
