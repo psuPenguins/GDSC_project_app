@@ -47,9 +47,10 @@ public class PostActivity extends AppCompatActivity {
         tiContentLayout=findViewById(R.id.tiContentLayout);
         ivPostUserPic=findViewById(R.id.ivPostUserPic);
 
-
+        // Set current posting user name and image
         tvPostingName.setText(ParseUser.getCurrentUser().getUsername());
         Glide.with(this).load(ParseUser.getCurrentUser().getParseFile(KEY_USER_PROFILE_IMAGE).getUrl()).into(ivPostUserPic);
+
 
         btnReturnFromPost.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,7 +68,6 @@ public class PostActivity extends AppCompatActivity {
             }
         });
     }
-
 
 
     // declaring transition functions
