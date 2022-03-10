@@ -51,14 +51,15 @@
         android:layout_alignParentBottom="true"
         app:cardBackgroundColor="#75FFFFFF">
 
-        <Button
-            android:id="@+id/btnAddComment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="15dp"
-            android:text="Add Comment" />
+<!--        <Button-->
+<!--            android:id="@+id/btnAddComment"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_centerInParent="true"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:layout_marginBottom="15dp"-->
+<!--            android:text="Add Comment" />-->
+        <include layout="@layout/activity_addcomment"/>
 
     </RelativeLayout>
 
