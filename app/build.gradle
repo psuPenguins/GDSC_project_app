@@ -50,10 +50,15 @@ dependencies {
 
     // for floating action button
     implementation 'com.google.android.material:material:1.5.0-alpha02'
+
+    // for images
+    implementation 'com.github.bumptech.glide:glide:4.13.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'
 }
 
 repositories {
     mavenCentral()
     jcenter()
+    google()
     maven{url 'https://jitpack.io'}
 }
