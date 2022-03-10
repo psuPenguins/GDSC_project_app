@@ -22,6 +22,7 @@ public class PostActivity extends AppCompatActivity {
     public static final String TAG = "PostActivity";
 
     // create private variables (btn, tv..)
+    private Button btnReturnFromPost;
     private Button btnMakePost;
     private TextView tvPostingName;
     private TextInputEditText tiContentInput;
@@ -35,7 +36,7 @@ public class PostActivity extends AppCompatActivity {
         Log.i(TAG, "I'm in PostActivity");
 
         // link the private variables to the elements in the xml files
-
+        btnReturnFromPost=findViewById(R.id.btnReturnFromPost);
         btnMakePost=findViewById(R.id.btnMakePost);
         tvPostingName=findViewById(R.id.tvPostingName);
         tiContentInput=findViewById(R.id.tiContentInput);
@@ -44,28 +45,19 @@ public class PostActivity extends AppCompatActivity {
 
         tvPostingName.setText("Doggo371");
 
-        btnMakePost.setOnClickListener(new View.OnClickListener() {
+        btnReturnFromPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View view){
                 Log.i(TAG, "onClick make post button");
                 goRoomActivity();
             }
         });
-    }
 
-    private void queryPosts() {
-        ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
-        query.include(Post.KEY_USERID);
-        query.findInBackground(new FindCallback<Post>() {
+        btnMakePost.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void done(List<Post> posts, ParseException e) {
-                if (e != null) {
-                    Log.e(TAG, "Issue with getting posts", e);
-                    return;
-                }
-                for (Post post : posts) {
-                    Log.i(TAG, "Post: " + post.getDescription() + ", userID: " + post.getUserID().getUsername());
-                }
+            public void onClick (View view){
+                Log.i(TAG, "onClick make post button");
+                goRoomActivity();
             }
         });
     }
