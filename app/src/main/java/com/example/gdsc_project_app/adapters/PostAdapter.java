@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.view.menu.MenuView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gdsc_project_app.CommentActivity;
@@ -48,6 +49,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostHolder>{
       Post post = list.get(position);
       holder.UserID.setText(post.getUsername());
       holder.Content.setText(post.getDescription());
+      holder.LikeAmount.setText(post.getLikeCount().toString());
       holder.btnViewReply.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View view) {
@@ -70,6 +72,7 @@ class PostHolder extends RecyclerView.ViewHolder {
 
    TextView UserID;
    TextView Content;
+   TextView LikeAmount;
    Button btnViewReply;
 
    public PostHolder(@NonNull View itemView) {
@@ -77,5 +80,6 @@ class PostHolder extends RecyclerView.ViewHolder {
       UserID = itemView.findViewById(R.id.tvUsername);
       Content = itemView.findViewById(R.id.tvPostContent);
       btnViewReply = itemView.findViewById(R.id.btnViewReply);
+      LikeAmount = itemView.findViewById(R.id.tvLikeAmount);
    }
 }

@@ -21,6 +21,7 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="0dp"
         android:layout_toEndOf="@+id/ivUserPic"
+        android:textColor="#000000"
         android:textSize="16sp"
         tools:text="Meow123" />
 
@@ -32,6 +33,7 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
         android:layout_toEndOf="@+id/ivUserPic"
+        android:textColor="#404040"
         android:textSize="12sp"
         tools:text="I love pizza." />
 
@@ -44,7 +46,32 @@
         android:layout_marginTop="5dp"
         android:layout_marginEnd="5dp"
         android:text="@string/strViewReply"
-        android:textSize="11sp"
-        app:iconTint="#03A9F4" />
+        android:textSize="11sp" />
+
+    <TextView
+        android:id="@+id/tvLikeAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvPostContent"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@+id/ivUserPic"
+        android:background="#002600FF"
+        android:textColor="#4E4E4E"
+        android:textSize="12sp"
+        tools:text="12 " />
+
+    <ImageView
+        android:id="@+id/ivLike"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_below="@+id/tvPostContent"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@+id/tvLikeAmount"
+        android:background="#000003FF"
+        android:foregroundTint="#00FFFFFF"
+        android:tint="#673AB7"
+        tools:srcCompat="@android:drawable/arrow_up_float" />
 
 </RelativeLayout>
