@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -27,6 +29,7 @@ public class CommentActivity extends AppCompatActivity {
 
     private Button btnBack;
     private Button btnAddComment;
+    private EditText etNewComment;
     private RecyclerView rvComments;
     private CommentsAdapter adapter;
     private List<Comment> allComments;
@@ -40,6 +43,7 @@ public class CommentActivity extends AppCompatActivity {
         btnBack = findViewById(R.id.btnBack);
         btnAddComment = findViewById(R.id.btnAddComment);
         rvComments = findViewById(R.id.rvComments);
+        etNewComment = findViewById(R.id.etNewComment);
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,7 +57,16 @@ public class CommentActivity extends AppCompatActivity {
             @Override
             public void onClick (View view){
                 Log.i(TAG, "onClick btnAddComment button");
-                AddCommentActivity();
+                String newComment = etNewComment.getText().toString();
+                //TODO: Dont enter if it is blank
+                if (newComment.length() != 0){
+                    AddCommentActivity();
+                    Log.i(TAG, "New Comment Added: "+newComment);
+                }
+                else{
+                    Toast.makeText(CommentActivity.this, "Comment cannot be empty!", Toast.LENGTH_SHORT).show();
+                    Log.i(TAG, "Empty Comment Submitted");
+                }
             }
         });
 
@@ -106,8 +119,13 @@ public class CommentActivity extends AppCompatActivity {
 
     // onclicking add comment
     private void AddCommentActivity(){
-        Log.i(TAG, "Added Comment in CommentActivity");
-        //TODO: Work with database to add comment, refresh recycler view
+        Log.i(TAG, "Adding Comment in CommentActivity");
+        //TODO: Work with database to add comment,
+        //
+        //
+        Intent i = new Intent(this, CommentActivity.class);
+        Log.i(TAG, "Refreshing CommentActivity");
+        startActivity(i);
     }
 
 }
