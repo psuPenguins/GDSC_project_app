@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#D7332E2E">
+    android:background="#D7FAFAFA">
     <!--Add context to link (tools:context=".CommentItem)-->
 
     <TextView
@@ -30,9 +30,9 @@
         android:id="@+id/ivProfilePic"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="5dp"
         android:layout_below="@id/tvUsername"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
@@ -41,10 +41,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tvUsername"
         android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
         android:layout_marginTop="10dp"
-        android:layout_toRightOf="@id/ivProfilePic"
+        android:layout_marginEnd="5dp"
         android:layout_toLeftOf="@id/rgVote"
+        android:layout_toRightOf="@id/ivProfilePic"
         android:text="CommentComesHere" />
 
     <RadioGroup
