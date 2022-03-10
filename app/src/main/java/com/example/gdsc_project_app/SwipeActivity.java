@@ -1,9 +1,12 @@
 package com.example.gdsc_project_app;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,7 +21,8 @@ public class SwipeActivity extends AppCompatActivity {
 
     public static final String TAG = "SwipeActivity";
     private SwipePlaceHolderView swipeView;
-    private Context someContext; // not sure if I need this
+    private Context someContext;
+    private Button btnReturnFromSwipe;
     //TODO: create private variables (btn, tv..)
 
     @Override
@@ -26,17 +30,36 @@ public class SwipeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView((R.layout.activity_swipe));
 
+        btnReturnFromSwipe = findViewById(R.id.btnReturnFromSwipe);
         swipeView = (SwipePlaceHolderView) findViewById(R.id.swipeView);
         someContext = getApplicationContext();
 
         swipeView.getBuilder()
                 .setSwipeType(SwipePlaceHolderView.SWIPE_TYPE_HORIZONTAL);
 
+        // generate the cards from database.
         queryQuestion();
+
+        // back button
+        btnReturnFromSwipe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View view){
+                Log.i(TAG, "onClick return from room button");
+                goMainActivity();
+            }
+        });
 
         // TODO: link the private variables to the elements in the xml files
     }
 
+    // Go to main activity.
+    private void goMainActivity(){
+        Intent i = new Intent(this, MainActivity.class);
+        Log.i(TAG, "Going into MainActivity");
+        startActivity(i);
+    }
+
+    // generate cards from data base
     private void queryQuestion(){
         ParseQuery<Question> query = new ParseQuery<>("Question");
         query.findInBackground(new FindCallback<Question>() {

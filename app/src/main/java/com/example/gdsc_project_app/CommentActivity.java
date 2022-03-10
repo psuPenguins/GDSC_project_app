@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -27,6 +29,7 @@ public class CommentActivity extends AppCompatActivity {
 
     private Button btnBack;
     private Button btnAddComment;
+    private EditText etNewComment;
     private RecyclerView rvComments;
     private CommentsAdapter adapter;
     private List<Comment> allComments;
@@ -40,23 +43,32 @@ public class CommentActivity extends AppCompatActivity {
         btnBack = findViewById(R.id.btnBack);
         btnAddComment = findViewById(R.id.btnAddComment);
         rvComments = findViewById(R.id.rvComments);
+        etNewComment = findViewById(R.id.etNewComment);
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View view){
                 Log.i(TAG, "onClick Back button");
-                goMainActivity();
+                goRoomActivity();
             }
         });
 
-        // TODO: activate this button
-//        btnAddComment.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick (View view){
-//                Log.i(TAG, "onClick Add Comment button");
-//                goAddCommentActivity();
-//            }
-//        });
+        btnAddComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View view){
+                Log.i(TAG, "onClick btnAddComment button");
+                String newComment = etNewComment.getText().toString();
+                //Don't enter if blank
+                if (newComment.length() != 0){
+                    AddCommentActivity();
+                    Log.i(TAG, "New Comment Added: "+newComment);
+                }
+                else{
+                    Toast.makeText(CommentActivity.this, "Comment cannot be empty!", Toast.LENGTH_SHORT).show();
+                    Log.i(TAG, "Empty Comment Submitted");
+                }
+            }
+        });
 
         allComments = new ArrayList<>();
         adapter = new CommentsAdapter(this, allComments);
@@ -99,16 +111,21 @@ public class CommentActivity extends AppCompatActivity {
     }
 
     // create onclicklistener for the button to the change the activity
-    private void goMainActivity(){
-        Intent i = new Intent(this, MainActivity.class);
-        Log.i(TAG, "Going into MainActivity");
+    private void goRoomActivity(){
+        Intent i = new Intent(this, RoomActivity.class);
+        Log.i(TAG, "Going into RoomActivity");
         startActivity(i);
     }
 
-//    private void goAddCommentActivity(){
-//        Intent i = new Intent(this, MainActivity.class);
-//        Log.i(TAG, "Going into AddCommentActivity");
-//        startActivity(i);
-//        // startActivity(temp);
-//    }
+    // onclicking add comment
+    private void AddCommentActivity(){
+        Log.i(TAG, "Adding Comment in CommentActivity");
+        //TODO: Work with database to add comment,
+        //
+        //
+        Intent i = new Intent(this, CommentActivity.class);
+        Log.i(TAG, "Refreshing CommentActivity");
+        startActivity(i);
+    }
+
 }

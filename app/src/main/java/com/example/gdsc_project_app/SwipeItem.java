@@ -5,7 +5,9 @@ import com.mindorks.placeholderview.annotations.Layout;
 import com.mindorks.placeholderview.annotations.Resolve;
 import com.mindorks.placeholderview.annotations.View;
 import com.mindorks.placeholderview.annotations.swipe.SwipeCancelState;
+import com.mindorks.placeholderview.annotations.swipe.SwipeIn;
 import com.mindorks.placeholderview.annotations.swipe.SwipeInDirectional;
+import com.mindorks.placeholderview.annotations.swipe.SwipeOut;
 import com.mindorks.placeholderview.annotations.swipe.SwipeOutDirectional;
 import com.mindorks.placeholderview.annotations.swipe.SwipeView;
 import com.mindorks.placeholderview.annotations.swipe.SwipingDirection;
@@ -45,23 +47,34 @@ public class SwipeItem {
 
     @SwipeOutDirectional
     public void onSwipeOutDirectional(SwipeDirection direction) {
-        Log.d("DEBUG", "SwipeOutDirectional " + direction.name());
+        Log.i("DEBUG", "SwipeOutDirectional " + direction.name());
     }
 
     @SwipeCancelState
     public void onSwipeCancelState() {
-        Log.d("DEBUG", "onSwipeCancelState");
+        Log.i("DEBUG", "onSwipeCancelState");
         mSwipeView.setAlpha(1);
     }
 
     @SwipeInDirectional
     public void onSwipeInDirectional(SwipeDirection direction) {
-        Log.d("DEBUG", "SwipeInDirectional " + direction.name());
+        Log.i("DEBUG", "SwipeInDirectional " + direction.name());
     }
 
     @SwipingDirection
     public void onSwipingDirection(SwipeDirection direction) {
-        Log.d("DEBUG", "SwipingDirection " + direction.name());
+        Log.i("DEBUG", "SwipingDirection " + direction.name());
     }
 
+    // out = left
+    @SwipeOut
+    public void onSwipedOut() {
+        Log.i("DEBUG", "onSwipedOut");
+    }
+
+    // in = right
+    @SwipeIn
+    public void onSwipeIn() {
+        Log.i("DEBUG", "onSwipedIn");
+    }
 }

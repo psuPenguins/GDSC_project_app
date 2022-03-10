@@ -25,7 +25,7 @@
         <TextView
             android:id="@+id/questionText"
             android:layout_width="350dp"
-            android:layout_height="700dp"
+            android:layout_height="680dp"
             android:gravity="center"
             android:textSize="18dp"
             android:textStyle="bold" />
