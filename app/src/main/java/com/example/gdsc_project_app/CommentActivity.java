@@ -58,7 +58,7 @@ public class CommentActivity extends AppCompatActivity {
             public void onClick (View view){
                 Log.i(TAG, "onClick btnAddComment button");
                 String newComment = etNewComment.getText().toString();
-                //TODO: Dont enter if it is blank
+                //Don't enter if blank
                 if (newComment.length() != 0){
                     AddCommentActivity();
                     Log.i(TAG, "New Comment Added: "+newComment);
