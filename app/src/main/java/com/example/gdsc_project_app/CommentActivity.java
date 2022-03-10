@@ -45,18 +45,17 @@ public class CommentActivity extends AppCompatActivity {
             @Override
             public void onClick (View view){
                 Log.i(TAG, "onClick Back button");
-                goMainActivity();
+                goRoomActivity();
             }
         });
 
-        // TODO: activate this button
-//        btnAddComment.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick (View view){
-//                Log.i(TAG, "onClick Add Comment button");
-//                goAddCommentActivity();
-//            }
-//        });
+        btnAddComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View view){
+                Log.i(TAG, "onClick btnAddComment button");
+                AddCommentActivity();
+            }
+        });
 
         allComments = new ArrayList<>();
         adapter = new CommentsAdapter(this, allComments);
@@ -99,16 +98,16 @@ public class CommentActivity extends AppCompatActivity {
     }
 
     // create onclicklistener for the button to the change the activity
-    private void goMainActivity(){
-        Intent i = new Intent(this, MainActivity.class);
-        Log.i(TAG, "Going into MainActivity");
+    private void goRoomActivity(){
+        Intent i = new Intent(this, RoomActivity.class);
+        Log.i(TAG, "Going into RoomActivity");
         startActivity(i);
     }
 
-//    private void goAddCommentActivity(){
-//        Intent i = new Intent(this, MainActivity.class);
-//        Log.i(TAG, "Going into AddCommentActivity");
-//        startActivity(i);
-//        // startActivity(temp);
-//    }
+    // onclicking add comment
+    private void AddCommentActivity(){
+        Log.i(TAG, "Added Comment in CommentActivity");
+        //TODO: Work with database to add comment, refresh recycler view
+    }
+
 }
