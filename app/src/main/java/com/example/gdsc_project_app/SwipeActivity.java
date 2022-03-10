@@ -4,17 +4,14 @@ import android.content.Context;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ArrayAdapter;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.gdsc_project_app.adapters.CommentsAdapter;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SwipeActivity extends AppCompatActivity {
@@ -35,23 +32,7 @@ public class SwipeActivity extends AppCompatActivity {
         swipeView.getBuilder()
                 .setSwipeType(SwipePlaceHolderView.SWIPE_TYPE_HORIZONTAL);
 
-        // question samples
-        /*
-        questions.add("Do you like grapes?");
-        questions.add("Pineapple on pizza?");
-        questions.add("Do you pee in the shower?");
-        questions.add("Is ketchup on mac n cheese ok?");
-        questions.add("Boneless wings are better than bone in wings.");
-        questions.add("Lukewarm water is better than cold water.");
-        questions.add("Rap music is music");
-        questions.add("URg?");
-         */
-        // Define the class we would like to query
-        // for later
-        Point p = new Point(0, 0);
-
         queryQuestion();
-
 
         // TODO: link the private variables to the elements in the xml files
     }
@@ -61,7 +42,7 @@ public class SwipeActivity extends AppCompatActivity {
         query.findInBackground(new FindCallback<Question>() {
         @Override
         public void done(List<Question> dbQs, ParseException e) {
-            Point p = new Point(0,0);
+            Point p = new Point(0,0); // Point maybe useless, don't know yet.
             if (e == null) {
                 for (Question q : dbQs) {
                     Log.i(TAG, q.getQuestion());
