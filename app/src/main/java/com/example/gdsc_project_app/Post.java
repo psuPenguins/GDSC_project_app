@@ -27,8 +27,8 @@ public class Post extends ParseObject{
         put(KEY_DESCRIPTION, description);
     }
 
-    public String getLikeCount() {
-        return getString(KEY_LIKE_COUNT);
+    public Integer getLikeCount() {
+        return getInt(KEY_LIKE_COUNT);
     }
 
     public void setLikeCount() {

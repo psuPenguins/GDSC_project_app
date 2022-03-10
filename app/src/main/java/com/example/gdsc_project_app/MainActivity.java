@@ -45,6 +45,14 @@ public class MainActivity extends AppCompatActivity {
                 goRoomActivity();
             }
         });
+
+        btnLogOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i(TAG, "onClick Logout button");
+                goLoginActivity();
+            }
+        });
     }
 
 
@@ -59,6 +67,12 @@ public class MainActivity extends AppCompatActivity {
     private void goRoomActivity(){
         Intent i = new Intent(this, RoomActivity.class);
         Log.i(TAG, "Going into RoomActivity");
+        startActivity(i);
+    }
+
+    private void goLoginActivity(){
+        Intent i = new Intent(this, LoginActivity.class);
+        Log.i(TAG, "Going into LoginActivity");
         startActivity(i);
     }
 }
