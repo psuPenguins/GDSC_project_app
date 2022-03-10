@@ -2,14 +2,17 @@ package com.example.gdsc_project_app.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.gdsc_project_app.CommentActivity;
 import com.parse.ParseObject;
 
 import java.util.ArrayList;
@@ -45,8 +48,16 @@ public class PostAdapter extends RecyclerView.Adapter<PostHolder>{
       Post post = list.get(position);
       holder.UserID.setText(post.getUsername());
       holder.Content.setText(post.getDescription());
+      holder.btnViewReply.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View view) {
+            //Log.i(TAG, "onClick view reply button");
+            Intent i = new Intent(context, CommentActivity.class);
+            //Log.i(TAG, "Going into RoomActivity");
+            context.startActivity(i);
+         }
+      });
    }
-
 
    @Override
    public int getItemCount() {
@@ -59,10 +70,12 @@ class PostHolder extends RecyclerView.ViewHolder {
 
    TextView UserID;
    TextView Content;
+   Button btnViewReply;
 
    public PostHolder(@NonNull View itemView) {
       super(itemView);
       UserID = itemView.findViewById(R.id.tvUsername);
       Content = itemView.findViewById(R.id.tvPostContent);
+      btnViewReply = itemView.findViewById(R.id.btnViewReply);
    }
 }
