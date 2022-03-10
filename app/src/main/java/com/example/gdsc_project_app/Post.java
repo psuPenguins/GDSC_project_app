@@ -9,14 +9,18 @@ public class Post extends ParseObject{
     public String description;
     public Integer likeCount;
     public Integer dislikeCount;
-
-    public static final String KEY_DESCRIPTION = "description";
     public static final String KEY_USERID = "userID";
+    public static final String KEY_USERNAME = "username";
+    public static final String KEY_DESCRIPTION = "description";
     public static final String KEY_LIKE_COUNT = "likeCount";
     public static final String KEY_DISLIKE_COUNT = "dislikeCount";
 
     public String getDescription() {
         return getString(KEY_DESCRIPTION);
+    }
+
+    public String getUsername() {
+        return getString(KEY_USERNAME);
     }
 
     public void setDescription() {

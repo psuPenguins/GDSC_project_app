@@ -43,7 +43,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostHolder>{
    @Override
    public void onBindViewHolder(@NonNull PostHolder holder, int position) {
       Post post = list.get(position);
-      holder.UserID.setText(post.getString("userID"));
+      holder.UserID.setText(post.getUsername());
       holder.Content.setText(post.getDescription());
    }
 
