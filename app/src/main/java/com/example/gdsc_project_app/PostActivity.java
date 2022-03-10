@@ -51,7 +51,6 @@ public class PostActivity extends AppCompatActivity {
         tvPostingName.setText(ParseUser.getCurrentUser().getUsername());
         Glide.with(this).load(ParseUser.getCurrentUser().getParseFile(KEY_USER_PROFILE_IMAGE).getUrl()).into(ivPostUserPic);
 
-
         btnReturnFromPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View view){
