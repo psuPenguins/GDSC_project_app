@@ -70,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         validationErrorMessage.append(".");
         if (validationError){
-            Toast.makeText(LoginActivity.this, Html.fromHtml("<font color='#5e5e5e'><b><big>" + validationErrorMessage + "</b></font></big>"), Toast.LENGTH_LONG).show();
+            Toast.makeText(LoginActivity.this, Html.fromHtml("<font color='#5e5e5e'><b>" + validationErrorMessage + "</b></font>"), Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -80,12 +80,12 @@ public class LoginActivity extends AppCompatActivity {
             public void done(ParseUser user, ParseException e) {
                 if (e != null){
                     Log.e(TAG, "Issue with login", e);
-                    Toast.makeText(LoginActivity.this, Html.fromHtml("<font color='#5e5e5e'><b><big>" + "Issue with login!" + "</b></font></big>"), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, Html.fromHtml("<font color='#5e5e5e'><b>" + "Issue with login!" + "</b></font>"), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 goMainActivity();
                 Log.i(TAG, "Login Success");
-                Toast.makeText(LoginActivity.this, Html.fromHtml("<font color='#5e5e5e'><b><big>" + "Success!" + "</b></font></big>"), Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, Html.fromHtml("<font color='#5e5e5e'><b>" + "Success!" + "</b></font>"), Toast.LENGTH_SHORT).show();
             }
         });
     }
