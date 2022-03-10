@@ -16,6 +16,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import java.util.List;
 
@@ -45,7 +46,7 @@ public class PostActivity extends AppCompatActivity {
         ivPostUserPic=findViewById(R.id.ivPostUserPic);
 
 
-        tvPostingName.setText("Doggo371");
+        tvPostingName.setText(ParseUser.getCurrentUser().getUsername());
         Glide.with(this)
                 .load("https://img.icons8.com/flat-round/64/000000/bird--v1.png")
                 .into(ivPostUserPic);

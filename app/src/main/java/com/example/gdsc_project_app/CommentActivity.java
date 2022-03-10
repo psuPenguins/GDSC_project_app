@@ -4,6 +4,7 @@ import static java.security.AccessController.getContext;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -64,7 +65,7 @@ public class CommentActivity extends AppCompatActivity {
                     Log.i(TAG, "New Comment Added: "+newComment);
                 }
                 else{
-                    Toast.makeText(CommentActivity.this, "Comment cannot be empty!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CommentActivity.this, Html.fromHtml("<font color='#5e5e5e'><b>" + "Comment cannot be empty!" + "</b></font>"), Toast.LENGTH_SHORT).show();
                     Log.i(TAG, "Empty Comment Submitted");
                 }
             }
@@ -121,7 +122,6 @@ public class CommentActivity extends AppCompatActivity {
     private void AddCommentActivity(){
         Log.i(TAG, "Adding Comment in CommentActivity");
         //TODO: Work with database to add comment,
-        //
         //
         Intent i = new Intent(this, CommentActivity.class);
         Log.i(TAG, "Refreshing CommentActivity");
