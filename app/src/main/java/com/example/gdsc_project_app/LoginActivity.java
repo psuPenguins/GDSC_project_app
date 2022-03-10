@@ -1,13 +1,20 @@
 package com.example.gdsc_project_app;
 
+import static android.text.TextUtils.isEmpty;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.SpannableStringBuilder;
+import android.text.style.RelativeSizeSpan;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -46,27 +53,47 @@ public class LoginActivity extends AppCompatActivity {
 
     private void loginUser(String username, String password){
         Log.i(TAG, "Attempting to login user: " + username);
+
+        // Check if username or password is lacking
+        boolean validationError = false;
+        StringBuilder validationErrorMessage = new StringBuilder("Please ");
+        if (isEmpty(username)){
+            validationError = true;
+            validationErrorMessage.append("enter a username");
+        }
+        if (isEmpty(password)){
+            if (validationError){
+                validationErrorMessage.append(", \n  and ");
+            }
+            validationError = true;
+            validationErrorMessage.append("enter a password");
+        }
+        validationErrorMessage.append(".");
+        if (validationError){
+            Toast.makeText(LoginActivity.this, Html.fromHtml("<font color='#5e5e5e'><b><big>" + validationErrorMessage + "</b></font></big>"), Toast.LENGTH_LONG).show();
+            return;
+        }
+
         // TODO: navigate to the main activity if the user has signed in properly
         ParseUser.logInInBackground(username, password, new LogInCallback() {
             @Override
             public void done(ParseUser user, ParseException e) {
                 if (e != null){
                     Log.e(TAG, "Issue with login", e);
-                    Toast.makeText(LoginActivity.this, "Issue with login!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, Html.fromHtml("<font color='#5e5e5e'><b><big>" + "Issue with login!" + "</b></font></big>"), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 goMainActivity();
                 Log.i(TAG, "Login Success");
-                Toast.makeText(LoginActivity.this, "Success!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, Html.fromHtml("<font color='#5e5e5e'><b><big>" + "Success!" + "</b></font></big>"), Toast.LENGTH_SHORT).show();
             }
         });
     }
-    private void goMainActivity(){
+    private void goMainActivity() {
         Intent i = new Intent(this, MainActivity.class);
         // Intent temp = new Intent(this, CommentActivity.class);
         Log.i(TAG, "Going into MainActivity");
         startActivity(i);
         // startActivity(temp);
     }
-
 }
