@@ -29,24 +29,39 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cvPost"
         android:layout_width="match_parent"
-        android:layout_height="130dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/tbComments"
-        app:cardBackgroundColor="#75FFFFFF" />
+        app:cardBackgroundColor="#75FFFFFF">
+
+        <include layout="@layout/item_post" />
+
+    </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvComments"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/btnAddComment"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/rlAddComment"
         android:layout_below="@id/cvPost" />
 
-    <Button
-        android:id="@+id/btnAddComment"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/rlAddComment"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="15dp"
-        android:text="Add Comment" />
+        app:cardBackgroundColor="#75FFFFFF">
+
+        <Button
+            android:id="@+id/btnAddComment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="15dp"
+            android:text="Add Comment" />
+
+    </RelativeLayout>
+
+
 
 </RelativeLayout>
