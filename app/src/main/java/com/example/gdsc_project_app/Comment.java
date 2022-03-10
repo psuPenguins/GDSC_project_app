@@ -12,7 +12,7 @@ public class Comment extends ParseObject {
     public static final String KEY_COMMENT_POST_ID = "postID";
     public static final String KEY_COMMENT_LIKE_COUNT = "likeCount";
     public static final String KEY_COMMENT_DISLIKE_COUNT = "dislikeCount";
-    public static final String KEY_COMMENT_USER_NAME = "userName";
+    public static final String KEY_COMMENT_USER_NAME = "username";
     public static final String KEY_COMMENT_TIME = "createdAt";
 
     public String getCommentDescription(){
