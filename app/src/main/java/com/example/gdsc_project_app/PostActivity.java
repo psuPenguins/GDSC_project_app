@@ -1,5 +1,7 @@
 package com.example.gdsc_project_app;
 
+import static com.example.gdsc_project_app.User.KEY_USER_PROFILE_IMAGE;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -47,9 +49,7 @@ public class PostActivity extends AppCompatActivity {
 
 
         tvPostingName.setText(ParseUser.getCurrentUser().getUsername());
-        Glide.with(this)
-                .load("https://img.icons8.com/flat-round/64/000000/bird--v1.png")
-                .into(ivPostUserPic);
+        Glide.with(this).load(ParseUser.getCurrentUser().getParseFile(KEY_USER_PROFILE_IMAGE).getUrl()).into(ivPostUserPic);
 
         btnReturnFromPost.setOnClickListener(new View.OnClickListener() {
             @Override
