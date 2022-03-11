@@ -86,6 +86,7 @@ public class PostActivity extends AppCompatActivity {
         post.setDescription(description);
         post.setUserID(currentUser.getObjectId());
         post.setUsername(currentUser.getUsername());
+        post.setQuestionID(currentUser.getString("questionID"));
         post.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {

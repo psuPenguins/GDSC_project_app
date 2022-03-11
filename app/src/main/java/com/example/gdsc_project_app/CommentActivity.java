@@ -24,6 +24,7 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -104,7 +105,7 @@ public class CommentActivity extends AppCompatActivity {
         ParseQuery<Comment> query = ParseQuery.getQuery(Comment.class);
         query.include(Comment.KEY_COMMENT_USER_ID);
         // TODO:
-        //query.whereEqualTo(Comment.KEY_COMMENT_POST_ID, );
+        query.whereEqualTo(Comment.KEY_COMMENT_POST_ID, PostAdapter.currentPostId);
         query.orderByDescending(Comment.KEY_COMMENT_TIME);
 
         query.findInBackground(new FindCallback<Comment>() {
@@ -134,7 +135,7 @@ public class CommentActivity extends AppCompatActivity {
     private void AddCommentActivity(){
         Log.i(TAG, "Adding Comment in CommentActivity");
         //TODO: Work with database to add comment,
-        //
+        saveComment(etNewComment.getText().toString(), ParseUser.getCurrentUser());
         Intent i = new Intent(this, CommentActivity.class);
         Log.i(TAG, "Refreshing CommentActivity");
         startActivity(i);
@@ -154,6 +155,25 @@ public class CommentActivity extends AppCompatActivity {
                 return;
             } else {
                 Log.e(TAG, "Something is wrong with querying current post data!");
+            }
+        });
+    }
+
+    private void saveComment(String description, ParseUser currentUser) {
+        Comment comment = new Comment();
+        comment.setDescription(description);
+        comment.setUserID(currentUser.getObjectId());
+        comment.setUsername(currentUser.getUsername());
+        comment.setPostID(PostAdapter.currentPostId);
+        comment.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if(e != null){
+                    Log.e(TAG, "Error while saving!", e);
+                    Toast.makeText(CommentActivity.this, "Error while saving", Toast.LENGTH_SHORT).show();
+                }
+                Log.i(TAG, "Post save was successful!");
+                btnAddComment.setText("");
             }
         });
     }
