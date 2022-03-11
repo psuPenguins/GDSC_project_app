@@ -1,5 +1,7 @@
 package com.example.gdsc_project_app;
 
+import static com.example.gdsc_project_app.Post.KEY_QUESTIONID;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +19,7 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import java.util.List;
 
@@ -108,7 +111,8 @@ public class RoomActivity extends AppCompatActivity {
     // Get the posts from the data
     private void queryPosts() {
         ParseQuery<Post> query = new ParseQuery<>("Post");
-        query.orderByDescending("createdAt");
+        query.whereEqualTo(Post.KEY_QUESTIONID, ParseUser.getCurrentUser().getString(KEY_QUESTIONID));
+        query.orderByDescending("likeCount");
         query.findInBackground((objects, e) -> {
             if (e == null) {
                 PostAdapter adapter = new PostAdapter(this, objects);

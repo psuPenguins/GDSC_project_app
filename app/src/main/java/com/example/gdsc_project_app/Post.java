@@ -14,6 +14,7 @@ public class Post extends ParseObject{
     public static final String KEY_DESCRIPTION = "description";
     public static final String KEY_LIKE_COUNT = "likeCount";
     public static final String KEY_DISLIKE_COUNT = "dislikeCount";
+    public static final String KEY_QUESTIONID = "questionID";
 
     public String getDescription() {
         return getString(KEY_DESCRIPTION);
@@ -53,5 +54,13 @@ public class Post extends ParseObject{
 
     public void setUsername(String username) {
         put(KEY_USERNAME, username);
+    }
+
+    public String getQuestionID() {
+        return getString(KEY_QUESTIONID);
+    }
+
+    public void setQuestionID(String questionID) {
+        put(KEY_QUESTIONID, questionID);
     }
 }
