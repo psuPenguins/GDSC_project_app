@@ -34,6 +34,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostHolder>{
    private Context context;
    private List<Post> list;
 
+   public static String currentPostId;
+
    public PostAdapter(Context context, List<Post> list) {
       this.list = list;
       this.context = context;
@@ -64,6 +66,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostHolder>{
             //Log.i(TAG, "onClick view reply button");
             Intent i = new Intent(context, CommentActivity.class);
             //Log.i(TAG, "Going into RoomActivity");
+            currentPostId = post.getPostID();
             context.startActivity(i);
          }
       });
