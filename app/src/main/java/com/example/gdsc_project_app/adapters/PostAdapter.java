@@ -14,14 +14,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.gdsc_project_app.CommentActivity;
-import com.example.gdsc_project_app.PostActivity;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 
@@ -89,7 +87,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostHolder>{
                holder.LikeAmount.setText(post.getLikeCount().toString());
                holder.DislikeAmount.setText(post.getDislikeCount().toString());
             }
-            if (checkedID == R.id.rbDislike){
+            if (checkedID == R.id.rbUnlike){
                Log.i(TAG, "onClick dislike button");
                addOneDislike(post);
                post.disliked = true;
