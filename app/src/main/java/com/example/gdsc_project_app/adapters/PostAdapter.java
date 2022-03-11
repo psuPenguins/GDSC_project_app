@@ -57,6 +57,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostHolder>{
       Post post = list.get(position);
       holder.UserID.setText(post.getUsername());
       holder.Content.setText(post.getDescription());
+      holder.LikeAmount.setText(post.getLikeCount().toString());
       holder.btnViewReply.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View view) {
@@ -100,12 +101,14 @@ class PostHolder extends RecyclerView.ViewHolder {
    TextView Content;
    Button btnViewReply;
    ImageView ivUserPic;
+   TextView LikeAmount;
 
    public PostHolder(@NonNull View itemView) {
       super(itemView);
       UserID = itemView.findViewById(R.id.tvUsername);
       Content = itemView.findViewById(R.id.tvPostContent);
       btnViewReply = itemView.findViewById(R.id.btnViewReply);
+      LikeAmount = itemView.findViewById(R.id.tvLikeAmount);
       ivUserPic = itemView.findViewById(R.id.ivUserPic);
    }
 }
