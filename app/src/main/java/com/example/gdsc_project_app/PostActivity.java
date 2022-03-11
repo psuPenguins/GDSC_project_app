@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,6 +20,7 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import java.util.List;
 
@@ -63,7 +65,36 @@ public class PostActivity extends AppCompatActivity {
             @Override
             public void onClick (View view){
                 Log.i(TAG, "onClick make post button");
+                // TODO: update the post
+                // set description
+                String description = tiContentInput.getText().toString();
+                if(description.isEmpty()) {
+                    Toast.makeText(PostActivity.this, "Description can't be empty", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                ParseUser currentUser = ParseUser.getCurrentUser();
+                savePost(description, currentUser);
+
+                // reload the room activity
                 goRoomActivity();
+            }
+        });
+    }
+
+    private void savePost(String description, ParseUser currentUser) {
+        Post post = new Post();
+        post.setDescription(description);
+        post.setUserID(currentUser.getObjectId());
+        post.setUsername(currentUser.getUsername());
+        post.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if(e != null){
+                    Log.e(TAG, "Error while saving!", e);
+                    Toast.makeText(PostActivity.this, "Error while saving", Toast.LENGTH_SHORT).show();
+                }
+                Log.i(TAG, "Post save was successful!");
+                tiContentInput.setText("");
             }
         });
     }

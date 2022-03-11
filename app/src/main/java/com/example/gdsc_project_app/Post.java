@@ -23,7 +23,7 @@ public class Post extends ParseObject{
         return getString(KEY_USERNAME);
     }
 
-    public void setDescription() {
+    public void setDescription(String description) {
         put(KEY_DESCRIPTION, description);
     }
 
@@ -47,7 +47,11 @@ public class Post extends ParseObject{
         return getString(KEY_USERID);
     }
 
-    public void setUserID(ParseUser user) {
-        put(KEY_USERID, user);
+    public void setUserID(String userID) {
+        put(KEY_USERID, userID);
+    }
+
+    public void setUsername(String username) {
+        put(KEY_USERNAME, username);
     }
 }

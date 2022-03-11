@@ -43,7 +43,19 @@ public class Comment extends ParseObject {
         return getString(KEY_COMMENT_TIME);
     }
 
-    public void setUser(ParseUser user){
-        put(KEY_COMMENT_USER_ID, user);
+    public void setUserID(String userID){
+        put(KEY_COMMENT_USER_ID, userID);
+    }
+
+    public void setUsername(String username){
+        put(KEY_COMMENT_USER_NAME, username);
+    }
+
+    public void setPostID(String postID){
+        put(KEY_COMMENT_POST_ID, postID);
+    }
+
+    public void setDescription(String description){
+        put(KEY_COMMENT_DESCRIPTION, description);
     }
 }
