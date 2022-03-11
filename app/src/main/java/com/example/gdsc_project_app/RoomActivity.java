@@ -128,6 +128,7 @@ public class RoomActivity extends AppCompatActivity {
         });
     }
 
+    // set the topic text to the right topic
     private void queryTopic(){
         ParseQuery<Question> query = new ParseQuery<Question>("Question");
         query.whereEqualTo(Question.KEY_QUESTIONID, ParseUser.getCurrentUser().getString(KEY_QUESTIONID));
