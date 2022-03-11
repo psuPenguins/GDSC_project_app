@@ -5,7 +5,6 @@ import static com.example.gdsc_project_app.User.KEY_USER_PROFILE_IMAGE;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +19,6 @@ import com.bumptech.glide.Glide;
 import com.example.gdsc_project_app.CommentActivity;
 import com.parse.FindCallback;
 import com.parse.ParseException;
-import com.parse.ParseObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +56,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostHolder>{
       holder.UserID.setText(post.getUsername());
       holder.Content.setText(post.getDescription());
       holder.LikeAmount.setText(post.getLikeCount().toString());
+      holder.DislikeAmount.setText(post.getDislikeCount().toString());
       holder.btnViewReply.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View view) {
@@ -102,6 +101,7 @@ class PostHolder extends RecyclerView.ViewHolder {
    Button btnViewReply;
    ImageView ivUserPic;
    TextView LikeAmount;
+   TextView DislikeAmount;
 
    public PostHolder(@NonNull View itemView) {
       super(itemView);
@@ -109,6 +109,7 @@ class PostHolder extends RecyclerView.ViewHolder {
       Content = itemView.findViewById(R.id.tvPostContent);
       btnViewReply = itemView.findViewById(R.id.btnViewReply);
       LikeAmount = itemView.findViewById(R.id.tvLikeAmount);
+      DislikeAmount = itemView.findViewById(R.id.tvDislikeAmount);
       ivUserPic = itemView.findViewById(R.id.ivUserPic);
    }
 }

@@ -41,7 +41,7 @@ public class Post extends ParseObject{
         put(KEY_LIKE_COUNT, likeCount);
     }
 
-    public String getDislike() {
+    public String getDislikeCount() {
         return getString(KEY_DISLIKE_COUNT);
     }
 
