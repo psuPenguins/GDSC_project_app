@@ -13,6 +13,8 @@ public class Post extends ParseObject{
     public static final String KEY_LIKE_COUNT = "likeCount";
     public static final String KEY_DISLIKE_COUNT = "dislikeCount";
     public static final String KEY_QUESTIONID = "questionID";
+    public Boolean liked = false;
+    public Boolean disliked = false;
 
     public String getDescription() {
         return getString(KEY_DESCRIPTION);
