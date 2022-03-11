@@ -14,12 +14,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.gdsc_project_app.CommentActivity;
+import com.example.gdsc_project_app.PostActivity;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 
@@ -30,6 +32,7 @@ import com.example.gdsc_project_app.Post;
 import com.example.gdsc_project_app.R;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 public class PostAdapter extends RecyclerView.Adapter<PostHolder>{
    private Context context;
@@ -78,12 +81,14 @@ public class PostAdapter extends RecyclerView.Adapter<PostHolder>{
             if (checkedID == R.id.rbLike){
                Log.i(TAG, "onClick like button");
                Integer newLikeCount = post.getLikeCount() + 1;
-               post.setLikeCount(newLikeCount);
+               saveLike(newLikeCount, post);
+               holder.LikeAmount.setText(post.getLikeCount().toString());
             }
             if (checkedID == R.id.rbDislike){
                Log.i(TAG, "onClick dislike button");
                Integer newDislikeCount = post.getDislikeCount() + 1;
-               post.setDislikeCount(newDislikeCount);
+               saveDislike(newDislikeCount, post);
+               holder.DislikeAmount.setText(post.getDislikeCount().toString());
             }
          }
       });
@@ -113,6 +118,35 @@ public class PostAdapter extends RecyclerView.Adapter<PostHolder>{
    public int getItemCount() {
       return list.size();
    }
+
+   // updates the likeCount in database
+   private void saveLike(Integer likeCount, Post post) {
+      post.setLikeCount(likeCount);
+      post.saveInBackground(new SaveCallback() {
+         @Override
+         public void done(ParseException e) {
+            if(e != null){
+               Log.e(TAG, "Error while saving like count!", e);
+            }
+            Log.i(TAG, "Like count save was successful!");
+         }
+      });
+   }
+
+   // updates the dislikeCount in database
+   private void saveDislike(Integer dislikeCount, Post post) {
+      post.setDislikeCount(dislikeCount);
+      post.saveInBackground(new SaveCallback() {
+         @Override
+         public void done(ParseException e) {
+            if(e != null){
+               Log.e(TAG, "Error while saving dislike count!", e);
+            }
+            Log.i(TAG, "Dislike count save was successful!");
+         }
+      });
+   }
+
 }
 
 
