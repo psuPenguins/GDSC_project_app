@@ -56,14 +56,14 @@
         android:layout_marginEnd="10dp">
 
         <RadioButton
-            android:id="@+id/rbPromote"
+            android:id="@+id/rbLike"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:button="@android:drawable/ic_input_add"
             android:textSize="10sp" />
 
         <RadioButton
-            android:id="@+id/rbDemote"
+            android:id="@+id/rbUnlike"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:button="@android:drawable/ic_delete"

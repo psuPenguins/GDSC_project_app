@@ -3,7 +3,6 @@ package com.example.gdsc_project_app.adapters;
 import static com.example.gdsc_project_app.User.KEY_USER_PROFILE_IMAGE;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bumptech.glide.Glide;
-import com.example.gdsc_project_app.User;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -78,8 +76,8 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Commen
             tvUsername = itemView.findViewById(R.id.tvUsername);
             tvTime = itemView.findViewById(R.id.tvTime);
             tvCommentText = itemView.findViewById(R.id.tvCommentText);
-            rbPromote = itemView.findViewById(R.id.rbPromote);
-            rbDemote = itemView.findViewById(R.id.rbDemote);
+            rbPromote = itemView.findViewById(R.id.rbLike);
+            rbDemote = itemView.findViewById(R.id.rbUnlike);
         }
 
         public void bind(Comment comment) {
