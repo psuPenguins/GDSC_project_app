@@ -80,18 +80,30 @@ public class PostAdapter extends RecyclerView.Adapter<PostHolder>{
             // checkedID is the RadioButton selected
             if (checkedID == R.id.rbLike){
                Log.i(TAG, "onClick like button");
-               Integer newLikeCount = post.getLikeCount() + 1;
-               saveLike(newLikeCount, post);
+               addOneLike(post);
+               post.liked = true;
+               if (post.disliked == true){
+                  post.disliked = false;
+                  minusOneDislike(post);
+               }
                holder.LikeAmount.setText(post.getLikeCount().toString());
+               holder.DislikeAmount.setText(post.getDislikeCount().toString());
             }
             if (checkedID == R.id.rbDislike){
                Log.i(TAG, "onClick dislike button");
-               Integer newDislikeCount = post.getDislikeCount() + 1;
-               saveDislike(newDislikeCount, post);
+               addOneDislike(post);
+               post.disliked = true;
+
+               if (post.liked == true){
+                  post.liked = false;
+                  minusOneLike(post);
+               }
                holder.DislikeAmount.setText(post.getDislikeCount().toString());
+               holder.LikeAmount.setText(post.getLikeCount().toString());
             }
          }
       });
+
 
 
       ParseQuery<ParseUser> query = ParseUser.getQuery();
@@ -120,8 +132,22 @@ public class PostAdapter extends RecyclerView.Adapter<PostHolder>{
    }
 
    // updates the likeCount in database
-   private void saveLike(Integer likeCount, Post post) {
-      post.setLikeCount(likeCount);
+   private void addOneLike(Post post) {
+      Integer newLikeCount = post.getLikeCount() + 1;
+      post.setLikeCount(newLikeCount);
+      post.saveInBackground(new SaveCallback() {
+         @Override
+         public void done(ParseException e) {
+            if(e != null){
+               Log.e(TAG, "Error while saving like count!", e);
+            }
+            Log.i(TAG, "Like count save was successful!");
+         }
+      });
+   }
+   private void minusOneLike(Post post) {
+      Integer newLikeCount = post.getLikeCount() - 1;
+      post.setLikeCount(newLikeCount);
       post.saveInBackground(new SaveCallback() {
          @Override
          public void done(ParseException e) {
@@ -133,9 +159,24 @@ public class PostAdapter extends RecyclerView.Adapter<PostHolder>{
       });
    }
 
+
    // updates the dislikeCount in database
-   private void saveDislike(Integer dislikeCount, Post post) {
-      post.setDislikeCount(dislikeCount);
+   private void addOneDislike(Post post) {
+      Integer newDislikeCount = post.getDislikeCount() + 1;
+      post.setDislikeCount(newDislikeCount);
+      post.saveInBackground(new SaveCallback() {
+         @Override
+         public void done(ParseException e) {
+            if(e != null){
+               Log.e(TAG, "Error while saving dislike count!", e);
+            }
+            Log.i(TAG, "Dislike count save was successful!");
+         }
+      });
+   }
+   private void minusOneDislike(Post post) {
+      Integer newDislikeCount = post.getDislikeCount() - 1;
+      post.setDislikeCount(newDislikeCount);
       post.saveInBackground(new SaveCallback() {
          @Override
          public void done(ParseException e) {
