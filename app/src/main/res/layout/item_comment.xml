@@ -75,7 +75,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginEnd="0dp"
             android:layout_marginBottom="0dp"
-            android:button="@android:drawable/ic_input_add" />
+            android:button="@android:drawable/arrow_up_float" />
 
         <TextView
             android:id="@+id/tvDislikeAmount"
@@ -94,7 +94,7 @@
             android:layout_height="30dp"
             android:layout_marginStart="0dp"
             android:layout_marginTop="5dp"
-            android:button="@android:drawable/ic_delete"
+            android:button="@android:drawable/arrow_down_float"
             android:textAlignment="center" />
 
     </RadioGroup>
