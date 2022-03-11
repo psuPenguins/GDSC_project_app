@@ -1,6 +1,9 @@
 package com.example.gdsc_project_app;
 
+import static com.example.gdsc_project_app.Post.KEY_QUESTIONID;
+
 import android.content.Intent;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +20,7 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import java.util.List;
 
@@ -56,6 +60,7 @@ public class RoomActivity extends AppCompatActivity {
         // 3 Create the data source
         // 4 Set the adapter on the recycler view
         // 5 Set the layout manager on the recycler view
+        queryTopic();
         queryPosts();
 
 
@@ -108,7 +113,8 @@ public class RoomActivity extends AppCompatActivity {
     // Get the posts from the data
     private void queryPosts() {
         ParseQuery<Post> query = new ParseQuery<>("Post");
-        query.orderByDescending("createdAt");
+        query.whereEqualTo(Post.KEY_QUESTIONID, ParseUser.getCurrentUser().getString(KEY_QUESTIONID));
+        query.orderByDescending("likeCount");
         query.findInBackground((objects, e) -> {
             if (e == null) {
                 PostAdapter adapter = new PostAdapter(this, objects);
@@ -118,6 +124,24 @@ public class RoomActivity extends AppCompatActivity {
                 return;
             } else {
                 Log.e(TAG, "Something is wrong with querying data!");
+            }
+        });
+    }
+
+    // set the topic text to the right topic
+    private void queryTopic(){
+        ParseQuery<Question> query = new ParseQuery<Question>("Question");
+        query.whereEqualTo(Question.KEY_QUESTIONID, ParseUser.getCurrentUser().getString(KEY_QUESTIONID));
+        Log.i(TAG, Question.KEY_QUESTIONID +" and "+ ParseUser.getCurrentUser().getString(KEY_QUESTIONID));
+        query.findInBackground(new FindCallback<Question>() {
+            @Override
+            public void done(List<Question> dbQs, ParseException e) {
+                if (e == null) {
+                    Log.i(TAG, "size: " + dbQs.size());
+                    tvRoomTopic.setText("Topic: " + dbQs.get(0).getTopic());
+                } else {
+                    Log.e(TAG,"ERROR getting data");
+                }
             }
         });
     }
