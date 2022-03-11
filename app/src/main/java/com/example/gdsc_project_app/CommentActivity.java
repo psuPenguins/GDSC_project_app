@@ -1,6 +1,5 @@
 package com.example.gdsc_project_app;
 
-import static com.example.gdsc_project_app.Post.KEY_POSTID;
 import static com.example.gdsc_project_app.Post.KEY_QUESTIONID;
 import static java.security.AccessController.getContext;
 
@@ -145,7 +144,7 @@ public class CommentActivity extends AppCompatActivity {
     private void querySelectedPost() {
         ParseQuery<Post> query = new ParseQuery<>("Post");
         query.whereEqualTo("objectId", PostAdapter.currentPostId);
-        Log.i("SelectedPost", "currentPost:"+PostAdapter.currentPostId+" postID:"+ Post.KEY_POSTID);
+        Log.i("SelectedPost", "currentPost:"+PostAdapter.currentPostId+" postID:"+ "objectId");
         query.findInBackground((objects, e) -> {
             if (e == null) {
                 PostAdapter adapter = new PostAdapter(this, objects);
