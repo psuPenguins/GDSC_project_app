@@ -77,9 +77,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostHolder>{
             // checkedID is the RadioButton selected
             if (checkedID == R.id.rbLike){
                Log.i(TAG, "onClick like button");
+               Integer newLikeCount = post.getLikeCount() + 1;
+               post.setLikeCount(newLikeCount);
             }
             if (checkedID == R.id.rbDislike){
                Log.i(TAG, "onClick dislike button");
+               Integer newDislikeCount = post.getDislikeCount() + 1;
+               post.setDislikeCount(newDislikeCount);
             }
          }
       });
