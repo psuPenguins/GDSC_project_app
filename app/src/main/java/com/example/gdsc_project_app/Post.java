@@ -1,12 +1,13 @@
 package com.example.gdsc_project_app;
 
+import android.util.Log;
+
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
 @ParseClassName("Post")
 public class Post extends ParseObject{
-    public static final String KEY_POSTID = "objectId";
     public static final String KEY_USERID = "userID";
     public static final String KEY_USERNAME = "username";
     public static final String KEY_DESCRIPTION = "description";
@@ -20,9 +21,6 @@ public class Post extends ParseObject{
         return getString(KEY_DESCRIPTION);
     }
 
-    public String getPostID() {
-        return getString(KEY_POSTID);
-    }
 
     public String getUsername() {
         return getString(KEY_USERNAME);

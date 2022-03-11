@@ -69,7 +69,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostHolder>{
          @Override
          public void onClick(View view) {
             Intent i = new Intent(context, CommentActivity.class);
-            currentPostId = post.getPostID();
+            currentPostId = post.getObjectId();
             context.startActivity(i);
          }
       });
