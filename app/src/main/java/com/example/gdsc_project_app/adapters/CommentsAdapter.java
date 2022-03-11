@@ -1,19 +1,23 @@
 package com.example.gdsc_project_app.adapters;
 
+import static com.example.gdsc_project_app.MainActivity.TAG;
 import static com.example.gdsc_project_app.User.KEY_USER_PROFILE_IMAGE;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gdsc_project_app.Comment;
+import com.example.gdsc_project_app.Post;
 import com.example.gdsc_project_app.R;
 
 import java.util.ArrayList;
@@ -24,6 +28,9 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
+
+import org.w3c.dom.Text;
 
 public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.CommentViewHolder>{
 
@@ -52,6 +59,38 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Commen
 
         // Bind the comment with view holder
         holder.bind(comment);
+
+
+        holder.rgVote.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedID) {
+                // checkedID is the RadioButton selected
+                if (checkedID == R.id.rbLike){
+                    Log.i(TAG, "onClick like button");
+                    addOneLike(comment);
+                    comment.liked = true;
+                    if (comment.disliked == true){
+                        comment.disliked = false;
+                        minusOneDislike(comment);
+                    }
+                    holder.tvLikeAmount.setText(comment.getCommentLikeCount().toString());
+                    holder.tvDislikeAmount.setText(comment.getCommentDislikeCount().toString());
+                }
+                if (checkedID == R.id.rbUnlike){
+                    Log.i(TAG, "onClick dislike button");
+                    addOneDislike(comment);
+                    comment.disliked = true;
+
+                    if (comment.liked == true){
+                        comment.liked = false;
+                        minusOneLike(comment);
+                    }
+                    holder.tvDislikeAmount.setText(comment.getCommentDislikeCount().toString());
+                    holder.tvLikeAmount.setText(comment.getCommentLikeCount().toString());
+                }
+            }
+        });
+
     }
 
     @Override
@@ -67,8 +106,9 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Commen
         private TextView tvUsername;
         private TextView tvTime;
         private TextView tvCommentText;
-        private RadioButton rbPromote;
-        private RadioButton rbDemote;
+        private TextView tvLikeAmount;
+        private TextView tvDislikeAmount;
+        private RadioGroup rgVote;
 
         public CommentViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -76,8 +116,9 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Commen
             tvUsername = itemView.findViewById(R.id.tvUsername);
             tvTime = itemView.findViewById(R.id.tvTime);
             tvCommentText = itemView.findViewById(R.id.tvCommentText);
-            rbPromote = itemView.findViewById(R.id.rbLike);
-            rbDemote = itemView.findViewById(R.id.rbUnlike);
+            rgVote = itemView.findViewById(R.id.rgVote);
+            tvLikeAmount = itemView.findViewById(R.id.tvLikeAmount);
+            tvDislikeAmount = itemView.findViewById(R.id.tvDislikeAmount);
         }
 
         public void bind(Comment comment) {
@@ -104,8 +145,65 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Commen
             tvUsername.setText(comment.getCommentUserName());
             tvTime.setText(comment.getCommentTime());
             tvCommentText.setText(comment.getCommentDescription());
-            rbPromote.setText(comment.getCommentLikeCount().toString());
-            rbDemote.setText(comment.getCommentDislikeCount().toString());
+
+
         }
+    }
+    // updates the likeCount in database
+    private void addOneLike(Comment post) {
+        Integer newLikeCount = post.getCommentLikeCount() + 1;
+        post.setCommentLikeCount(newLikeCount);
+        post.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if(e != null){
+                    Log.e(TAG, "Error while saving like count!", e);
+                }
+                Log.i(TAG, "Like count save was successful!");
+            }
+        });
+    }
+
+    private void minusOneLike(Comment post) {
+        Integer newLikeCount = post.getCommentLikeCount() - 1;
+        post.setCommentLikeCount(newLikeCount);
+        post.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if(e != null){
+                    Log.e(TAG, "Error while saving like count!", e);
+                }
+                Log.i(TAG, "Like count save was successful!");
+            }
+        });
+    }
+
+
+    // updates the dislikeCount in database
+    private void addOneDislike(Comment comment) {
+        Integer newDislikeCount = comment.getCommentDislikeCount() + 1;
+        comment.setCommentDislikeCount(newDislikeCount);
+        comment.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if(e != null){
+                    Log.e(TAG, "Error while saving dislike count!", e);
+                }
+                Log.i(TAG, "Dislike count save was successful!");
+            }
+        });
+    }
+    private void minusOneDislike(Comment comment) {
+        Integer newDislikeCount = comment.getCommentDislikeCount() - 1;
+        comment.setCommentDislikeCount(newDislikeCount);
+        comment.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if(e != null){
+                    Log.e(TAG, "Error while saving dislike count!", e);
+                }
+                Log.i(TAG, "Dislike count save was successful!");
+            }
+        });
     }
 }
