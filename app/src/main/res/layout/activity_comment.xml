@@ -27,23 +27,19 @@
         android:text="Back"
         android:textSize="11sp" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cvPost"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvCurrentPost"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tbComments"
-        app:cardBackgroundColor="#75FFFFFF">
-
-        <include layout="@layout/item_post" />
-
-    </androidx.cardview.widget.CardView>
+        app:cardBackgroundColor="#75FFFFFF" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvComments"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/rlAddComment"
-        android:layout_below="@id/cvPost" />
+        android:layout_below="@id/rvCurrentPost" />
 
     <RelativeLayout
         android:id="@+id/rlAddComment"

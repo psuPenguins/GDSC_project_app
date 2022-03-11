@@ -1,5 +1,7 @@
 package com.example.gdsc_project_app;
 
+import static com.example.gdsc_project_app.Post.KEY_POSTID;
+import static com.example.gdsc_project_app.Post.KEY_QUESTIONID;
 import static java.security.AccessController.getContext;
 
 import android.content.Intent;
@@ -13,13 +15,16 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gdsc_project_app.adapters.CommentsAdapter;
+import com.example.gdsc_project_app.adapters.PostAdapter;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,20 +36,28 @@ public class CommentActivity extends AppCompatActivity {
     private Button btnBack;
     private Button btnAddComment;
     private EditText etNewComment;
+    private RecyclerView rvCurrentPost;
     private RecyclerView rvComments;
-    private CommentsAdapter adapter;
+//    private PostAdapter postAdapter;
+    private CommentsAdapter commentsAdapter;
     private List<Comment> allComments;
+//    private List<Post> selectedPost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView((R.layout.activity_comment));
 
+
         // linking the private variables to the elements in the xml files
         btnBack = findViewById(R.id.btnBack);
         btnAddComment = findViewById(R.id.btnAddComment);
+        rvCurrentPost = findViewById(R.id.rvCurrentPost);
         rvComments = findViewById(R.id.rvComments);
         etNewComment = findViewById(R.id.etNewComment);
+
+        //get current post into layout
+        querySelectedPost();
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,14 +85,14 @@ public class CommentActivity extends AppCompatActivity {
         });
 
         allComments = new ArrayList<>();
-        adapter = new CommentsAdapter(this, allComments);
+        commentsAdapter = new CommentsAdapter(this, allComments);
 
         // Steps to use the recycler view
         // 0. create layout for one row in the list
         // 1. create the adapter
         // 2. create the data source
         // 3. set the adapter on the recycler view
-        rvComments.setAdapter(adapter);
+        rvComments.setAdapter(commentsAdapter);
         // 4. set the layout manger on the recycler view
         rvComments.setLayoutManager(new LinearLayoutManager(this));
 
@@ -106,7 +119,7 @@ public class CommentActivity extends AppCompatActivity {
                     Log.i(TAG, "Comment: " + comment.getCommentDescription() + ", username: " + comment.getCommentUserName());
                 }
                 allComments.addAll(comments);
-                adapter.notifyDataSetChanged();
+                commentsAdapter.notifyDataSetChanged();
             }
         });
     }
@@ -126,6 +139,24 @@ public class CommentActivity extends AppCompatActivity {
         Intent i = new Intent(this, CommentActivity.class);
         Log.i(TAG, "Refreshing CommentActivity");
         startActivity(i);
+    }
+
+    // get selected post
+    private void querySelectedPost() {
+        ParseQuery<Post> query = new ParseQuery<>("Post");
+        query.whereEqualTo("objectId", PostAdapter.currentPostId);
+        Log.i("SelectedPost", "currentPost:"+PostAdapter.currentPostId+" postID:"+ Post.KEY_POSTID);
+        query.findInBackground((objects, e) -> {
+            if (e == null) {
+                PostAdapter adapter = new PostAdapter(this, objects);
+                rvCurrentPost.setLayoutManager(new LinearLayoutManager(this));
+                rvCurrentPost.setAdapter(adapter);
+                Log.d(TAG, "SELECTED POST: " + objects);
+                return;
+            } else {
+                Log.e(TAG, "Something is wrong with querying current post data!");
+            }
+        });
     }
 
 }
