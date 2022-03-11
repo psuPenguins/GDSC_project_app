@@ -1,15 +1,18 @@
 package com.example.gdsc_project_app.adapters;
 
+import static com.example.gdsc_project_app.MainActivity.TAG;
 import static com.example.gdsc_project_app.User.KEY_USER_PROFILE_IMAGE;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -62,13 +65,25 @@ public class PostAdapter extends RecyclerView.Adapter<PostHolder>{
       holder.btnViewReply.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View view) {
-            //Log.i(TAG, "onClick view reply button");
             Intent i = new Intent(context, CommentActivity.class);
-            //Log.i(TAG, "Going into RoomActivity");
             currentPostId = post.getPostID();
             context.startActivity(i);
          }
       });
+
+      holder.rgVote.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+         @Override
+         public void onCheckedChanged(RadioGroup group, int checkedID) {
+            // checkedID is the RadioButton selected
+            if (checkedID == R.id.rbLike){
+               Log.i(TAG, "onClick like button");
+            }
+            if (checkedID == R.id.rbDislike){
+               Log.i(TAG, "onClick dislike button");
+            }
+         }
+      });
+
 
       ParseQuery<ParseUser> query = ParseUser.getQuery();
       List<ParseUser> allUsers = new ArrayList<>();
@@ -105,6 +120,7 @@ class PostHolder extends RecyclerView.ViewHolder {
    ImageView ivUserPic;
    TextView LikeAmount;
    TextView DislikeAmount;
+   RadioGroup rgVote;
 
    public PostHolder(@NonNull View itemView) {
       super(itemView);
@@ -114,5 +130,6 @@ class PostHolder extends RecyclerView.ViewHolder {
       LikeAmount = itemView.findViewById(R.id.tvLikeAmount);
       DislikeAmount = itemView.findViewById(R.id.tvDislikeAmount);
       ivUserPic = itemView.findViewById(R.id.ivUserPic);
+      rgVote = itemView.findViewById(R.id.rgVote);
    }
 }

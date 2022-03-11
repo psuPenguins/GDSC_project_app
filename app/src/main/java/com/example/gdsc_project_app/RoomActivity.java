@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,7 +32,6 @@ public class RoomActivity extends AppCompatActivity {
 
     //TODO: create private variables (btn, tv..)
     private RecyclerView rvPosts;
-    private Button btnViewReply;
     private Button btnReturnFromRoom;
     private FloatingActionButton btnAddPost;
     private TextView tvRoomTopic;
@@ -42,14 +43,9 @@ public class RoomActivity extends AppCompatActivity {
         Log.i(TAG, "I'm in RoomActivity");
 
         // link the private variables to the elements in the xml files
-        btnViewReply = findViewById(R.id.btnViewReply);
         btnReturnFromRoom = findViewById(R.id.btnReturnFromRoom);
         btnAddPost = findViewById(R.id.btnAddPost);
         tvRoomTopic = findViewById(R.id.tvRoomTopic);
-
-        tvRoomTopic.setText("Topic: Food");
-
-
 
 
 
@@ -66,13 +62,6 @@ public class RoomActivity extends AppCompatActivity {
 
 
         // create onclicklistener for the button to the change the activity
-        //btnViewReply.setOnClickListener(new View.OnClickListener() {
-            //@Override
-            //public void onClick (View view){
-                //Log.i(TAG, "onClick view reply button");
-                //goReplyActivity();
-            //}
-        //});
 
         btnReturnFromRoom.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,13 +79,6 @@ public class RoomActivity extends AppCompatActivity {
             }
         });
     }
-
-    // declaring transition functions
-    //private void goReplyActivity(){
-        //Intent i = new Intent(this, ReplyActivity.class);
-        //Log.i(TAG, "Going into ReplyActivity");
-        //startActivity(i);
-    //}
 
     private void goMainActivity(){
         Intent i = new Intent(this, MainActivity.class);
