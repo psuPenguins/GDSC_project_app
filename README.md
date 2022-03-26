@@ -59,7 +59,7 @@ Here's a walkthrough of implemented user stories:
 
 - [X] Question room and adding comments
 
-<img src='https://drive.google.com/file/d/1f57bUARGcP9QLV1YSgCGcfBwG12gZQRX/view?usp=sharing' title='Video Walkthrough' width='300px' alt='Video Walkthrough' />
+<img src='https://discord.com/channels/941822535945822309/950424910281457794/957367691780448296' title='Video Walkthrough' width='300px' alt='Video Walkthrough' />
 GIF created with [Kap](https://getkap.co/).
 
 ## Notes
