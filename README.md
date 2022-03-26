@@ -59,7 +59,7 @@ Here's a walkthrough of implemented user stories:
 
 - [X] Question room and adding comments
 
-<iframe src="https://imgur.com/8LcXaHj" title="description"></iframe>
+<script><iframe src="https://imgur.com/8LcXaHj" title="description"></iframe></script>
 GIF created with [Kap](https://getkap.co/).
 
 ## Notes
