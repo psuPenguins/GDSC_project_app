@@ -47,7 +47,7 @@ The following features are some furtue features we would like to add:
 Here's a walkthrough of implemented user stories:
 - [X] Users are able to login, if either the user name or passoword is entered incorrectly, it will prompt a message
 
-<img src='https://github.com/psuPenguins/GDSC_project_app/blob/main/gifs/login_fail.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://github.com/psuPenguins/GDSC_project_app/blob/main/gifs/login_fail.gif' title='Video Walkthrough' width='25px' alt='Video Walkthrough' />
 
 - [X] Users will be able t login and enter different rooms
 
