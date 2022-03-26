@@ -1,5 +1,5 @@
 # GDSC_project_app-- ChatterBox
-Collaborators: Nicholas Chan, Selina Fu, Chen-Kuan Liao, Ved Walavalker
+Contributors: Nicholas Chan, Selina Fu, Chen-Kuan Liao, Ved Walavalker
 
 ## Summary
 Built by four students from Pennsylvaia State University, this project was build to compete in the 2022 Google Solution Challenge. 
