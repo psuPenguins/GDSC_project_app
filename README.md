@@ -49,7 +49,7 @@ Here's a walkthrough of implemented user stories:
 
 <img src='https://github.com/psuPenguins/GDSC_project_app/blob/main/gifs/login_fail.gif' title='Video Walkthrough' width='300px' alt='Video Walkthrough' />
 
-- [X] Users will be able t login and enter different rooms
+- [X] Users will be able to login and enter different rooms
 
 <img src='https://github.com/psuPenguins/GDSC_project_app/blob/main/gifs/login_back_buttons.gif' title='Video Walkthrough' width='300px' alt='Video Walkthrough' />
 
