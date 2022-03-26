@@ -1,5 +1,5 @@
 # GDSC_project_app-- ChatterBox
-Collaborators: 
+Collaborators: Nicholas Chan, Selina Fu, Chen-Kuan Liao, Ved Walavalker
 
 ## Summary
 Built by four students from Pennsylvaia State University, this project was build to compete in the 2022 Google Solution Challenge. 
@@ -59,7 +59,7 @@ Here's a walkthrough of implemented user stories:
 
 - [X] Question room and adding comments
 
-<img src='' title='Video Walkthrough' width='300px' alt='Video Walkthrough' />
+<img src='https://drive.google.com/file/d/1f57bUARGcP9QLV1YSgCGcfBwG12gZQRX/view?usp=sharing' title='Video Walkthrough' width='300px' alt='Video Walkthrough' />
 GIF created with [Kap](https://getkap.co/).
 
 ## Notes
