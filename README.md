@@ -59,7 +59,7 @@ Here's a walkthrough of implemented user stories:
 
 - [X] Question room and adding comments
 
-<blockquote class="imgur-embed-pub" lang="en" data-id="8LcXaHj" data-context="false" ><a href="//imgur.com/8LcXaHj"></a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
+<iframe src="https://imgur.com/8LcXaHj" title="description"></iframe>
 GIF created with [Kap](https://getkap.co/).
 
 ## Notes
