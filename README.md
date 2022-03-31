@@ -1,6 +1,8 @@
 # GDSC_project_app-- ChatterBox
 Contributors: Nicholas Chan, Selina Fu, Chen-Kuan Liao, Ved Walavalker
+
 Full introduction video: https://www.youtube.com/watch?v=h0dlxgpdf7E
+
 2 minutes DEMO: https://www.youtube.com/watch?v=CDzLdAcu3e8
 
 ## Summary
