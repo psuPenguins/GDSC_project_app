@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -42,6 +43,9 @@ public class CommentActivity extends AppCompatActivity {
     private CommentsAdapter commentsAdapter;
     private List<Comment> allComments;
 //    private List<Post> selectedPost;
+    private TextView tvLikeAmount;
+    private TextView tvDislikeAmount;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +59,8 @@ public class CommentActivity extends AppCompatActivity {
         rvCurrentPost = findViewById(R.id.rvCurrentPost);
         rvComments = findViewById(R.id.rvComments);
         etNewComment = findViewById(R.id.etNewComment);
+        tvLikeAmount = findViewById((R.id.tvLikeAmount));
+        tvDislikeAmount = findViewById(R.id.tvDislikeAmount);
 
         //get current post into layout
         querySelectedPost();
