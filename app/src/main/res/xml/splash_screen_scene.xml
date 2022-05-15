@@ -21,12 +21,12 @@
                android:alpha="1" />
            <KeyAttribute
                motion:motionTarget="@+id/imageView"
-               motion:framePosition="50"
+               motion:framePosition="30"
                android:scaleX=".7"
                android:alpha="1" />
            <KeyAttribute
                motion:motionTarget="@+id/imageView"
-               motion:framePosition="50"
+               motion:framePosition="30"
                android:scaleY=".7"
                android:alpha="1" />
            <KeyAttribute
