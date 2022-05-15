@@ -145,8 +145,6 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Commen
             tvUsername.setText(comment.getCommentUserName());
             tvTime.setText(comment.getCommentTime());
             tvCommentText.setText(comment.getCommentDescription());
-            tvLikeAmount.setText(comment.getCommentLikeCount().toString());
-            tvDislikeAmount.setText(comment.getCommentDislikeCount().toString());
 
 
         }

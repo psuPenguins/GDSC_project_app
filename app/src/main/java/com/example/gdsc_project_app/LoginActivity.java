@@ -91,9 +91,9 @@ public class LoginActivity extends AppCompatActivity {
     }
     private void goMainActivity() {
         Intent i = new Intent(this, MainActivity.class);
-        // Intent temp = new Intent(this, CommentActivity.class);
         Log.i(TAG, "Going into MainActivity");
         startActivity(i);
-        // startActivity(temp);
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
+
 }
