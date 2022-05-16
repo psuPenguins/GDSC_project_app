@@ -6,23 +6,26 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
 
 
 public class ProfileFragment extends Fragment {
     public static final String TAG = "ProfileFragment";
-
+    public Button btnLogOut;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
-        return inflater.inflate(R.layout.fragment_room, parent, false);
+        return inflater.inflate(R.layout.fragment_profile, parent, false);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         Log.i(TAG, "I'm in ProfileFragment");
         super.onCreate(savedInstanceState);
+
+        btnLogOut = view.findViewById(R.id.btnSwipe);
 
         btnLogOut.setOnClickListener(new View.OnClickListener() {
             @Override

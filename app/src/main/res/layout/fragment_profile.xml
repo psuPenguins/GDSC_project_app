@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <Button
-        android:id="@+id/btnViewReply"
+        android:id="@+id/btnLogOut"
         android:layout_width="wrap_content"
         android:layout_height="33dp"
         android:layout_alignParentEnd="true"
