@@ -6,6 +6,7 @@ plugins {
 android {
     compileSdk 32
 
+
     defaultConfig {
         applicationId "com.example.gdsc_project_app"
         minSdk 21
@@ -63,6 +64,10 @@ dependencies {
     // firebase
     implementation platform('com.google.firebase:firebase-bom:30.0.1')
     implementation 'com.google.firebase:firebase-analytics'
+
+    // firebase login
+    implementation 'com.google.firebase:firebase-auth:16.1.0'
+    implementation 'com.firebaseui:firebase-ui-auth:7.2.0'
 
     // for fragment
     implementation("androidx.fragment:fragment:1.4.1")
