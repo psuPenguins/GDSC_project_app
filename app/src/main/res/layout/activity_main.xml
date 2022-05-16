@@ -24,8 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/btnLogOut"
-        android:layout_above="@id/btnRoom"
-        android:name="com.example.gdsc_project_app.SwipeFragment" />
+        android:layout_above="@id/btnRoom" ></androidx.viewpager.widget.ViewPager>
 
     <Button
         android:id="@+id/btnSwipe"

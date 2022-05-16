@@ -1,6 +1,7 @@
 package com.example.gdsc_project_app;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +14,9 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "MainActivity";
 
+    private SectionsStatePagerAdapter mSectionsStatePagerAdapter;
+    private ViewPager mViewPager;
+
     //TODO: create private variables (btn, tv..)
     private Button btnLogOut;
     private Button btnSwipe;
@@ -23,6 +27,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.i(TAG, "I'm in MainActivity");
+
+        mSectionsStatePagerAdapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
+
+        mViewPager = (ViewPager) findViewById(R.id.mainFragment_view);
+        //setup the pager
+        setupViewPager(mViewPager);
+
 
         // TODO: link the private variables to the elements in the xml files
         btnLogOut = findViewById((R.id.btnLogOut));
@@ -75,4 +86,13 @@ public class MainActivity extends AppCompatActivity {
         Log.i(TAG, "Going into LoginActivity");
         startActivity(i);
     }
+
+    private void setupViewPager(ViewPager viewPager){
+        SectionsStatePagerAdapter adapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new RoomFragment(), "Fragment1");
+        adapter.addFragment(new SwipeFragment(), "Fragment2");
+        viewPager.setAdapter(adapter);
+    }
+
+
 }
