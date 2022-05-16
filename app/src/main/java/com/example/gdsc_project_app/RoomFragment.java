@@ -72,7 +72,7 @@ public class RoomFragment extends Fragment {
 
 
     private void goPostActivity(){
-        Intent i = new Intent(this, PostActivity.class);
+        Intent i = new Intent(getContext(), PostActivity.class);
         Log.i(TAG, "Going into PostActivity");
         startActivity(i);
     }
@@ -84,8 +84,8 @@ public class RoomFragment extends Fragment {
         query.orderByDescending("likeCount");
         query.findInBackground((objects, e) -> {
             if (e == null) {
-                PostAdapter adapter = new PostAdapter(this, objects);
-                rvPosts.setLayoutManager(new LinearLayoutManager(this));
+                PostAdapter adapter = new PostAdapter(getContext(), objects);
+                rvPosts.setLayoutManager(new LinearLayoutManager(getContext()));
                 rvPosts.setAdapter(adapter);
                 Log.d(TAG, "New adapter. Objects: " + objects);
                 return;
