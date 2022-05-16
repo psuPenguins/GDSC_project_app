@@ -39,7 +39,7 @@ public class RoomFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
-        return inflater.inflate(R.layout.activity_room, parent, false);
+        return inflater.inflate(R.layout.fragment_room, parent, false);
     }
 
     @Override

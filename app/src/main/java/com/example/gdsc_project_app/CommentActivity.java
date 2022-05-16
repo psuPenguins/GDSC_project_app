@@ -59,14 +59,6 @@ public class CommentActivity extends AppCompatActivity {
         //get current post into layout
         querySelectedPost();
 
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick (View view){
-                Log.i(TAG, "onClick Back button");
-                goRoomActivity();
-            }
-        });
-
         btnAddComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View view){
@@ -122,13 +114,6 @@ public class CommentActivity extends AppCompatActivity {
                 commentsAdapter.notifyDataSetChanged();
             }
         });
-    }
-
-    // create onclicklistener for the button to the change the activity
-    private void goRoomActivity(){
-        Intent i = new Intent(this, RoomActivity.class);
-        Log.i(TAG, "Going into RoomActivity");
-        startActivity(i);
     }
 
     // onclicking add comment
