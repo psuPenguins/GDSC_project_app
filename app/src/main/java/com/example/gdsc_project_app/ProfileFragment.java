@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
 
@@ -14,6 +15,7 @@ import androidx.fragment.app.Fragment;
 public class ProfileFragment extends Fragment {
     public static final String TAG = "ProfileFragment";
     public Button btnLogOut;
+    public ImageView ivProfilePic;
 
     public ProfileFragment(){ }
 
@@ -27,7 +29,9 @@ public class ProfileFragment extends Fragment {
         Log.i(TAG, "I'm in ProfileFragment");
         super.onCreate(savedInstanceState);
 
-        btnLogOut=view.findViewById(R.id.btnLogOut);
+        btnLogOut = view.findViewById(R.id.btnLogOut);
+        ivProfilePic = view.findViewById(R.id.ivProfilePic);
+
 
         btnLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
