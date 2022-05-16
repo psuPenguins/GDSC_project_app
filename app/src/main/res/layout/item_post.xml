@@ -8,11 +8,12 @@
 
     <ImageView
         android:id="@+id/ivUserPic"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
+        android:contentDescription="@string/strUserpic"
         tools:srcCompat="@tools:sample/avatars[3]" />
 
     <TextView
@@ -46,10 +47,11 @@
         android:layout_height="33dp"
         android:layout_below="@+id/tvPostContent"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="0dp"
         android:layout_marginEnd="5dp"
         android:text="@string/strViewReply"
-        android:textSize="11sp" />
+        android:textSize="11sp"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <RadioGroup
         android:id="@+id/rgVote"
@@ -57,7 +59,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvPostContent"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="0dp"
         android:layout_marginEnd="10dp"
         android:layout_toEndOf="@+id/ivUserPic"
         android:orientation="horizontal">
@@ -82,7 +84,8 @@
             android:layout_marginTop="5dp"
             android:layout_marginEnd="0dp"
             android:layout_marginBottom="0dp"
-            android:button="@android:drawable/arrow_up_float" />
+            android:button="@android:drawable/arrow_up_float"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <TextView
             android:id="@+id/tvDislikeAmount"
@@ -102,7 +105,8 @@
             android:layout_marginStart="0dp"
             android:layout_marginTop="5dp"
             android:button="@android:drawable/arrow_down_float"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            tools:ignore="TouchTargetSizeCheck" />
 
     </RadioGroup>
 

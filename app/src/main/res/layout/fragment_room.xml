@@ -9,8 +9,9 @@
         android:id="@+id/rvPosts"
         android:layout_width="match_parent"
         android:layout_height="700dp"
+        android:layout_below="@+id/ivBackgroundColor"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="0dp"
         android:layout_marginEnd="0dp"
         android:layout_marginBottom="0dp" />
 
@@ -21,7 +22,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:elevation="@dimen/cardview_default_elevation"
         android:textColor="@color/white"
         android:textSize="24sp"
@@ -41,7 +42,7 @@
     <View
         android:id="@+id/ivBackgroundColor"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="80dp"
         android:background="@color/purple_500" />
 
 </RelativeLayout>

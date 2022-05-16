@@ -24,6 +24,10 @@
 
     // for item_Post
     <string name="strViewReply">Replies</string>
+    <string name="strUserpic">Userpic</string>
+
+    // for item_swipe_card
+    <string name="strQuestion">Question</string>
 
     // for activity_post
     <string name="strMakePost">Post</string>

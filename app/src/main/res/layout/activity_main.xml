@@ -12,7 +12,11 @@
     <FrameLayout
         android:id="@+id/mainFragment_view"
         android:layout_width="match_parent"
-        android:layout_height="600dp" />
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnRoom"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="0dp" />
 
     <ImageButton
         android:id="@+id/btnSwipe"
