@@ -65,5 +65,6 @@ public class ProfileFragment extends Fragment {
         Intent i = new Intent(getContext(), LoginActivity.class);
         Log.i(TAG, "Going into LoginActivity");
         startActivity(i);
+        getActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 }
