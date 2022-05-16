@@ -59,6 +59,14 @@ public class CommentActivity extends AppCompatActivity {
         //get current post into layout
         querySelectedPost();
 
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View view){
+                Log.i(TAG, "onClick make post button");
+                goRoomActivity();
+            }
+        });
+
         btnAddComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View view){
@@ -161,6 +169,13 @@ public class CommentActivity extends AppCompatActivity {
                 btnAddComment.setText("");
             }
         });
+    }
+
+    // declaring transition functions
+    private void goRoomActivity(){
+        Intent i = new Intent(this, MainActivity.class);
+        Log.i(TAG, "Going into RoomActivity");
+        startActivity(i);
     }
 
 }

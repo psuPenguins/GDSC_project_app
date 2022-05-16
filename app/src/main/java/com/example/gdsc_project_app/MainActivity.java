@@ -27,6 +27,9 @@ public class MainActivity extends AppCompatActivity {
         swipeFragmentBtn = findViewById(R.id.btnSwipe);
         roomFragmentBtn = findViewById(R.id.btnRoom);
 
+        // default fragment
+        replaceFragment(new RoomFragment());
+
         swipeFragmentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
