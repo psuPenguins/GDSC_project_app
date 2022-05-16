@@ -32,9 +32,7 @@ public class RoomFragment extends Fragment {
     private FloatingActionButton btnAddPost;
     private TextView tvRoomTopic;
 
-    public RoomFragment(){
-
-    }
+    public RoomFragment(){ }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){

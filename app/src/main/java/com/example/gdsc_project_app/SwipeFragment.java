@@ -25,9 +25,7 @@ public class SwipeFragment extends Fragment {
     private SwipePlaceHolderView swipeView;
     //private Context someContext;
 
-    public SwipeFragment(){
-
-    }
+    public SwipeFragment(){ }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
@@ -37,6 +35,7 @@ public class SwipeFragment extends Fragment {
     //actions within frame
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+        Log.i(TAG, "I'm in SwipeFragment");
         super.onCreate(savedInstanceState);
 
         swipeView = (SwipePlaceHolderView) view.findViewById(R.id.swipeView);
@@ -50,8 +49,6 @@ public class SwipeFragment extends Fragment {
 
     }
 
-
-    // Go to main activity.
 
     // generate cards from data base
     private void queryQuestion(){

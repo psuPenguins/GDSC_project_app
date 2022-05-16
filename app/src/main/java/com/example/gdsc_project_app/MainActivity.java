@@ -15,7 +15,7 @@ import androidx.fragment.app.FragmentTransaction;
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "MainActivity";
-    Button swipeFragmentBtn, roomFragmentBtn;
+    Button swipeFragmentBtn, roomFragmentBtn, profileFragmentBtn;
 
 
     @Override
@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
         swipeFragmentBtn = findViewById(R.id.btnSwipe);
         roomFragmentBtn = findViewById(R.id.btnRoom);
+        profileFragmentBtn = findViewById(R.id.btnProfile);
 
         // default fragment
         replaceFragment(new RoomFragment());
@@ -44,6 +45,16 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 replaceFragment(new RoomFragment());
+
+            }
+
+        });
+
+        profileFragmentBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                replaceFragment(new ProfileFragment());
 
             }
 
