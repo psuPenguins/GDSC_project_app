@@ -2,7 +2,6 @@ package com.example.gdsc_project_app;
 
 import android.content.Intent;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.result.ActivityResultCallback;
@@ -34,5 +33,20 @@ public class FirebaseUIActivity extends AppCompatActivity {
                 }
             }
     );
+
+    // [START auth_fui_result]
+    private void onSignInResult(FirebaseAuthUIAuthenticationResult result) {
+        IdpResponse response = result.getIdpResponse();
+        if (result.getResultCode() == RESULT_OK) {
+            // Successfully signed in
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            // ...
+        } else {
+            // Sign in failed. If response is null the user canceled the
+            // sign-in flow using the back button. Otherwise check
+            // response.getError().getErrorCode() and handle the error.
+            // ...
+        }
+    }
 
 }
