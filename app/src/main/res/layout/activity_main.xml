@@ -18,7 +18,7 @@
         android:layout_marginEnd="10dp"
         android:text="Log Out" />
 
-    <androidx.fragment.app.FragmentContainerView
+    <androidx.viewpager.widget.ViewPager
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/mainFragment_view"
         android:layout_width="match_parent"
