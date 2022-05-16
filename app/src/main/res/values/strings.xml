@@ -28,7 +28,7 @@
     //for swipe
     <string name="strSwipeDone">You are done swiping for now....</string>
 
-    //for profile
+    //for profile fragment
     <string name="strLogOut">Log Out</string>
 
 </resources>

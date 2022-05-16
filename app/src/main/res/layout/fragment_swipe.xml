@@ -6,6 +6,7 @@
     android:background="@color/white"
     android:orientation="vertical">
 
+    /* Ask nick how to make this works*/
     <TextView
         android:id="@+id/tvSwipeDone"
         android:layout_width="wrap_content"

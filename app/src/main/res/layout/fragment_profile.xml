@@ -34,4 +34,6 @@
         android:textStyle="bold"
         tools:text="@string/strUsername" />
 
+    //make a list of what needs to be added here
+
 </RelativeLayout>
