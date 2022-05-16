@@ -28,17 +28,6 @@
         android:textStyle="bold"
         tools:text="@string/strRoomTopic" />
 
-    <Button
-        android:id="@+id/btnReturnFromRoom"
-        android:layout_width="wrap_content"
-        android:layout_height="33dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="0dp"
-        android:text="@string/strReturnFromRoom"
-        android:textSize="12sp" />
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnAddPost"
         android:layout_width="60dp"
@@ -47,16 +36,11 @@
         android:layout_alignParentBottom="true"
         android:src="@drawable/ic_add_post_button" />
 
-    <ImageView
+
+    <View
         android:id="@+id/ivBackgroundColor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="-15dp"
-        android:layout_marginEnd="138dp"
-        android:scaleX="2"
-        android:scaleY="1.2"
-        app:srcCompat="@drawable/blue" />
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/purple_500" />
 
 </RelativeLayout>

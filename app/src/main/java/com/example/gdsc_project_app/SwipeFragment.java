@@ -24,7 +24,6 @@ public class SwipeFragment extends Fragment {
     public static final String TAG = "SwipeFragment";
     private SwipePlaceHolderView swipeView;
     //private Context someContext;
-    private Button btnReturnFromSwipe;
 
     public SwipeFragment(){
 
@@ -40,7 +39,6 @@ public class SwipeFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        btnReturnFromSwipe = view.findViewById(R.id.btnReturnFromSwipe);
         swipeView = (SwipePlaceHolderView) view.findViewById(R.id.swipeView);
         //someContext = getApplicationContext();
 

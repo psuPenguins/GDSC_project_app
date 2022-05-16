@@ -29,7 +29,6 @@ public class RoomFragment extends Fragment {
 
     //TODO: create private variables (btn, tv..)
     private RecyclerView rvPosts;
-    private Button btnReturnFromRoom;
     private FloatingActionButton btnAddPost;
     private TextView tvRoomTopic;
 
@@ -47,7 +46,6 @@ public class RoomFragment extends Fragment {
         Log.i(TAG, "I'm in RoomFragment");
 
         // link the private variables to the elements in the xml files
-        btnReturnFromRoom = view.findViewById(R.id.btnReturnFromRoom);
         btnAddPost = view.findViewById(R.id.btnAddPost);
         tvRoomTopic = view.findViewById(R.id.tvRoomTopic);
 
