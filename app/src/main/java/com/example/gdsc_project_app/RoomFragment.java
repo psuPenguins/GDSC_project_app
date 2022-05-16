@@ -33,9 +33,13 @@ public class RoomFragment extends Fragment {
     private FloatingActionButton btnAddPost;
     private TextView tvRoomTopic;
 
+    public RoomFragment(){
+
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
-        return inflater.inflate(R.layout.activity_room, parent);
+        return inflater.inflate(R.layout.activity_room, parent, false);
     }
 
     @Override

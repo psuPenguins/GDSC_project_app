@@ -30,9 +30,13 @@ public class SwipeFragment extends Fragment {
     //private Context someContext;
     private Button btnReturnFromSwipe;
 
+    public SwipeFragment(){
+
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.activity_swipe, parent);
+        return inflater.inflate(R.layout.activity_swipe, parent, false);
     }
 
     //actions within frame
