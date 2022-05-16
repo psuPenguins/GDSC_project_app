@@ -16,21 +16,21 @@
 
     <ImageView
         android:id="@+id/ivProfilePic"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/tvSwipeDone"
+        android:id="@+id/tvProfileUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/ivProfilePic"
         android:layout_centerHorizontal="true"
-        android:textColor="@color/black"
         android:layout_marginTop="25dp"
-        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:textSize="30sp"
         android:textStyle="bold"
         tools:text="@string/strUsername" />
 
