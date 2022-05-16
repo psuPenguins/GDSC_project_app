@@ -62,7 +62,7 @@ public class CommentActivity extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View view){
-                Log.i(TAG, "onClick Back button");
+                Log.i(TAG, "onClick make post button");
                 goRoomActivity();
             }
         });
@@ -124,13 +124,6 @@ public class CommentActivity extends AppCompatActivity {
         });
     }
 
-    // create onclicklistener for the button to the change the activity
-    private void goRoomActivity(){
-        Intent i = new Intent(this, RoomActivity.class);
-        Log.i(TAG, "Going into RoomActivity");
-        startActivity(i);
-    }
-
     // onclicking add comment
     private void AddCommentActivity(){
         Log.i(TAG, "Adding Comment in CommentActivity");
@@ -176,6 +169,13 @@ public class CommentActivity extends AppCompatActivity {
                 btnAddComment.setText("");
             }
         });
+    }
+
+    // declaring transition functions
+    private void goRoomActivity(){
+        Intent i = new Intent(this, MainActivity.class);
+        Log.i(TAG, "Going into RoomActivity");
+        startActivity(i);
     }
 
 }

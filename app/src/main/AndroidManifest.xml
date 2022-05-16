@@ -33,13 +33,7 @@
         <activity android:name=".MainActivity">
         </activity>
 
-        <activity android:name=".RoomActivity">
-        </activity>
-
         <activity android:name=".CommentActivity">
-        </activity>
-
-        <activity android:name=".SwipeActivity">
         </activity>
 
         <activity android:name=".PostActivity">
@@ -57,6 +51,9 @@
         <meta-data
             android:name="com.parse.CLIENT_KEY"
             android:value="@string/back4app_client_key"/>
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
 
     </application>
 

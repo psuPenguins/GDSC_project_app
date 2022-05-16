@@ -2,21 +2,22 @@ package com.example.gdsc_project_app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "MainActivity";
+    ImageButton swipeFragmentBtn, roomFragmentBtn, profileFragmentBtn;
 
-    //TODO: create private variables (btn, tv..)
-    private Button btnLogOut;
-    private Button btnSwipe;
-    private Button btnRoom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,55 +25,51 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Log.i(TAG, "I'm in MainActivity");
 
-        // TODO: link the private variables to the elements in the xml files
-        btnLogOut = findViewById((R.id.btnLogOut));
-        btnSwipe = findViewById((R.id.btnSwipe));
-        btnRoom = findViewById((R.id.btnRoom));
+        swipeFragmentBtn = findViewById(R.id.btnSwipe);
+        roomFragmentBtn = findViewById(R.id.btnRoom);
+        profileFragmentBtn = findViewById(R.id.btnProfile);
 
-        // TODO: create onclicklistener for the button to the change the activity
-        btnSwipe.setOnClickListener(new View.OnClickListener() {
+        // default fragment
+        replaceFragment(new RoomFragment());
+
+        swipeFragmentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick (View view){
-                Log.i(TAG, "onClick Swipe button");
-                goSwipeActivity();
+            public void onClick(View v) {
+
+                replaceFragment(new SwipeFragment());
+
             }
         });
 
-        btnRoom.setOnClickListener(new View.OnClickListener() {
+        roomFragmentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick (View view){
-                Log.i(TAG, "onClick Room button");
-                goRoomActivity();
+            public void onClick(View v) {
+
+                replaceFragment(new RoomFragment());
+
             }
+
         });
 
-        btnLogOut.setOnClickListener(new View.OnClickListener() {
+        profileFragmentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Log.i(TAG, "onClick Logout button");
-                goLoginActivity();
+            public void onClick(View v) {
+
+                replaceFragment(new ProfileFragment());
+
             }
+
         });
+
     }
 
 
+    private void replaceFragment(Fragment fragment) {
 
-    //declaring transition functions
-    private void goSwipeActivity(){
-        Intent i = new Intent(this, SwipeActivity.class);
-        Log.i(TAG, "Going into SwipeActivity");
-        startActivity(i);
-    }
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.mainFragment_view,fragment);
+        fragmentTransaction.commit();
 
-    private void goRoomActivity(){
-        Intent i = new Intent(this, RoomActivity.class);
-        Log.i(TAG, "Going into RoomActivity");
-        startActivity(i);
-    }
-
-    private void goLoginActivity(){
-        Intent i = new Intent(this, LoginActivity.class);
-        Log.i(TAG, "Going into LoginActivity");
-        startActivity(i);
     }
 }

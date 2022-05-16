@@ -103,7 +103,7 @@ public class PostActivity extends AppCompatActivity {
 
     // declaring transition functions
     private void goRoomActivity(){
-        Intent i = new Intent(this, RoomActivity.class);
+        Intent i = new Intent(this, MainActivity.class);
         Log.i(TAG, "Going into RoomActivity");
         startActivity(i);
     }
