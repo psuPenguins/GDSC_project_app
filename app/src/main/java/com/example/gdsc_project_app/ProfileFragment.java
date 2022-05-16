@@ -15,6 +15,8 @@ public class ProfileFragment extends Fragment {
     public static final String TAG = "ProfileFragment";
     public Button btnLogOut;
 
+    public ProfileFragment(){ }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
         return inflater.inflate(R.layout.fragment_profile, parent, false);
@@ -25,7 +27,7 @@ public class ProfileFragment extends Fragment {
         Log.i(TAG, "I'm in ProfileFragment");
         super.onCreate(savedInstanceState);
 
-        btnLogOut = view.findViewById(R.id.btnSwipe);
+        btnLogOut=view.findViewById(R.id.btnLogOut);
 
         btnLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
