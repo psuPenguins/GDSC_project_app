@@ -1,6 +1,10 @@
 package com.example.gdsc_project_app;
 
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
+
 import com.mindorks.placeholderview.SwipeDirection;
+import com.mindorks.placeholderview.SwipeDirectionalView;
+import com.mindorks.placeholderview.SwipePlaceHolderView;
 import com.mindorks.placeholderview.annotations.Layout;
 import com.mindorks.placeholderview.annotations.Resolve;
 import com.mindorks.placeholderview.annotations.View;
@@ -12,8 +16,14 @@ import com.mindorks.placeholderview.annotations.swipe.SwipeOutDirectional;
 import com.mindorks.placeholderview.annotations.swipe.SwipeView;
 import com.mindorks.placeholderview.annotations.swipe.SwipingDirection;
 
+import android.app.Activity;
 import android.graphics.Point;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.content.Context;
 
@@ -31,11 +41,15 @@ public class SwipeItem {
     private String mQuestion;
     private Context mContext;
     private Point mCardViewHolderSize;
+    private SwipePlaceHolderView mHolderView;
+    private Activity mActivity;
 
-    public SwipeItem(Context context, String question, Point CardViewHolderSize){
+    public SwipeItem(Activity activity, SwipePlaceHolderView holderView, Context context, String question, Point CardViewHolderSize){
         mContext = context;
         mQuestion = question;
         mCardViewHolderSize = CardViewHolderSize;
+        mHolderView = holderView;
+        mActivity = activity;
     }
 
     // pretty sure this just sets the card up with the question
@@ -69,12 +83,45 @@ public class SwipeItem {
     // out = left
     @SwipeOut
     public void onSwipedOut() {
-        Log.i("DEBUG", "onSwipedOut");
+        Log.i("DEBUG", "onSwipedLeft");
+        if (mHolderView.getChildCount() == 1) {
+            popup();
+        }
     }
 
     // in = right
     @SwipeIn
     public void onSwipeIn() {
-        Log.i("DEBUG", "onSwipedIn");
+        Log.i("DEBUG", "onSwipedRight");
+        if (mHolderView.getChildCount() == 1) {
+            popup();
+        }
+    }
+
+
+    // popup screen telling user that there is no more questions
+    public void popup(){
+        // inflate the layout of the popup window
+        LayoutInflater inflater = (LayoutInflater) mActivity.getSystemService(LAYOUT_INFLATER_SERVICE);
+        android.view.View popupView = inflater.inflate(R.layout.swipe_popup, null);
+
+        // create the popup window
+        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        boolean focusable = true; // lets taps outside the popup also dismiss it
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+
+        // show the popup window
+        // which view you pass in doesn't matter, it is only used for the window token
+        popupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);
+
+        // dismiss the popup window when touched
+        popupView.setOnTouchListener(new android.view.View.OnTouchListener() {
+            @Override
+            public boolean onTouch(android.view.View v, MotionEvent event) {
+                popupWindow.dismiss();
+                return true;
+            }
+        });
     }
 }
