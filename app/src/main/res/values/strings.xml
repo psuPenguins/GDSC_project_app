@@ -25,4 +25,10 @@
     <string name="strPostHint">description..."</string>
     <string name="strReturnFromPost">Cancel</string>
 
+    //for swipe
+    <string name="strSwipeDone">You are done swiping for now....</string>
+
+    //for profile
+    <string name="strLogOut">Log Out</string>
+
 </resources>
