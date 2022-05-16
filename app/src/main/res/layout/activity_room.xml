@@ -22,6 +22,8 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="25dp"
         android:layout_marginTop="55dp"
+        android:elevation="@dimen/cardview_default_elevation"
+        android:textColor="@color/white"
         android:textSize="24sp"
         android:textStyle="bold"
         tools:text="@string/strRoomTopic" />
@@ -44,5 +46,17 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:src="@drawable/ic_add_post_button" />
+
+    <ImageView
+        android:id="@+id/ivBackgroundColor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="-15dp"
+        android:layout_marginEnd="138dp"
+        android:scaleX="2"
+        android:scaleY="1.2"
+        app:srcCompat="@drawable/blue" />
 
 </RelativeLayout>
