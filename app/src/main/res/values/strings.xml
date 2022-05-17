@@ -43,4 +43,7 @@
     //for profile fragment
     <string name="strLogOut">Log Out</string>
 
+    // for activity_register
+    <string name="strSignUp">Sign Up</string>
+
 </resources>

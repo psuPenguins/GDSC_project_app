@@ -32,11 +32,11 @@
         android:layout_alignParentEnd="true"
         android:layout_marginStart="25dp"
         android:layout_marginTop="25dp"
+        android:layout_marginEnd="25dp"
         android:autofillHints=""
         android:hint="@string/strPassword"
         android:inputType="textPassword"
-        android:minHeight="48dp"
-        android:layout_marginEnd="25dp" />
+        android:minHeight="48dp" />
 
     <Button
         android:id="@+id/btnLogin"
@@ -62,5 +62,18 @@
         android:layout_marginTop="-5dp"
         android:contentDescription="@string/strAppLogo"
         app:srcCompat="@drawable/login_icon" />
+
+    <TextView
+        android:id="@+id/tvSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnLogin"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="25dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/strSignUp"
+        android:textColor="#686868"
+        android:textSize="18sp" />
 
 </RelativeLayout>
