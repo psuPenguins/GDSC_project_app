@@ -20,7 +20,7 @@
         android:textSize="18sp" />
 
     <EditText
-        android:id="@+id/etSignUpUsername"
+        android:id="@+id/etSignUpEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -28,7 +28,7 @@
         android:layout_marginTop="100dp"
         android:layout_marginEnd="25dp"
         android:autofillHints=""
-        android:hint="@string/strUsername"
+        android:hint="@string/strEmail"
         android:inputType="text"
         android:minHeight="48dp" />
 
@@ -37,12 +37,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/etSignUpUsername"
+        android:layout_centerHorizontal="true"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="25dp"
         android:layout_marginEnd="25dp"
         android:autofillHints=""
         android:hint="@string/strPassword"
         android:inputType="textPassword"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/etSignUpUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etSignUpEmail"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="25dp"
+        android:autofillHints=""
+        android:hint="@string/strUsername"
+        android:inputType="text"
         android:minHeight="48dp" />
 
     <Button
