@@ -119,11 +119,11 @@ public class SignUpActivity extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
-                                        Toast.makeText(SignUpActivity.this, "User has been registered successfully.", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(SignUpActivity.this, Html.fromHtml("<font color='#5e5e5e'><b>" + "User has been registered successfully." + "</b></font>"), Toast.LENGTH_LONG).show();
                                         mLoadingBar.dismiss();
                                         goLoginActivity();
                                     } else {
-                                        Toast.makeText(SignUpActivity.this, "Failed to register. Please try again.", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(SignUpActivity.this, Html.fromHtml("<font color='#5e5e5e'><b>" + "Failed to register. Please try again." + "</b></font>"), Toast.LENGTH_LONG).show();
                                         mLoadingBar.dismiss();
                                     }
                                 }

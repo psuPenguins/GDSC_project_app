@@ -7,49 +7,55 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.parse.LogInCallback;
-import com.parse.ParseException;
-import com.parse.ParseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
     public static final String TAG = "LoginActivity";
-    private EditText etUsername;
+    private EditText etEmail;
     private EditText etPassword;
     private Button btnLogin;
     private TextView tvSignUp;
 
+    private ProgressBar progressBar;
+    private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_login);
 
-        etUsername = findViewById((R.id.etUsername));
+        etEmail = findViewById((R.id.etEmail));
         etPassword = findViewById((R.id.etPassword));
         btnLogin = findViewById((R.id.btnLogin));
         tvSignUp = findViewById(R.id.tvSignUp);
+
+        progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.INVISIBLE);
+        mAuth = FirebaseAuth.getInstance();
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.i(TAG, "onClick login button");
-                String username = etUsername.getText().toString();
+                String email = etEmail.getText().toString();
                 String password = etPassword.getText().toString();
-                loginUser(username, password);
+                loginUser(email, password);
             }
         });
 
@@ -62,42 +68,47 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void loginUser(String username, String password){
-        Log.i(TAG, "Attempting to login user: " + username);
+    private void loginUser(String email, String password){
+        Log.i(TAG, "Attempting to login user with email: " + email);
 
         // Check if username or password is lacking
-        boolean validationError = false;
-        StringBuilder validationErrorMessage = new StringBuilder("Please ");
-        if (isEmpty(username)){
-            validationError = true;
-            validationErrorMessage.append("enter a username");
+        if (isEmpty(email)){
+            etEmail.setError("An username is required.");
+            etEmail.requestFocus();
+            return;
         }
         if (isEmpty(password)){
-            if (validationError){
-                validationErrorMessage.append(", \n  and ");
-            }
-            validationError = true;
-            validationErrorMessage.append("enter a password");
+            etPassword.setError("A password is required.");
+            etPassword.requestFocus();
+            return;
         }
-        validationErrorMessage.append(".");
-        if (validationError){
-            Toast.makeText(LoginActivity.this, Html.fromHtml("<font color='#5e5e5e'><b>" + validationErrorMessage + "</b></font>"), Toast.LENGTH_LONG).show();
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            etEmail.setError("Please provide a valid email.");
+            etEmail.requestFocus();
+            return;
+        }
+        if (password.length() < 6){
+            etPassword.setError("Minimum length of password is 6.");
+            etPassword.requestFocus();
             return;
         }
 
-        // TODO: navigate to the main activity if the user has signed in properly
-        ParseUser.logInInBackground(username, password, new LogInCallback() {
-            @Override
-            public void done(ParseUser user, ParseException e) {
-                if (e != null){
-                    Log.e(TAG, "Issue with login", e);
-                    Toast.makeText(LoginActivity.this, Html.fromHtml("<font color='#5e5e5e'><b>" + "Issue with login!" + "</b></font>"), Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                goMainActivity();
-                Log.i(TAG, "Login Success");
-                Toast.makeText(LoginActivity.this, Html.fromHtml("<font color='#5e5e5e'><b>" + "Success!" + "</b></font>"), Toast.LENGTH_SHORT).show();
-            }
+        progressBar.setVisibility(View.VISIBLE);
+
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+
+                        if (task.isSuccessful()) {
+                            progressBar.setVisibility(View.INVISIBLE);
+                            goMainActivity();
+                        } else {
+                            progressBar.setVisibility(View.INVISIBLE);
+                            Toast.makeText(LoginActivity.this, Html.fromHtml("<font color='#5e5e5e'><b>" + "Failed to login. Please check your credentials." + "</b></font>"), Toast.LENGTH_LONG).show();
+                        }
+
+                    }
         });
     }
 
@@ -115,17 +126,6 @@ public class LoginActivity extends AppCompatActivity {
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
-    // Start the firebase
-    public void checkCurrentUser() {
-        // [START check_current_user]
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            // User is signed in
-        } else {
-            // No user is signed in
-        }
-        // [END check_current_user]
-    }
 
     public void getUserProfile() {
         // [START get_user_profile]
@@ -145,22 +145,6 @@ public class LoginActivity extends AppCompatActivity {
             String uid = user.getUid();
         }
         // [END get_user_profile]
-    }
-
-    public void updateEmail() {
-        // [START update_email]
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-        user.updateEmail("user@example.com")
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Log.d(TAG, "User email address updated.");
-                        }
-                    }
-                });
-        // [END update_email]
     }
 
     public void updatePassword() {
