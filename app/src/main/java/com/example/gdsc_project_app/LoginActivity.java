@@ -6,15 +6,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
-import android.text.SpannableStringBuilder;
-import android.text.style.RelativeSizeSpan;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -114,7 +109,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void goRegisterActivity() {
-        Intent i = new Intent(this, RegisterActivity.class);
+        Intent i = new Intent(this, SignUpActivity.class);
         Log.i(TAG, "Going into RegisterActivity");
         startActivity(i);
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);

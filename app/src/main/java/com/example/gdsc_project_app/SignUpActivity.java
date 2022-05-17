@@ -9,7 +9,7 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class RegisterActivity extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity {
     public static final String TAG = "RegisterActivity";
     private EditText etSignUpUsername;
     private EditText etSignUpPassword;
