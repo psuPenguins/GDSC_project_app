@@ -47,8 +47,6 @@ public class RoomFragment extends Fragment {
         btnAddPost = view.findViewById(R.id.btnAddPost);
         tvRoomTopic = view.findViewById(R.id.tvRoomTopic);
 
-
-
         //for recycler view
         rvPosts = view.findViewById(R.id.rvPosts);
         // 1 Create layout for one row in the list
@@ -58,7 +56,6 @@ public class RoomFragment extends Fragment {
         // 5 Set the layout manager on the recycler view
         queryTopic();
         queryPosts();
-
 
 
         btnAddPost.setOnClickListener(new View.OnClickListener() {
