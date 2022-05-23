@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         Log.i(TAG, "MA Get current userinstance");
         currentUserUID = currentUser.getUid();
         Log.i(TAG, "MA CurrentUID:"+currentUserUID);
-        usersRef.child("roomID").equalTo(currentUserUID).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+        usersRef.child(currentUserUID).child("roomID").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (!task.isSuccessful()) {
