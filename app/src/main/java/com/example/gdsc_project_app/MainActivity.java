@@ -45,10 +45,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Log.i(TAG, "I'm in MainActivity");
 
+        swipeFragmentBtn = findViewById(R.id.btnSwipe);
+        roomFragmentBtn = findViewById(R.id.btnRoom);
+        profileFragmentBtn = findViewById(R.id.btnProfile);
+
+
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         Log.i(TAG, "MA Get current userinstance");
         currentUserUID = currentUser.getUid();
         Log.i(TAG, "MA CurrentUID:"+currentUserUID);
+
         usersRef.child(currentUserUID).child("roomID").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -56,26 +62,20 @@ public class MainActivity extends AppCompatActivity {
                     Log.e("firebase", "Error getting data", task.getException());
                 }
                 else {
-                    Log.d(TAG, "Current roomID:"+ (String.valueOf(task.getResult().getValue())));
+                    Log.i(TAG, "Current roomID:"+ (String.valueOf(task.getResult().getValue())));
                     currentRoomID = String.valueOf(task.getResult().getValue());
+                    if (currentRoomID != "") {
+                        replaceFragment(new RoomFragment());
+                        Log.i(TAG, "WOW there is room");
+                    }
+                    else {
+                        replaceFragment(new ProfileFragment());
+                        Log.i(TAG, "NO Room");
+                    }
                 }
             }
         });
 
-
-        swipeFragmentBtn = findViewById(R.id.btnSwipe);
-        roomFragmentBtn = findViewById(R.id.btnRoom);
-        profileFragmentBtn = findViewById(R.id.btnProfile);
-
-
-
-        // default fragment
-        if (currentRoomID != null) {
-            replaceFragment(new RoomFragment());
-        }
-        else {
-            replaceFragment(new ProfileFragment());
-        }
 
         swipeFragmentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
