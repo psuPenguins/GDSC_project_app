@@ -62,15 +62,14 @@ public class MainActivity extends AppCompatActivity {
                     Log.e("firebase", "Error getting data", task.getException());
                 }
                 else {
-                    Log.i(TAG, "Current roomID:"+ (String.valueOf(task.getResult().getValue())));
-                    currentRoomID = String.valueOf(task.getResult().getValue());
-                    if (currentRoomID != "") {
-                        replaceFragment(new RoomFragment());
-                        Log.i(TAG, "WOW there is room");
+                    Log.i(TAG, "Current roomID:"+ (task.getResult().getValue()));
+                    Log.i(TAG, "Current roomID bool:"+ task.getResult().getValue().equals(""));
+                    if (task.getResult().getValue().equals("")) {
+                        replaceFragment(new ProfileFragment());
                     }
                     else {
-                        replaceFragment(new ProfileFragment());
-                        Log.i(TAG, "NO Room");
+                        replaceFragment(new RoomFragment());
+
                     }
                 }
             }
