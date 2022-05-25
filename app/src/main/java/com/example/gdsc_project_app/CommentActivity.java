@@ -136,20 +136,20 @@ public class CommentActivity extends AppCompatActivity {
 
     // get selected post
     private void querySelectedPost() {
-        ParseQuery<Post> query = new ParseQuery<>("Post");
-        query.whereEqualTo("objectId", PostAdapter.currentPostId);
-        Log.i("SelectedPost", "currentPost:"+PostAdapter.currentPostId+" postID:"+ "objectId");
-        query.findInBackground((objects, e) -> {
-            if (e == null) {
-                PostAdapter adapter = new PostAdapter(this, objects);
-                rvCurrentPost.setLayoutManager(new LinearLayoutManager(this));
-                rvCurrentPost.setAdapter(adapter);
-                Log.d(TAG, "SELECTED POST: " + objects);
-                return;
-            } else {
-                Log.e(TAG, "Something is wrong with querying current post data!");
-            }
-        });
+//        ParseQuery<Post> query = new ParseQuery<>("Post");
+//        query.whereEqualTo("objectId", PostAdapter.currentPostId);
+//        Log.i("SelectedPost", "currentPost:"+PostAdapter.currentPostId+" postID:"+ "objectId");
+//        query.findInBackground((objects, e) -> {
+//            if (e == null) {
+//                PostAdapter adapter = new PostAdapter(this, objects);
+//                rvCurrentPost.setLayoutManager(new LinearLayoutManager(this));
+//                rvCurrentPost.setAdapter(adapter);
+//                Log.d(TAG, "SELECTED POST: " + objects);
+//                return;
+//            } else {
+//                Log.e(TAG, "Something is wrong with querying current post data!");
+//            }
+//        });
     }
 
     private void saveComment(String description, ParseUser currentUser) {

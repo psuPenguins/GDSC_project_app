@@ -12,4 +12,9 @@ public class FBPost {
         this.likeCount = 0;
         this.dislikeCount = 0;
     }
+
+    public String getUsername() {return this.username;}
+    public String getDescription() {return this.description;}
+    public String getLikeCount() {return this.likeCount.toString();}
+    public String getDislikeCount() {return this.dislikeCount.toString();}
 }

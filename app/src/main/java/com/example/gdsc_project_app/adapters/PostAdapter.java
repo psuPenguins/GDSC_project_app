@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.gdsc_project_app.CommentActivity;
+import com.example.gdsc_project_app.FBPost;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 
@@ -32,16 +33,30 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
-public class PostAdapter extends RecyclerView.Adapter<PostHolder>{
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+
+public class PostAdapter extends FirebaseRecyclerAdapter<FBPost, PostHolder>{
    private Context context;
    private List<Post> list;
 
    public static String currentPostId;
 
-   public PostAdapter(Context context, List<Post> list) {
-      this.list = list;
-      this.context = context;
+   public PostAdapter(@NonNull FirebaseRecyclerOptions<FBPost> options) {
+      super(options);
    }
+
+   @Override
+   protected void onBindViewHolder(@NonNull PostHolder holder, int position, @NonNull FBPost model) {
+      holder.UserID.setText(model.getUsername());
+      holder.Content.setText(model.getDescription());
+      holder.LikeAmount.setText(model.getLikeCount());
+      holder.DislikeAmount.setText(model.getDislikeCount());
+   }
+
+
+
+
 
    public void clearList(){
       list = new ArrayList<>();
@@ -55,79 +70,83 @@ public class PostAdapter extends RecyclerView.Adapter<PostHolder>{
       return new PostHolder(v);
    }
 
-   @SuppressLint("SetText18n")
-   @Override
-   public void onBindViewHolder(@NonNull PostHolder holder, int position) {
-      Post post = list.get(position);
-      holder.UserID.setText(post.getUsername());
-      holder.Content.setText(post.getDescription());
-      holder.LikeAmount.setText(post.getLikeCount().toString());
-      holder.DislikeAmount.setText(post.getDislikeCount().toString());
-      holder.btnViewReply.setOnClickListener(new View.OnClickListener() {
-         @Override
-         public void onClick(View view) {
-            Intent i = new Intent(context, CommentActivity.class);
-            currentPostId = post.getObjectId();
-            context.startActivity(i);
-         }
-      });
-
-      holder.rgVote.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-         @Override
-         public void onCheckedChanged(RadioGroup group, int checkedID) {
-            // checkedID is the RadioButton selected
-            if (checkedID == R.id.rbLike){
-               Log.i(TAG, "onClick like button");
-               addOneLike(post);
-               post.liked = true;
-               if (post.disliked == true){
-                  post.disliked = false;
-                  minusOneDislike(post);
-               }
-               holder.LikeAmount.setText(post.getLikeCount().toString());
-               holder.DislikeAmount.setText(post.getDislikeCount().toString());
-            }
-            if (checkedID == R.id.rbUnlike){
-               Log.i(TAG, "onClick dislike button");
-               addOneDislike(post);
-               post.disliked = true;
-
-               if (post.liked == true){
-                  post.liked = false;
-                  minusOneLike(post);
-               }
-               holder.DislikeAmount.setText(post.getDislikeCount().toString());
-               holder.LikeAmount.setText(post.getLikeCount().toString());
-            }
-         }
-      });
-
-
-
-      ParseQuery<ParseUser> query = ParseUser.getQuery();
-      List<ParseUser> allUsers = new ArrayList<>();
-      query.findInBackground(new FindCallback<ParseUser>() {
-         @Override
-         public void done(List<ParseUser> users, ParseException e) {
-            if(e != null){
-               return;
-            }
-            allUsers.addAll(users);
-            for(ParseUser user:allUsers){
-               if(user.getObjectId().equals(post.getUserID())){
-                  Glide.with(context).load(user.getParseFile(KEY_USER_PROFILE_IMAGE).getUrl()).into(holder.ivUserPic);
-               }
-            }
-         }
-      });
-
-
-   }
+//   @SuppressLint("SetText18n")
+//   @Override
+//   public void onBindViewHolder(@NonNull PostHolder holder, int position) {
+//      Post post = list.get(position);
+//      holder.UserID.setText(post.getUsername());
+//      holder.Content.setText(post.getDescription());
+//      holder.LikeAmount.setText(post.getLikeCount().toString());
+//      holder.DislikeAmount.setText(post.getDislikeCount().toString());
+//      holder.btnViewReply.setOnClickListener(new View.OnClickListener() {
+//         @Override
+//         public void onClick(View view) {
+//            Intent i = new Intent(context, CommentActivity.class);
+//            currentPostId = post.getObjectId();
+//            context.startActivity(i);
+//         }
+//      });
+//
+//      holder.rgVote.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+//         @Override
+//         public void onCheckedChanged(RadioGroup group, int checkedID) {
+//            // checkedID is the RadioButton selected
+//            if (checkedID == R.id.rbLike){
+//               Log.i(TAG, "onClick like button");
+//               addOneLike(post);
+//               post.liked = true;
+//               if (post.disliked == true){
+//                  post.disliked = false;
+//                  minusOneDislike(post);
+//               }
+//               holder.LikeAmount.setText(post.getLikeCount().toString());
+//               holder.DislikeAmount.setText(post.getDislikeCount().toString());
+//            }
+//            if (checkedID == R.id.rbUnlike){
+//               Log.i(TAG, "onClick dislike button");
+//               addOneDislike(post);
+//               post.disliked = true;
+//
+//               if (post.liked == true){
+//                  post.liked = false;
+//                  minusOneLike(post);
+//               }
+//               holder.DislikeAmount.setText(post.getDislikeCount().toString());
+//               holder.LikeAmount.setText(post.getLikeCount().toString());
+//            }
+//         }
+//      });
+//
+//
+//
+//      ParseQuery<ParseUser> query = ParseUser.getQuery();
+//      List<ParseUser> allUsers = new ArrayList<>();
+//      query.findInBackground(new FindCallback<ParseUser>() {
+//         @Override
+//         public void done(List<ParseUser> users, ParseException e) {
+//            if(e != null){
+//               return;
+//            }
+//            allUsers.addAll(users);
+//            for(ParseUser user:allUsers){
+//               if(user.getObjectId().equals(post.getUserID())){
+//                  Glide.with(context).load(user.getParseFile(KEY_USER_PROFILE_IMAGE).getUrl()).into(holder.ivUserPic);
+//               }
+//            }
+//         }
+//      });
+//
+//
+//   }
 
    @Override
    public int getItemCount() {
       return list.size();
    }
+
+
+
+
 
    // updates the likeCount in database
    private void addOneLike(Post post) {
