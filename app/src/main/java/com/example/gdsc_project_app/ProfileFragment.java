@@ -72,8 +72,8 @@ public class ProfileFragment extends Fragment {
                 //setting username
                 tvProfileUsername.setText(user.username);
                 //setting profilepic
-//                Log.i(TAG, "ProfileImageURL: "+user.profileImage);
-//                Glide.with(getActivity()).load(user.profileImage).into(ivProfilePic);
+                Log.i(TAG, "ProfileImageURL: "+user.profileImage);
+                Glide.with(getActivity()).load(user.profileImage).into(ivProfilePic);
             }
 
             @Override
