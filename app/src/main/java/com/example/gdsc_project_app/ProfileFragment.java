@@ -12,10 +12,20 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.core.view.accessibility.AccessibilityViewCommand;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -30,6 +40,13 @@ public class ProfileFragment extends Fragment {
     public Button btnLogOut;
     public ImageView ivProfilePic;
     public TextView tvProfileUsername;
+    //FBUser user;
+    FirebaseUser currentUser;
+    String currentUserUID;
+    String currentUsername;
+
+    final FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference usersRef = database.getReference("Users");
 
     public ProfileFragment(){ }
 
@@ -43,6 +60,28 @@ public class ProfileFragment extends Fragment {
         Log.i(TAG, "I'm in ProfileFragment");
         super.onCreate(savedInstanceState);
 
+        //Getting User
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        currentUserUID = currentUser.getUid();
+        Log.i(TAG, "PF CurrentUID:"+currentUserUID);
+        //Getting Username
+        usersRef.child(currentUserUID).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                FBUser user = dataSnapshot.getValue(FBUser.class);
+                //setting username
+                tvProfileUsername.setText(user.username);
+                //setting profilepic
+//                Log.i(TAG, "ProfileImageURL: "+user.profileImage);
+//                Glide.with(getActivity()).load(user.profileImage).into(ivProfilePic);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.i(TAG,"The read failed for user: " + databaseError.getCode());
+            }
+        });
+
         btnLogOut = view.findViewById(R.id.btnLogOut);
         ivProfilePic = view.findViewById(R.id.ivProfilePic);
         tvProfileUsername = view.findViewById(R.id.tvProfileUsername);
@@ -54,10 +93,6 @@ public class ProfileFragment extends Fragment {
                 goLoginActivity();
             }
         });
-
-        // Setting the shown user pic and username
-        Glide.with(getActivity()).load(ParseUser.getCurrentUser().getParseFile(KEY_USER_PROFILE_IMAGE).getUrl()).into(ivProfilePic);
-        tvProfileUsername.setText(ParseUser.getCurrentUser().getUsername());
 
     }
 

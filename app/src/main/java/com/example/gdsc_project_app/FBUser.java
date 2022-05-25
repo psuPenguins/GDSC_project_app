@@ -5,10 +5,11 @@ public class FBUser {
 
     public FBUser(){}
 
-    public FBUser(String email, String username, String password, String roomID){
+    public FBUser(String email, String username, String password, String roomID, String profileImage){
         this.email = email;
         this.username = username;
         this.password = password;
         this.roomID = roomID;
+        this.profileImage = profileImage;
     }
 }
