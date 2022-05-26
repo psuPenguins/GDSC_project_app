@@ -70,6 +70,7 @@ dependencies {
 
     // firebase login
     implementation 'com.google.firebase:firebase-auth:21.0.4'
+    implementation 'com.google.firebase:firebase-database:20.0.5'
     implementation 'com.firebaseui:firebase-ui-auth:7.2.0'
 
     // for fragment
