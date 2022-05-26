@@ -1,6 +1,6 @@
 package com.example.gdsc_project_app.adapters;
 
-import static com.example.gdsc_project_app.MainActivity.TAG;
+import static com.example.gdsc_project_app.RoomFragment.TAG;
 import static com.example.gdsc_project_app.User.KEY_USER_PROFILE_IMAGE;
 
 import android.content.Context;
