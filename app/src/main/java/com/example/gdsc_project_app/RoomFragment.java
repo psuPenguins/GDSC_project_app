@@ -42,7 +42,7 @@ public class RoomFragment extends Fragment {
     private DatabaseReference roomsRef = database.getReference("Rooms");
     private DatabaseReference postsRef = database.getReference("Posts");
     private String postID;
-    private ObservableList<String> postIDs;
+    private ArrayList<String> postIDs;
     private ArrayList<String> posts;
 
     private String currentUserID;
@@ -68,35 +68,9 @@ public class RoomFragment extends Fragment {
         posts = new ArrayList<String>();
 
 
-        postIDs = new ObservableArrayList<String>();
-        postIDs.addOnListChangedCallback(new ObservableList.OnListChangedCallback<ObservableList<String>>() {
-            @Override
-            public void onChanged(ObservableList<String> sender) {
-                Log.i(TAG,"CHANGED");
-            }
+        postIDs = new ArrayList<String>();
 
-            @Override
-            public void onItemRangeChanged(ObservableList<String> sender, int positionStart, int itemCount) {
-
-            }
-
-            @Override
-            public void onItemRangeInserted(ObservableList<String> sender, int positionStart, int itemCount) {
-
-            }
-
-            @Override
-            public void onItemRangeMoved(ObservableList<String> sender, int fromPosition, int toPosition, int itemCount) {
-
-            }
-
-            @Override
-            public void onItemRangeRemoved(ObservableList<String> sender, int positionStart, int itemCount) {
-
-            }
-        });
         queryPostIDs();
-        queryPosts();
 
 
         btnAddPost.setOnClickListener(new View.OnClickListener() {
@@ -171,7 +145,5 @@ public class RoomFragment extends Fragment {
 
     }
 
-    private void queryPosts() {
-    }
 }
 
