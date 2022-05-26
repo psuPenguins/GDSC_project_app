@@ -90,6 +90,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Log.i(TAG, "onClick Logout button");
+                FirebaseAuth.getInstance().signOut();
                 goLoginActivity();
             }
         });
