@@ -4,6 +4,7 @@ import static com.example.gdsc_project_app.MainActivity.TAG;
 import static com.example.gdsc_project_app.User.KEY_USER_PROFILE_IMAGE;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -21,6 +22,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.gdsc_project_app.CommentActivity;
 import com.example.gdsc_project_app.FBPost;
+import com.example.gdsc_project_app.FBUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 
@@ -36,196 +43,77 @@ import com.parse.SaveCallback;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 
-public class PostAdapter extends FirebaseRecyclerAdapter<FBPost, PostHolder>{
-   private Context context;
-   private List<Post> list;
+public class PostAdapter extends FirebaseRecyclerAdapter<FBPost, PostAdapter.postsViewholder>{
+   final FirebaseDatabase database = FirebaseDatabase.getInstance();
+   DatabaseReference usersRef = database.getReference("Users");
 
-   public static String currentPostId;
-
-   public PostAdapter(@NonNull FirebaseRecyclerOptions<FBPost> options) {
+   public PostAdapter(@NonNull FirebaseRecyclerOptions<FBPost> options){
       super(options);
    }
 
    @Override
-   protected void onBindViewHolder(@NonNull PostHolder holder, int position, @NonNull FBPost model) {
-      holder.UserID.setText(model.getUsername());
-      holder.Content.setText(model.getDescription());
-      holder.LikeAmount.setText(model.getLikeCount());
-      holder.DislikeAmount.setText(model.getDislikeCount());
-   }
+   protected void onBindViewHolder(@NonNull postsViewholder holder, int position, @NonNull FBPost post){
+      holder.UserID.setText(post.getUsername());
+      holder.Content.setText(post.getDescription());
+      holder.LikeAmount.setText(post.getLikeCount().toString());
+      holder.DislikeAmount.setText(post.getDislikeCount().toString());
 
+      ArrayList<String> userIDs = new ArrayList<>();
+      ArrayList<String> urls = new ArrayList<>();
+      usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+         @Override
+         public void onDataChange(DataSnapshot dataSnapshot) {
+            for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
+               String userID = snapshot.getKey().toString();
+               FBUser user = snapshot.getValue(FBUser.class);
+               userIDs.add(userID);
+               urls.add(user.profileImage.toString());
+            }
+            Log.i(TAG, "userIDs: "+userIDs);
+            Log.i(TAG, "urls: "+urls);
+            for (int i=0; i<userIDs.size(); i++){
+               if(userIDs.get(i).equals(post.getUserID())){
+                  FBUser user = dataSnapshot.getValue(FBUser.class);
+                  Log.i(TAG, "ProfileImageURL: "+urls.get(i));
+                  Glide.with(holder.Content.getContext()).load(urls.get(i)).into(holder.ivUserPic);
+               }
+            }
+         }
 
-
-
-
-   public void clearList(){
-      list = new ArrayList<>();
-      notifyDataSetChanged();
+         @Override
+         public void onCancelled(DatabaseError databaseError) {
+            Log.i(TAG,"The read failed for user: " + databaseError.getCode());
+         }
+      });
    }
 
    @NonNull
    @Override
-   public PostHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-      View v = LayoutInflater.from(context).inflate(R.layout.item_post,parent,false);
-      return new PostHolder(v);
-   }
-
-//   @SuppressLint("SetText18n")
-//   @Override
-//   public void onBindViewHolder(@NonNull PostHolder holder, int position) {
-//      Post post = list.get(position);
-//      holder.UserID.setText(post.getUsername());
-//      holder.Content.setText(post.getDescription());
-//      holder.LikeAmount.setText(post.getLikeCount().toString());
-//      holder.DislikeAmount.setText(post.getDislikeCount().toString());
-//      holder.btnViewReply.setOnClickListener(new View.OnClickListener() {
-//         @Override
-//         public void onClick(View view) {
-//            Intent i = new Intent(context, CommentActivity.class);
-//            currentPostId = post.getObjectId();
-//            context.startActivity(i);
-//         }
-//      });
-//
-//      holder.rgVote.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-//         @Override
-//         public void onCheckedChanged(RadioGroup group, int checkedID) {
-//            // checkedID is the RadioButton selected
-//            if (checkedID == R.id.rbLike){
-//               Log.i(TAG, "onClick like button");
-//               addOneLike(post);
-//               post.liked = true;
-//               if (post.disliked == true){
-//                  post.disliked = false;
-//                  minusOneDislike(post);
-//               }
-//               holder.LikeAmount.setText(post.getLikeCount().toString());
-//               holder.DislikeAmount.setText(post.getDislikeCount().toString());
-//            }
-//            if (checkedID == R.id.rbUnlike){
-//               Log.i(TAG, "onClick dislike button");
-//               addOneDislike(post);
-//               post.disliked = true;
-//
-//               if (post.liked == true){
-//                  post.liked = false;
-//                  minusOneLike(post);
-//               }
-//               holder.DislikeAmount.setText(post.getDislikeCount().toString());
-//               holder.LikeAmount.setText(post.getLikeCount().toString());
-//            }
-//         }
-//      });
-//
-//
-//
-//      ParseQuery<ParseUser> query = ParseUser.getQuery();
-//      List<ParseUser> allUsers = new ArrayList<>();
-//      query.findInBackground(new FindCallback<ParseUser>() {
-//         @Override
-//         public void done(List<ParseUser> users, ParseException e) {
-//            if(e != null){
-//               return;
-//            }
-//            allUsers.addAll(users);
-//            for(ParseUser user:allUsers){
-//               if(user.getObjectId().equals(post.getUserID())){
-//                  Glide.with(context).load(user.getParseFile(KEY_USER_PROFILE_IMAGE).getUrl()).into(holder.ivUserPic);
-//               }
-//            }
-//         }
-//      });
-//
-//
-//   }
-
-   @Override
-   public int getItemCount() {
-      return list.size();
+   public postsViewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
+      View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_post, parent, false);
+      return new PostAdapter.postsViewholder(view);
    }
 
 
+   class postsViewholder extends RecyclerView.ViewHolder{
+      TextView UserID;
+      TextView Content;
+      Button btnViewReply;
+      ImageView ivUserPic;
+      TextView LikeAmount;
+      TextView DislikeAmount;
+      RadioGroup rgVote;
 
+      public postsViewholder(@NonNull View itemView){
+         super(itemView);
 
-
-   // updates the likeCount in database
-   private void addOneLike(Post post) {
-      Integer newLikeCount = post.getLikeCount() + 1;
-      post.setLikeCount(newLikeCount);
-      post.saveInBackground(new SaveCallback() {
-         @Override
-         public void done(ParseException e) {
-            if(e != null){
-               Log.e(TAG, "Error while saving like count!", e);
-            }
-            Log.i(TAG, "Like count save was successful!");
-         }
-      });
-   }
-   private void minusOneLike(Post post) {
-      Integer newLikeCount = post.getLikeCount() - 1;
-      post.setLikeCount(newLikeCount);
-      post.saveInBackground(new SaveCallback() {
-         @Override
-         public void done(ParseException e) {
-            if(e != null){
-               Log.e(TAG, "Error while saving like count!", e);
-            }
-            Log.i(TAG, "Like count save was successful!");
-         }
-      });
-   }
-
-
-   // updates the dislikeCount in database
-   private void addOneDislike(Post post) {
-      Integer newDislikeCount = post.getDislikeCount() + 1;
-      post.setDislikeCount(newDislikeCount);
-      post.saveInBackground(new SaveCallback() {
-         @Override
-         public void done(ParseException e) {
-            if(e != null){
-               Log.e(TAG, "Error while saving dislike count!", e);
-            }
-            Log.i(TAG, "Dislike count save was successful!");
-         }
-      });
-   }
-   private void minusOneDislike(Post post) {
-      Integer newDislikeCount = post.getDislikeCount() - 1;
-      post.setDislikeCount(newDislikeCount);
-      post.saveInBackground(new SaveCallback() {
-         @Override
-         public void done(ParseException e) {
-            if(e != null){
-               Log.e(TAG, "Error while saving dislike count!", e);
-            }
-            Log.i(TAG, "Dislike count save was successful!");
-         }
-      });
-   }
-
-}
-
-
-class PostHolder extends RecyclerView.ViewHolder {
-
-   TextView UserID;
-   TextView Content;
-   Button btnViewReply;
-   ImageView ivUserPic;
-   TextView LikeAmount;
-   TextView DislikeAmount;
-   RadioGroup rgVote;
-
-   public PostHolder(@NonNull View itemView) {
-      super(itemView);
-      UserID = itemView.findViewById(R.id.tvUsername);
-      Content = itemView.findViewById(R.id.tvPostContent);
-      btnViewReply = itemView.findViewById(R.id.btnViewReply);
-      LikeAmount = itemView.findViewById(R.id.tvLikeAmount);
-      DislikeAmount = itemView.findViewById(R.id.tvDislikeAmount);
-      ivUserPic = itemView.findViewById(R.id.ivUserPic);
-      rgVote = itemView.findViewById(R.id.rgVote);
+         UserID = itemView.findViewById(R.id.tvUsername);
+         Content = itemView.findViewById(R.id.tvPostContent);
+         btnViewReply = itemView.findViewById(R.id.btnViewReply);
+         LikeAmount = itemView.findViewById(R.id.tvLikeAmount);
+         DislikeAmount = itemView.findViewById(R.id.tvDislikeAmount);
+         ivUserPic = itemView.findViewById(R.id.ivUserPic);
+         rgVote = itemView.findViewById(R.id.rgVote);
+      }
    }
 }

@@ -10,11 +10,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.databinding.ObservableArrayList;
-import androidx.databinding.ObservableList;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.gdsc_project_app.adapters.PostAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -43,7 +44,7 @@ public class RoomFragment extends Fragment {
     private DatabaseReference postsRef = database.getReference("Posts");
     private String postID;
     private ArrayList<String> postIDs;
-    private ArrayList<String> posts;
+    private ArrayList<FBPost> posts;
 
     private String currentUserID;
     private String currentRoomID;
@@ -65,7 +66,7 @@ public class RoomFragment extends Fragment {
         //for recycler view
         rvPosts = view.findViewById(R.id.rvPosts);
 
-        posts = new ArrayList<String>();
+        posts = new ArrayList<FBPost>();
 
 
         postIDs = new ArrayList<String>();
@@ -105,29 +106,32 @@ public class RoomFragment extends Fragment {
                         postIDs.clear();
                         for (DataSnapshot childSnapshot : snapshot.getChildren()) {
                             postID = childSnapshot.getKey();
-                            Log.i(TAG, "POST ID= "+postID);
+                            Log.i(TAG, "POST ID= " + postID);
                             postIDs.add(postID);
-//                            FBPost post = snapshot.getValue(FBPost.class);
-//                            Log.i(TAG, "username"+post.username);
-
-//                            postsRef.orderByChild("likeCount").equalTo(postID).addValueEventListener(new ValueEventListener() {
-//                                @Override
-//                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                                    FBPost post = snapshot.getValue(FBPost.class);
-//                                    posts.add(post.username);
-//                                    Log.i(TAG, "post= "+posts);
-//                                }
-//
-//                                @Override
-//                                public void onCancelled(@NonNull DatabaseError error) {
-//
-//                                }
-//                            });
                         }
-//                        rvPosts.setLayoutManager(new LinearLayoutManager(getContext()));
-//                        PostAdapter adapter = new PostAdapter(getContext(), posts);
-//                        rvPosts.setAdapter(adapter);
-                        Log.i(TAG, "postIDs:" + postIDs);
+                        Log.i(TAG, "postIDs" + postIDs);
+                        postsRef.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                posts.clear();
+                                for (DataSnapshot childSnapshot : snapshot.getChildren()) {
+                                    FBPost post = childSnapshot.getValue(FBPost.class);
+                                    posts.add(post);
+                                }
+                                Log.i(TAG, "posts" + posts);
+
+                                rvPosts.setLayoutManager(new LinearLayoutManager(getContext()));
+                                FirebaseRecyclerOptions<FBPost> options = new FirebaseRecyclerOptions.Builder<FBPost>().setQuery(postsRef, FBPost.class).build();
+                                PostAdapter adapter = new PostAdapter(options);
+                                rvPosts.setAdapter(adapter);
+                                adapter.startListening();
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                                Log.e("firebase", "Error getting data");
+                            }
+                        });
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {

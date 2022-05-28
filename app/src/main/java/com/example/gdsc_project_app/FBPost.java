@@ -8,13 +8,13 @@ public class FBPost {
 
     public FBPost(){}
 
-    public FBPost(String userID, String username, String roomID, String description) {
+    public FBPost(String userID, String username, String roomID, String description, Integer likeCount, Integer dislikeCount) {
         this.userID = userID;
         this.username = username;
         this.roomID = roomID;
         this.description = description;
-        this.likeCount = 0;
-        this.dislikeCount = 0;
+        this.likeCount = likeCount;
+        this.dislikeCount = dislikeCount;
     }
 
     public String getUsername() {

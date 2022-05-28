@@ -38,12 +38,8 @@ public class SwipeFragment extends Fragment {
 
     public static final String TAG = "SwipeFragment";
     private SwipePlaceHolderView swipeView;
-    //private Context someContext;
 
     //FBUser user;
-    FirebaseUser currentUser;
-    String currentUserUID;
-    String currentUsername;
     ArrayList<String> questions = new ArrayList<String>();
 
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -75,26 +71,6 @@ public class SwipeFragment extends Fragment {
 
     // generate cards from data base
     private void queryQuestion() {
-//        ParseQuery<Question> query = new ParseQuery<>("Question");
-//        query.findInBackground(new FindCallback<Question>() {
-//            @Override
-//            public void done(List<Question> dbQs, ParseException e) {
-//                Point p = new Point(0, 0); // Point maybe useless, don't know yet.
-//                if (e == null) {
-//                    for (Question q : dbQs) {
-//                        Log.i(TAG, q.getQuestion());
-//                        Log.i(TAG, "" + swipeView.getChildCount());
-//                        swipeView.addView(new SwipeItem(getActivity(), swipeView, getApplicationContext(), q.getQuestion(), p));
-//                    }
-//                } else {
-//                    Log.e(TAG, "ERROR getting data");
-//                }
-//            }
-//        });
-        //Getting User
-        currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        currentUserUID = currentUser.getUid();
-        Log.i(TAG, "PF CurrentUID:"+currentUserUID);
         //Getting Username
         topicsRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

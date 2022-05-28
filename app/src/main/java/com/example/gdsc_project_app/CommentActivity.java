@@ -105,7 +105,7 @@ public class CommentActivity extends AppCompatActivity {
         ParseQuery<Comment> query = ParseQuery.getQuery(Comment.class);
         query.include(Comment.KEY_COMMENT_USER_ID);
         // TODO:
-        query.whereEqualTo(Comment.KEY_COMMENT_POST_ID, PostAdapter.currentPostId);
+//        query.whereEqualTo(Comment.KEY_COMMENT_POST_ID, PostAdapter.currentPostId);
         query.orderByDescending(Comment.KEY_COMMENT_TIME);
 
         query.findInBackground(new FindCallback<Comment>() {
@@ -157,7 +157,7 @@ public class CommentActivity extends AppCompatActivity {
         comment.setDescription(description);
         comment.setUserID(currentUser.getObjectId());
         comment.setUsername(currentUser.getUsername());
-        comment.setPostID(PostAdapter.currentPostId);
+//        comment.setPostID(PostAdapter.currentPostId);
         comment.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
