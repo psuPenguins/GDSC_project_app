@@ -24,6 +24,7 @@ import com.bumptech.glide.Glide;
 import com.example.gdsc_project_app.CommentActivity;
 import com.example.gdsc_project_app.FBPost;
 import com.example.gdsc_project_app.FBUser;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -50,6 +51,7 @@ public class PostAdapter extends FirebaseRecyclerAdapter<FBPost, PostAdapter.pos
    DatabaseReference postRef = database.getReference("Posts");
 
    public static String currentPostId;
+   private String currentUserID;
 
    public PostAdapter(@NonNull FirebaseRecyclerOptions<FBPost> options){
       super(options);
@@ -62,6 +64,8 @@ public class PostAdapter extends FirebaseRecyclerAdapter<FBPost, PostAdapter.pos
       holder.LikeAmount.setText(post.getLikeCount().toString());
       holder.DislikeAmount.setText(post.getDislikeCount().toString());
 
+      currentPostId = post.getPostID();
+      currentUserID = FirebaseAuth.getInstance().getCurrentUser().getUid();
       ArrayList<String> userIDs = new ArrayList<>();
       ArrayList<String> urls = new ArrayList<>();
       usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -79,7 +83,7 @@ public class PostAdapter extends FirebaseRecyclerAdapter<FBPost, PostAdapter.pos
                if(userIDs.get(i).equals(post.getUserID())){
                   FBUser user = dataSnapshot.getValue(FBUser.class);
                   Log.i(TAG, "ProfileImageURL: "+urls.get(i));
-                  Glide.with(holder.Content.getContext()).load(urls.get(i)).into(holder.ivUserPic);
+                  Glide.with(holder.ivUserPic.getContext()).load(urls.get(i)).into(holder.ivUserPic);
                }
             }
          }
