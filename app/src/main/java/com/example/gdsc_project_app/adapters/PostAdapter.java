@@ -103,6 +103,7 @@ public class PostAdapter extends FirebaseRecyclerAdapter<FBPost, PostAdapter.pos
          }
       });
 
+
 //      holder.rgVote.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 //         @Override
 //         public void onCheckedChanged(RadioGroup group, int checkedID) {

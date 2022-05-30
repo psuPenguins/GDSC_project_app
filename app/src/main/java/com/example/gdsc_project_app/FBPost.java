@@ -26,14 +26,14 @@ public class FBPost {
     }
 
     public String getUsername() {
-        return username;
+        return this.username;
     }
-    public String getDescription() {return description;}
-    public Integer getLikeCount() {return likeCount;}
-    public Integer getDislikeCount() {return dislikeCount;}
-    public String getUserID() {return userID;}
-    public String getRoomID() {return roomID;}
-    public String getPostID() {return postID;}
+    public String getDescription() {return this.description;}
+    public Integer getLikeCount() {return this.likeCount;}
+    public Integer getDislikeCount() {return this.dislikeCount;}
+    public String getUserID() {return this.userID;}
+    public String getRoomID() {return this.roomID;}
+    public String getPostID() {return this.postID;}
 
     public void setUserID(String userID) {this.userID = userID;}
     public void setUsername(String username) {this.username = username;}

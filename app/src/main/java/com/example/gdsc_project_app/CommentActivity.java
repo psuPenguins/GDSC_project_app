@@ -2,6 +2,7 @@ package com.example.gdsc_project_app;
 
 import static com.example.gdsc_project_app.MainActivity.TAG;
 import static com.example.gdsc_project_app.Post.KEY_QUESTIONID;
+import static com.example.gdsc_project_app.RoomFragment.currentRoomID;
 import static java.security.AccessController.getContext;
 
 import android.content.Intent;
@@ -20,6 +21,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.gdsc_project_app.adapters.CommentsAdapter;
 import com.example.gdsc_project_app.adapters.PostAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -65,6 +67,9 @@ public class CommentActivity extends AppCompatActivity {
     private FirebaseUser userID = FirebaseAuth.getInstance().getCurrentUser();
     private String user;
     private String pfp;
+
+
+    FirebaseRecyclerOptions<FBPost> newOption;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,7 +122,7 @@ public class CommentActivity extends AppCompatActivity {
 
     private void queryComment() {
         rvComments.setLayoutManager(new LinearLayoutManager(CommentActivity.this));
-        FirebaseRecyclerOptions<FBComment> options = new FirebaseRecyclerOptions.Builder<FBComment>().setQuery(roomsRef.child(RoomFragment.currentRoomID).child("posts").child(PostAdapter.currentPostId).child("comments"), FBComment.class).build();
+        FirebaseRecyclerOptions<FBComment> options = new FirebaseRecyclerOptions.Builder<FBComment>().setQuery(roomsRef.child(currentRoomID).child("posts").child(PostAdapter.currentPostId).child("comments"), FBComment.class).build();
         CommentsAdapter adapter = new CommentsAdapter(options);
         rvComments.setAdapter(adapter);
         adapter.startListening();
@@ -135,20 +140,15 @@ public class CommentActivity extends AppCompatActivity {
 
     // get selected post
     private void querySelectedPost() {
-//        ParseQuery<Post> query = new ParseQuery<>("Post");
-//        query.whereEqualTo("objectId", PostAdapter.currentPostId);
-//        Log.i("SelectedPost", "currentPost:"+PostAdapter.currentPostId+" postID:"+ "objectId");
-//        query.findInBackground((objects, e) -> {
-//            if (e == null) {
-//                PostAdapter adapter = new PostAdapter(this, objects);
-//                rvCurrentPost.setLayoutManager(new LinearLayoutManager(this));
-//                rvCurrentPost.setAdapter(adapter);
-//                Log.d(TAG, "SELECTED POST: " + objects);
-//                return;
-//            } else {
-//                Log.e(TAG, "Something is wrong with querying current post data!");
-//            }
-//        });
+        rvCurrentPost.setLayoutManager(new LinearLayoutManager(this));
+        Log.i(TAG, "roomID is: " + RoomFragment.currentRoomID);
+        Log.i(TAG, "postID is: " + PostAdapter.currentPostId);
+
+        FirebaseRecyclerOptions<FBPost> options = new FirebaseRecyclerOptions.Builder<FBPost>().setQuery(roomsRef.child(RoomFragment.currentRoomID).child("posts").orderByKey().equalTo(PostAdapter.currentPostId), FBPost.class).build();
+
+        PostAdapter adapter = new PostAdapter(options);
+        rvCurrentPost.setAdapter(adapter);
+        adapter.startListening();
     }
 
     private void saveComment(String description, DatabaseReference usersRef) {
@@ -166,7 +166,7 @@ public class CommentActivity extends AppCompatActivity {
                         0,
                         UUID.randomUUID().toString()
                 );
-                roomsRef.child(RoomFragment.currentRoomID).child("posts").child(PostAdapter.currentPostId).child("comments").child(comment.commentID).setValue(comment);
+                roomsRef.child(currentRoomID).child("posts").child(PostAdapter.currentPostId).child("comments").child(comment.commentID).setValue(comment);
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
