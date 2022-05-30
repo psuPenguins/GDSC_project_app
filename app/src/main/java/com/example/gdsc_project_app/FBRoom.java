@@ -1,11 +1,30 @@
 package com.example.gdsc_project_app;
 
 public class FBRoom {
-    public String topic, userIDs, numOfUser, postIDs;
+    public String topic, userIDs, numOfUsers, postIDs;
 
-    public FBRoom(String topic, String numOfUser, String postIDs) {
+    public FBRoom(){}
+
+    
+    public FBRoom(String topic, String numOfUsers, String postIDs) {
         this.topic = topic;
-        this.numOfUser = numOfUser;
+        this.numOfUsers = numOfUsers;
         this.postIDs = postIDs;
+    }
+
+    public String getTopic() {
+        return topic;
+    }
+
+    public String getUserIDs() {
+        return userIDs;
+    }
+
+    public String getNumOfUsers() {
+        return numOfUsers;
+    }
+
+    public String getPostIDs() {
+        return postIDs;
     }
 }

@@ -3,11 +3,13 @@ package com.example.gdsc_project_app.adapters;
 import static com.example.gdsc_project_app.RoomFragment.TAG;
 import static com.example.gdsc_project_app.User.KEY_USER_PROFILE_IMAGE;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -17,6 +19,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gdsc_project_app.Comment;
+import com.example.gdsc_project_app.FBComment;
+import com.example.gdsc_project_app.FBPost;
+import com.example.gdsc_project_app.FBUser;
+import com.example.gdsc_project_app.MainActivity;
 import com.example.gdsc_project_app.Post;
 import com.example.gdsc_project_app.R;
 
@@ -24,6 +30,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bumptech.glide.Glide;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -32,76 +45,59 @@ import com.parse.SaveCallback;
 
 import org.w3c.dom.Text;
 
-public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.CommentViewHolder>{
+public class CommentsAdapter extends FirebaseRecyclerAdapter<FBComment, CommentsAdapter.commentsViewholder> {
+    final FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference usersRef = database.getReference("Users");
+    DatabaseReference postRef = database.getReference("Posts");
 
-    Context context;
-    List<Comment> comments;
-
-    // Pass in the context and list of Comments
-    public CommentsAdapter(Context context, List<Comment> comments) {
-        this.context = context;
-        this.comments = comments;
+    public CommentsAdapter(@NonNull FirebaseRecyclerOptions<FBComment> options){
+        super(options);
     }
 
-    // For each row, inflate the layout for the comment
-    @NonNull
     @Override
-    public CommentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_comment, parent, false);
-        return new CommentViewHolder(view);
-    }
+    protected void onBindViewHolder(@NonNull commentsViewholder holder, int position, @NonNull FBComment comment) {
+        holder.tvUsername.setText(comment.username.toString());
+        holder.tvCommentText.setText(comment.description.toString());
+        holder.tvLikeAmount.setText(comment.likeCount.toString());
+        holder.tvDislikeAmount.setText(comment.dislikeCount.toString());
 
-    // Bind values based on te position of the element
-    @Override
-    public void onBindViewHolder(@NonNull CommentViewHolder holder, int position) {
-        // Get the data at position
-        Comment comment = comments.get(position);
-
-        // Bind the comment with view holder
-        holder.bind(comment);
-
-
-        holder.rgVote.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        ArrayList<String> userIDs = new ArrayList<>();
+        ArrayList<String> urls = new ArrayList<>();
+        usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onCheckedChanged(RadioGroup group, int checkedID) {
-                // checkedID is the RadioButton selected
-                if (checkedID == R.id.rbLike){
-                    Log.i(TAG, "onClick like button");
-                    addOneLike(comment);
-                    comment.liked = true;
-                    if (comment.disliked == true){
-                        comment.disliked = false;
-                        minusOneDislike(comment);
-                    }
-                    holder.tvLikeAmount.setText(comment.getCommentLikeCount().toString());
-                    holder.tvDislikeAmount.setText(comment.getCommentDislikeCount().toString());
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
+                    String userID = snapshot.getKey().toString();
+                    FBUser user = snapshot.getValue(FBUser.class);
+                    userIDs.add(userID);
+                    urls.add(user.profileImage.toString());
                 }
-                if (checkedID == R.id.rbUnlike){
-                    Log.i(TAG, "onClick dislike button");
-                    addOneDislike(comment);
-                    comment.disliked = true;
-
-                    if (comment.liked == true){
-                        comment.liked = false;
-                        minusOneLike(comment);
+                Log.i(MainActivity.TAG, "userIDs: "+userIDs);
+                Log.i(MainActivity.TAG, "urls: "+urls);
+                for (int i=0; i<userIDs.size(); i++){
+                    if(userIDs.get(i).equals(comment.userID)){
+                        FBUser user = dataSnapshot.getValue(FBUser.class);
+                        Log.i(MainActivity.TAG, "ProfileImageURL: "+urls.get(i));
+                        Glide.with(holder.ivProfilePic.getContext()).load(urls.get(i)).into(holder.ivProfilePic);
                     }
-                    holder.tvDislikeAmount.setText(comment.getCommentDislikeCount().toString());
-                    holder.tvLikeAmount.setText(comment.getCommentLikeCount().toString());
                 }
             }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.i(MainActivity.TAG,"The read failed for user: " + databaseError.getCode());
+            }
         });
-
     }
 
+
+    @NonNull
     @Override
-    public int getItemCount() {
-        return comments.size();
+    public commentsViewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_comment, parent, false);
+        return new CommentsAdapter.commentsViewholder(view);
     }
 
-
-    // Define a viewHolder
-    public class CommentViewHolder extends RecyclerView.ViewHolder{
-
+    class commentsViewholder extends RecyclerView.ViewHolder{
         private ImageView ivProfilePic;
         private TextView tvUsername;
         private TextView tvTime;
@@ -110,8 +106,9 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Commen
         private TextView tvDislikeAmount;
         private RadioGroup rgVote;
 
-        public CommentViewHolder(@NonNull View itemView) {
+        public commentsViewholder(@NonNull View itemView){
             super(itemView);
+
             ivProfilePic = itemView.findViewById(R.id.ivProfilePic);
             tvUsername = itemView.findViewById(R.id.tvUsername);
             tvTime = itemView.findViewById(R.id.tvTime);
@@ -120,92 +117,5 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Commen
             tvLikeAmount = itemView.findViewById(R.id.tvLikeAmount);
             tvDislikeAmount = itemView.findViewById(R.id.tvDislikeAmount);
         }
-
-        public void bind(Comment comment) {
-            // TODO: set the profile Image
-            ParseQuery<ParseUser> query = ParseUser.getQuery();
-            List<ParseUser> allUsers = new ArrayList<>();
-
-            query.findInBackground(new FindCallback<ParseUser>() {
-                @Override
-                public void done(List<ParseUser> users, ParseException e) {
-                    if(e != null){
-                        return;
-                    }
-                    allUsers.addAll(users);
-                    for(ParseUser user:allUsers){
-                        if(user.getObjectId().equals(comment.getCommentUserId())){
-                            Glide.with(context).load(user.getParseFile(KEY_USER_PROFILE_IMAGE).getUrl()).into(ivProfilePic);
-                        }
-                    }
-                }
-            });
-
-
-            tvUsername.setText(comment.getCommentUserName());
-            tvTime.setText(comment.getCommentTime());
-            tvCommentText.setText(comment.getCommentDescription());
-            tvLikeAmount.setText(comment.getCommentLikeCount().toString());
-            tvDislikeAmount.setText(comment.getCommentDislikeCount().toString());
-
-
-        }
-    }
-    // updates the likeCount in database
-    private void addOneLike(Comment post) {
-        Integer newLikeCount = post.getCommentLikeCount() + 1;
-        post.setCommentLikeCount(newLikeCount);
-        post.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                if(e != null){
-                    Log.e(TAG, "Error while saving like count!", e);
-                }
-                Log.i(TAG, "Like count save was successful!");
-            }
-        });
-    }
-
-    private void minusOneLike(Comment post) {
-        Integer newLikeCount = post.getCommentLikeCount() - 1;
-        post.setCommentLikeCount(newLikeCount);
-        post.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                if(e != null){
-                    Log.e(TAG, "Error while saving like count!", e);
-                }
-                Log.i(TAG, "Like count save was successful!");
-            }
-        });
-    }
-
-
-    // updates the dislikeCount in database
-    private void addOneDislike(Comment comment) {
-        Integer newDislikeCount = comment.getCommentDislikeCount() + 1;
-        comment.setCommentDislikeCount(newDislikeCount);
-        comment.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                if(e != null){
-                    Log.e(TAG, "Error while saving dislike count!", e);
-                }
-                Log.i(TAG, "Dislike count save was successful!");
-            }
-        });
-    }
-    private void minusOneDislike(Comment comment) {
-        Integer newDislikeCount = comment.getCommentDislikeCount() - 1;
-        comment.setCommentDislikeCount(newDislikeCount);
-        comment.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                if(e != null){
-                    Log.e(TAG, "Error while saving dislike count!", e);
-                }
-                Log.i(TAG, "Dislike count save was successful!");
-            }
-        });
     }
 }

@@ -1,5 +1,6 @@
 package com.example.gdsc_project_app;
 
+import static com.example.gdsc_project_app.MainActivity.TAG;
 import static com.example.gdsc_project_app.Post.KEY_QUESTIONID;
 import static java.security.AccessController.getContext;
 
@@ -13,6 +14,7 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,6 +22,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gdsc_project_app.adapters.CommentsAdapter;
 import com.example.gdsc_project_app.adapters.PostAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -43,6 +52,15 @@ public class CommentActivity extends AppCompatActivity {
     private List<Comment> allComments;
 //    private List<Post> selectedPost;
 
+    final FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private DatabaseReference usersRef = database.getReference("Users");
+    private DatabaseReference roomsRef = database.getReference("Rooms");
+    private DatabaseReference postsRef = database.getReference("Posts");
+    private DatabaseReference commentsRef = database.getReference("Comments");
+    private String commentID;
+    private ArrayList<String> commentIDs;
+    private ArrayList<FBComment> comments;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +73,9 @@ public class CommentActivity extends AppCompatActivity {
         rvCurrentPost = findViewById(R.id.rvCurrentPost);
         rvComments = findViewById(R.id.rvComments);
         etNewComment = findViewById(R.id.etNewComment);
+
+        comments = new ArrayList<FBComment>();
+        commentIDs = new ArrayList<String>();
 
         //get current post into layout
         querySelectedPost();
@@ -84,42 +105,47 @@ public class CommentActivity extends AppCompatActivity {
             }
         });
 
-        allComments = new ArrayList<>();
-        commentsAdapter = new CommentsAdapter(this, allComments);
-
-        // Steps to use the recycler view
-        // 0. create layout for one row in the list
-        // 1. create the adapter
-        // 2. create the data source
-        // 3. set the adapter on the recycler view
-        rvComments.setAdapter(commentsAdapter);
-        // 4. set the layout manger on the recycler view
-        rvComments.setLayoutManager(new LinearLayoutManager(this));
-
         queryComment();
 
 
     }
 
     private void queryComment() {
-        ParseQuery<Comment> query = ParseQuery.getQuery(Comment.class);
-        query.include(Comment.KEY_COMMENT_USER_ID);
-        // TODO:
-//        query.whereEqualTo(Comment.KEY_COMMENT_POST_ID, PostAdapter.currentPostId);
-        query.orderByDescending(Comment.KEY_COMMENT_TIME);
-
-        query.findInBackground(new FindCallback<Comment>() {
+        postsRef.child(PostAdapter.currentPostId).child("commentIDs").addValueEventListener(new ValueEventListener() {
             @Override
-            public void done(List<Comment> comments, ParseException e) {
-                if(e != null){
-                    Log.e(TAG, "Issue with getting comments", e);
-                    return;
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
+                    if(snapshot.getValue(Boolean.class) == true) {
+                        commentIDs.add(snapshot.getKey().toString());
+                    }
                 }
-                for (Comment comment : comments){
-                    Log.i(TAG, "Comment: " + comment.getCommentDescription() + ", username: " + comment.getCommentUserName());
-                }
-                allComments.addAll(comments);
-                commentsAdapter.notifyDataSetChanged();
+                commentsRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        comments.clear();
+                        for (DataSnapshot childSnapshot : snapshot.getChildren()) {
+                            FBComment comment = childSnapshot.getValue(FBComment.class);
+                            comments.add(comment);
+                        }
+                        Log.i(TAG, "comments" + comments);
+
+                        rvComments.setLayoutManager(new LinearLayoutManager(CommentActivity.this));
+                        FirebaseRecyclerOptions<FBComment> options = new FirebaseRecyclerOptions.Builder<FBComment>().setQuery(commentsRef, FBComment.class).build();
+                        CommentsAdapter adapter = new CommentsAdapter(options);
+                        rvComments.setAdapter(adapter);
+                        adapter.startListening();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        Log.i(TAG,"The read failed for user: " + databaseError.getCode());
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.i(TAG,"The read failed for user: " + databaseError.getCode());
             }
         });
     }

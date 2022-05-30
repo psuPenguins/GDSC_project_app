@@ -17,6 +17,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -46,6 +47,9 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 public class PostAdapter extends FirebaseRecyclerAdapter<FBPost, PostAdapter.postsViewholder>{
    final FirebaseDatabase database = FirebaseDatabase.getInstance();
    DatabaseReference usersRef = database.getReference("Users");
+   DatabaseReference postRef = database.getReference("Posts");
+
+   public static String currentPostId;
 
    public PostAdapter(@NonNull FirebaseRecyclerOptions<FBPost> options){
       super(options);
@@ -85,6 +89,45 @@ public class PostAdapter extends FirebaseRecyclerAdapter<FBPost, PostAdapter.pos
             Log.i(TAG,"The read failed for user: " + databaseError.getCode());
          }
       });
+
+      holder.btnViewReply.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View view) {
+            Intent i = new Intent(holder.Content.getContext(), CommentActivity.class);
+            currentPostId = post.getPostID();
+            holder.Content.getContext().startActivity(i);
+         }
+      });
+
+      holder.rgVote.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+         @Override
+         public void onCheckedChanged(RadioGroup group, int checkedID) {
+            // checkedID is the RadioButton selected
+            if (checkedID == R.id.rbLike){
+               Log.i(TAG, "onClick like button");
+               addOneLike(post);
+               post.liked = true;
+               if (post.disliked == true){
+                  post.disliked = false;
+                  minusOneDislike(post);
+               }
+               holder.LikeAmount.setText(post.getLikeCount().toString());
+               holder.DislikeAmount.setText(post.getDislikeCount().toString());
+            }
+            if (checkedID == R.id.rbUnlike){
+               Log.i(TAG, "onClick dislike button");
+               addOneDislike(post);
+               post.disliked = true;
+
+               if (post.liked == true){
+                  post.liked = false;
+                  minusOneLike(post);
+               }
+               holder.DislikeAmount.setText(post.getDislikeCount().toString());
+               holder.LikeAmount.setText(post.getLikeCount().toString());
+            }
+         }
+      });
    }
 
    @NonNull
@@ -115,5 +158,29 @@ public class PostAdapter extends FirebaseRecyclerAdapter<FBPost, PostAdapter.pos
          ivUserPic = itemView.findViewById(R.id.ivUserPic);
          rgVote = itemView.findViewById(R.id.rgVote);
       }
+   }
+
+   // updates the likeCount in database
+   private void addOneLike(FBPost post) {
+      Integer newLikeCount = post.getLikeCount() + 1;
+      post.setLikeCount(newLikeCount);
+      postRef.child(post.postID).child("likeCount").setValue(newLikeCount);
+   }
+   private void minusOneLike(FBPost post) {
+      Integer newLikeCount = post.getLikeCount() - 1;
+      post.setLikeCount(newLikeCount);
+      postRef.child(post.postID).child("likeCount").setValue(newLikeCount);
+   }
+
+   // updates the dislikeCount in database
+   private void addOneDislike(FBPost post) {
+      Integer newDislikeCount = post.getDislikeCount() + 1;
+      post.setDislikeCount(newDislikeCount);
+      postRef.child(post.postID).child("dislikeCount").setValue(newDislikeCount);
+   }
+   private void minusOneDislike(FBPost post) {
+      Integer newDislikeCount = post.getDislikeCount() - 1;
+      post.setDislikeCount(newDislikeCount);
+      postRef.child(post.postID).child("dislikeCount").setValue(newDislikeCount);
    }
 }

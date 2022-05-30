@@ -14,10 +14,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.gdsc_project_app.adapters.PostAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -49,6 +51,10 @@ public class RoomFragment extends Fragment {
     private String currentUserID;
     private String currentRoomID;
 
+    FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+    String currentUserUID = currentUser.getUid();
+
+
     public RoomFragment(){ }
 
     @Override
@@ -68,8 +74,38 @@ public class RoomFragment extends Fragment {
 
         posts = new ArrayList<FBPost>();
 
-
         postIDs = new ArrayList<String>();
+
+
+        Log.i(TAG, "currentUserID is here: " + currentUserUID);
+
+
+        usersRef.child(currentUserUID).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                FBUser user = dataSnapshot.getValue(FBUser.class);
+                //getting roomID
+                currentRoomID = user.roomID;
+                Log.i(TAG, "currentRoomID is this: " + user.roomID);
+
+                roomsRef.child(currentRoomID).child("topic").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        //setting topic
+                        tvRoomTopic.setText(dataSnapshot.getValue().toString());
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.i(TAG,"The read failed for user: " + databaseError.getCode());
+                    }
+                });
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.i(TAG,"The read failed for user: " + databaseError.getCode());
+            }
+        });
 
         queryPostIDs();
 
