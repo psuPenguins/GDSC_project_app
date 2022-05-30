@@ -24,6 +24,7 @@ import com.example.gdsc_project_app.adapters.CommentsAdapter;
 import com.example.gdsc_project_app.adapters.PostAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -37,6 +38,7 @@ import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class CommentActivity extends AppCompatActivity {
 
@@ -60,6 +62,9 @@ public class CommentActivity extends AppCompatActivity {
     private String commentID;
     private ArrayList<String> commentIDs;
     private ArrayList<FBComment> comments;
+    private FirebaseUser userID = FirebaseAuth.getInstance().getCurrentUser();
+    private String user;
+    private String pfp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,7 +127,7 @@ public class CommentActivity extends AppCompatActivity {
     private void AddCommentActivity(){
         Log.i(TAG, "Adding Comment in CommentActivity");
         //TODO: Work with database to add comment,
-        saveComment(etNewComment.getText().toString(), ParseUser.getCurrentUser());
+        saveComment(etNewComment.getText().toString(), usersRef);
         Intent i = new Intent(this, CommentActivity.class);
         Log.i(TAG, "Refreshing CommentActivity");
         startActivity(i);
@@ -146,21 +151,26 @@ public class CommentActivity extends AppCompatActivity {
 //        });
     }
 
-    private void saveComment(String description, ParseUser currentUser) {
-        Comment comment = new Comment();
-        comment.setDescription(description);
-        comment.setUserID(currentUser.getObjectId());
-        comment.setUsername(currentUser.getUsername());
-//        comment.setPostID(PostAdapter.currentPostId);
-        comment.saveInBackground(new SaveCallback() {
+    private void saveComment(String description, DatabaseReference usersRef) {
+        // TODO: save in Room as well.
+        usersRef.child(userID.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void done(ParseException e) {
-                if(e != null){
-                    Log.e(TAG, "Error while saving!", e);
-                    Toast.makeText(CommentActivity.this, "Error while saving", Toast.LENGTH_SHORT).show();
-                }
-                Log.i(TAG, "Post save was successful!");
-                btnAddComment.setText("");
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                FBUser user = dataSnapshot.getValue(FBUser.class);
+                FBComment comment = new FBComment(
+                        userID.getUid(),
+                        user.username,
+                        PostAdapter.currentPostId,
+                        description,
+                        0,
+                        0,
+                        UUID.randomUUID().toString()
+                );
+                roomsRef.child(RoomFragment.currentRoomID).child("posts").child(PostAdapter.currentPostId).child("comments").child(comment.commentID).setValue(comment);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.i(TAG,"The read failed for user: " + databaseError.getCode());
             }
         });
     }
