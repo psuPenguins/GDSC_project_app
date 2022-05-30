@@ -5,6 +5,8 @@ import android.util.Log;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+
 public class FBPost {
     public String userID, username, roomID, description, postID;
     public Integer likeCount, dislikeCount;
@@ -24,14 +26,14 @@ public class FBPost {
     }
 
     public String getUsername() {
-        return this.username;
+        return username;
     }
-    public String getDescription() {return this.description;}
-    public Integer getLikeCount() {return this.likeCount;}
-    public Integer getDislikeCount() {return this.dislikeCount;}
-    public String getUserID() {return this.userID;}
-    public String getRoomID() {return this.roomID;}
-    public String getPostID() {return this.postID;}
+    public String getDescription() {return description;}
+    public Integer getLikeCount() {return likeCount;}
+    public Integer getDislikeCount() {return dislikeCount;}
+    public String getUserID() {return userID;}
+    public String getRoomID() {return roomID;}
+    public String getPostID() {return postID;}
 
     public void setUserID(String userID) {this.userID = userID;}
     public void setUsername(String username) {this.username = username;}

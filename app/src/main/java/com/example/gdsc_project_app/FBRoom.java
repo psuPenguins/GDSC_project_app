@@ -6,7 +6,7 @@ public class FBRoom {
     public FBRoom(){}
 
     
-    public FBRoom(String topic, String numOfUsers, String postIDs) {
+    public FBRoom(String topic, String numOfUsers) {
         this.topic = topic;
         this.numOfUsers = numOfUsers;
         this.postIDs = postIDs;
@@ -22,9 +22,5 @@ public class FBRoom {
 
     public String getNumOfUsers() {
         return numOfUsers;
-    }
-
-    public String getPostIDs() {
-        return postIDs;
     }
 }

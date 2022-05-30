@@ -99,35 +99,35 @@ public class PostAdapter extends FirebaseRecyclerAdapter<FBPost, PostAdapter.pos
          }
       });
 
-      holder.rgVote.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-         @Override
-         public void onCheckedChanged(RadioGroup group, int checkedID) {
-            // checkedID is the RadioButton selected
-            if (checkedID == R.id.rbLike){
-               Log.i(TAG, "onClick like button");
-               addOneLike(post);
-               post.liked = true;
-               if (post.disliked == true){
-                  post.disliked = false;
-                  minusOneDislike(post);
-               }
-               holder.LikeAmount.setText(post.getLikeCount().toString());
-               holder.DislikeAmount.setText(post.getDislikeCount().toString());
-            }
-            if (checkedID == R.id.rbUnlike){
-               Log.i(TAG, "onClick dislike button");
-               addOneDislike(post);
-               post.disliked = true;
-
-               if (post.liked == true){
-                  post.liked = false;
-                  minusOneLike(post);
-               }
-               holder.DislikeAmount.setText(post.getDislikeCount().toString());
-               holder.LikeAmount.setText(post.getLikeCount().toString());
-            }
-         }
-      });
+//      holder.rgVote.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+//         @Override
+//         public void onCheckedChanged(RadioGroup group, int checkedID) {
+//            // checkedID is the RadioButton selected
+//            if (checkedID == R.id.rbLike){
+//               Log.i(TAG, "onClick like button");
+//               addOneLike(post);
+//               post.liked = true;
+//               if (post.disliked == true){
+//                  post.disliked = false;
+//                  minusOneDislike(post);
+//               }
+//               holder.LikeAmount.setText(post.getLikeCount().toString());
+//               holder.DislikeAmount.setText(post.getDislikeCount().toString());
+//            }
+//            if (checkedID == R.id.rbUnlike){
+//               Log.i(TAG, "onClick dislike button");
+//               addOneDislike(post);
+//               post.disliked = true;
+//
+//               if (post.liked == true){
+//                  post.liked = false;
+//                  minusOneLike(post);
+//               }
+//               holder.DislikeAmount.setText(post.getDislikeCount().toString());
+//               holder.LikeAmount.setText(post.getLikeCount().toString());
+//            }
+//         }
+//      });
    }
 
    @NonNull
