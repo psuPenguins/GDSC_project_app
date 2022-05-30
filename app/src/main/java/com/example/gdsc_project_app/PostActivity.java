@@ -12,13 +12,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -26,6 +34,7 @@ import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import java.util.List;
+import java.util.UUID;
 
 public class PostActivity extends AppCompatActivity {
     public static final String TAG = "PostActivity";
@@ -37,6 +46,14 @@ public class PostActivity extends AppCompatActivity {
     private TextInputEditText tiContentInput;
     private TextInputLayout tiContentLayout;
     private ImageView ivPostUserPic;
+
+    // firebase variables
+    final FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private DatabaseReference postsRef = database.getReference("Posts");
+    private FirebaseUser userID = FirebaseAuth.getInstance().getCurrentUser();
+    private DatabaseReference usersRef = database.getReference("Users");
+    private String user;
+    private String pfp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +70,26 @@ public class PostActivity extends AppCompatActivity {
         ivPostUserPic=findViewById(R.id.ivPostUserPic);
 
         // Set current posting user name and image
-        tvPostingName.setText(ParseUser.getCurrentUser().getUsername());
-        Glide.with(this).load(ParseUser.getCurrentUser().getParseFile(KEY_USER_PROFILE_IMAGE).getUrl()).into(ivPostUserPic);
+        usersRef.child(userID.getUid()).child("username").get().addOnCompleteListener(task -> {
+            if (!task.isSuccessful()) {
+                Log.e("firebase", "Error getting data", task.getException());
+            }
+            else {
+                user = String.valueOf(task.getResult().getValue());
+                tvPostingName.setText(user);
+                Log.d("firebase", String.valueOf(task.getResult().getValue()));
+            }
+        });
+        usersRef.child(userID.getUid()).child("profileImage").get().addOnCompleteListener(task -> {
+            if (!task.isSuccessful()) {
+                Log.e("firebase", "Error getting data", task.getException());
+            }
+            else {
+                pfp = String.valueOf(task.getResult().getValue());
+                Glide.with(this).load(pfp).into(ivPostUserPic);
+                Log.d("firebase", String.valueOf(task.getResult().getValue()));
+            }
+        });
 
         btnReturnFromPost.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,8 +110,7 @@ public class PostActivity extends AppCompatActivity {
                     Toast.makeText(PostActivity.this, "Description can't be empty", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                ParseUser currentUser = ParseUser.getCurrentUser();
-                savePost(description, currentUser);
+                savePost(description, usersRef);
 
                 // reload the room activity
                 goRoomActivity();
@@ -84,21 +118,26 @@ public class PostActivity extends AppCompatActivity {
         });
     }
 
-    private void savePost(String description, ParseUser currentUser) {
-        Post post = new Post();
-        post.setDescription(description);
-        post.setUserID(currentUser.getObjectId());
-        post.setUsername(currentUser.getUsername());
-        post.setQuestionID(currentUser.getString("questionID"));
-        post.saveInBackground(new SaveCallback() {
+    private void savePost(String description, DatabaseReference usersRef) {
+        // TODO: save in Room as well.
+        usersRef.child(userID.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void done(ParseException e) {
-                if(e != null){
-                    Log.e(TAG, "Error while saving!", e);
-                    Toast.makeText(PostActivity.this, "Error while saving", Toast.LENGTH_SHORT).show();
-                }
-                Log.i(TAG, "Post save was successful!");
-                tiContentInput.setText("");
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                FBUser user = dataSnapshot.getValue(FBUser.class);
+                FBPost post = new FBPost(
+                        userID.getUid(),
+                        user.username,
+                        user.roomID,
+                        description,
+                        0,
+                        0,
+                        UUID.randomUUID().toString()
+                );
+                postsRef.child(post.getPostID()).setValue(post);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.i(TAG,"The read failed for user: " + databaseError.getCode());
             }
         });
     }
