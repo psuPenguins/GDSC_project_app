@@ -50,6 +50,7 @@ public class PostActivity extends AppCompatActivity {
     // firebase variables
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference postsRef = database.getReference("Posts");
+    private DatabaseReference roomsRef = database.getReference("Rooms");
     private FirebaseUser userID = FirebaseAuth.getInstance().getCurrentUser();
     private DatabaseReference usersRef = database.getReference("Users");
     private String user;
@@ -133,7 +134,7 @@ public class PostActivity extends AppCompatActivity {
                         0,
                         UUID.randomUUID().toString()
                 );
-                postsRef.child(post.getPostID()).setValue(post);
+                roomsRef.child(RoomFragment.currentRoomID).child("posts").child(post.getPostID()).setValue(post);
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
