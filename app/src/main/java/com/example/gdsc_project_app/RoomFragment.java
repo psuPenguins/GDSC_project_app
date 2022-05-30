@@ -48,8 +48,8 @@ public class RoomFragment extends Fragment {
     private ArrayList<String> postIDs;
     private ArrayList<FBPost> posts;
 
-    private String currentUserID;
-    private String currentRoomID;
+    public static String currentUserID;
+    public static String currentRoomID;
 
     FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
     String currentUserUID = currentUser.getUid();
@@ -130,50 +130,18 @@ public class RoomFragment extends Fragment {
     private void queryPostIDs() {
         // get the room that the user is in
         currentUserID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+
         usersRef.child(currentUserID).child("roomID").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 currentRoomID = (String) snapshot.getValue();
 
-                Log.i(TAG, "ROOM ID= "+currentRoomID);
-                roomsRef.child(currentRoomID).child("postIDs").addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        postIDs.clear();
-                        for (DataSnapshot childSnapshot : snapshot.getChildren()) {
-                            postID = childSnapshot.getKey();
-                            Log.i(TAG, "POST ID= " + postID);
-                            postIDs.add(postID);
-                        }
-                        Log.i(TAG, "postIDs" + postIDs);
-                        postsRef.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                posts.clear();
-                                for (DataSnapshot childSnapshot : snapshot.getChildren()) {
-                                    FBPost post = childSnapshot.getValue(FBPost.class);
-                                    posts.add(post);
-                                }
-                                Log.i(TAG, "posts" + posts);
-
-                                rvPosts.setLayoutManager(new LinearLayoutManager(getContext()));
-                                FirebaseRecyclerOptions<FBPost> options = new FirebaseRecyclerOptions.Builder<FBPost>().setQuery(postsRef, FBPost.class).build();
-                                PostAdapter adapter = new PostAdapter(options);
-                                rvPosts.setAdapter(adapter);
-                                adapter.startListening();
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-                                Log.e("firebase", "Error getting data");
-                            }
-                        });
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        Log.e("firebase", "Error getting data");
-                    }
-                });
+                rvPosts.setLayoutManager(new LinearLayoutManager(getContext()));
+                FirebaseRecyclerOptions<FBPost> options = new FirebaseRecyclerOptions.Builder<FBPost>().setQuery(roomsRef.child(currentRoomID).child("posts"), FBPost.class).build();
+                PostAdapter adapter = new PostAdapter(options);
+                rvPosts.setAdapter(adapter);
+                adapter.startListening();
             }
 
             @Override
@@ -181,8 +149,6 @@ public class RoomFragment extends Fragment {
 
             }
         });
-
-
     }
 
 }

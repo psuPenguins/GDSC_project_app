@@ -111,43 +111,11 @@ public class CommentActivity extends AppCompatActivity {
     }
 
     private void queryComment() {
-        postsRef.child(PostAdapter.currentPostId).child("commentIDs").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
-                    if(snapshot.getValue(Boolean.class) == true) {
-                        commentIDs.add(snapshot.getKey().toString());
-                    }
-                }
-                commentsRef.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        comments.clear();
-                        for (DataSnapshot childSnapshot : snapshot.getChildren()) {
-                            FBComment comment = childSnapshot.getValue(FBComment.class);
-                            comments.add(comment);
-                        }
-                        Log.i(TAG, "comments" + comments);
-
-                        rvComments.setLayoutManager(new LinearLayoutManager(CommentActivity.this));
-                        FirebaseRecyclerOptions<FBComment> options = new FirebaseRecyclerOptions.Builder<FBComment>().setQuery(commentsRef, FBComment.class).build();
-                        CommentsAdapter adapter = new CommentsAdapter(options);
-                        rvComments.setAdapter(adapter);
-                        adapter.startListening();
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                        Log.i(TAG,"The read failed for user: " + databaseError.getCode());
-                    }
-                });
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.i(TAG,"The read failed for user: " + databaseError.getCode());
-            }
-        });
+        rvComments.setLayoutManager(new LinearLayoutManager(CommentActivity.this));
+        FirebaseRecyclerOptions<FBComment> options = new FirebaseRecyclerOptions.Builder<FBComment>().setQuery(roomsRef.child(RoomFragment.currentRoomID).child("posts").child(PostAdapter.currentPostId).child("comments"), FBComment.class).build();
+        CommentsAdapter adapter = new CommentsAdapter(options);
+        rvComments.setAdapter(adapter);
+        adapter.startListening();
     }
 
     // onclicking add comment
