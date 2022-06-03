@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -46,7 +47,7 @@ public class CommentActivity extends AppCompatActivity {
 
     public static final String TAG = "CommentActivity";
 
-    private Button btnBack;
+    private ImageButton btnBack;
     private Button btnAddComment;
     private EditText etNewComment;
     private RecyclerView rvCurrentPost;

@@ -6,26 +6,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="#DCDBDB"
+    android:foregroundTint="#FFFFFF"
     tools:context=".CommentActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tbComments"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FFFFFF"
+        android:background="#DCDBDB"
+        android:backgroundTint="#641AE6"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme" />
 
-    <Button
+    <ImageButton
         android:id="@+id/btnBack"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
+        android:background="#641AE6"
+        android:src="?attr/homeAsUpIndicator"
         android:text="Back"
-        android:textSize="11sp" />
+        android:textSize="11sp"
+        android:tint="#FBFAFA" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCurrentPost"
@@ -46,7 +51,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        app:cardBackgroundColor="#75FFFFFF">
+        app:cardBackgroundColor="#DCDBDB">
 
         <!--        <Button-->
         <!--            android:id="@+id/btnAddComment"-->

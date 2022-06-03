@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/ivUserPic"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
@@ -24,9 +24,10 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="10dp"
         android:layout_toEndOf="@+id/ivUserPic"
-        android:fontFamily="sans-serif-medium"
-        android:textColor="#000000"
-        android:textSize="16sp"
+        android:fontFamily="sans-serif-condensed"
+        android:textColor="#878787"
+        android:textSize="11sp"
+        android:textStyle="normal"
         tools:text="Meow123" />
 
     <TextView
@@ -38,13 +39,14 @@
         android:layout_marginTop="0dp"
         android:layout_toEndOf="@+id/ivUserPic"
         android:textColor="#404040"
-        android:textSize="12sp"
+        android:textSize="17sp"
+        android:textStyle="bold"
         tools:text="I love pizza." />
 
     <Button
         android:id="@+id/btnViewReply"
         android:layout_width="wrap_content"
-        android:layout_height="33dp"
+        android:layout_height="40dp"
         android:layout_below="@+id/tvPostContent"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="0dp"

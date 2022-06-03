@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#D7FAFAFA">
+    android:background="#DCDBDB"
+    app:barrierMargin="5dp">
     <!--Add context to link (tools:context=".CommentItem)-->
 
     <TextView
@@ -13,8 +14,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
+        android:layout_toEndOf="@+id/ivProfilePic"
         android:text="Username here"
-        android:textSize="14dp" />
+        android:textSize="11sp" />
 
     <TextView
         android:id="@+id/tvTime"
@@ -23,14 +25,13 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="10dp"
-        android:text="Time comes here"
+        android:text=""
         android:textSize="14dp" />
 
     <ImageView
         android:id="@+id/ivProfilePic"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_below="@id/tvUsername"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="10dp"
         tools:srcCompat="@tools:sample/avatars" />
@@ -41,10 +42,13 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tvUsername"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="3dp"
         android:layout_marginEnd="5dp"
         android:layout_toRightOf="@id/ivProfilePic"
-        android:text="CommentComesHere" />
+        android:text="CommentComesHere"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
     <RadioGroup
         android:id="@+id/rgVote"
