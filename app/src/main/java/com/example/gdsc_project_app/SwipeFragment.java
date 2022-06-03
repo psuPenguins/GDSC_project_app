@@ -3,6 +3,7 @@ package com.example.gdsc_project_app;
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 import static com.parse.Parse.getApplicationContext;
 
+import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.util.Log;
@@ -94,6 +95,13 @@ public class SwipeFragment extends Fragment {
                 Log.i(TAG, "The read failed for user: " + databaseError.getCode());
             }
         });
+    }
+
+    private void goMainActivity(){
+        Intent i = new Intent(getContext(), MainActivity.class);
+        Log.i("SwipItem", "Going into Room");
+        startActivity(i);
+        getActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
 }

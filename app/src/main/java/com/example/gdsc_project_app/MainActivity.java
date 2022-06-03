@@ -1,9 +1,12 @@
 package com.example.gdsc_project_app;
 
+import static com.parse.Parse.getApplicationContext;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Point;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -24,6 +27,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -55,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         currentUserUID = currentUser.getUid();
         Log.i(TAG, "MA CurrentUID:"+currentUserUID);
 
-        usersRef.child(currentUserUID).child("roomID").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+        usersRef.child(currentUserUID).child("swipe").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (!task.isSuccessful()) {
@@ -64,14 +68,33 @@ public class MainActivity extends AppCompatActivity {
                 else {
                     Log.i(TAG, "Current roomID:"+ (task.getResult().getValue()));
                     Log.i(TAG, "Current roomID bool:"+ task.getResult().getValue().equals(""));
-                    if (task.getResult().getValue().equals("")) {
-                        replaceFragment(new ProfileFragment());
+                    if (task.getResult().getValue(Boolean.class) == false) {
+                        replaceFragment(new SwipeFragment());
                     }
                     else {
                         replaceFragment(new RoomFragment());
 
                     }
                 }
+            }
+        });
+
+        usersRef.child(currentUserUID).child("swipe").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(!dataSnapshot.exists()){
+                    // TODO: use if it is in a room instead of creating new var
+                    usersRef.child(currentUserUID).child("swipe").setValue(false);
+                }
+                else if(dataSnapshot.getValue(Boolean.class) == true){
+                    replaceFragment(new RoomFragment());
+//                    usersRef.child(currentUserUID).child("swipe").setValue(false);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.i(TAG, "The read failed for user: " + databaseError.getCode());
             }
         });
 

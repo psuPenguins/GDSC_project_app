@@ -145,7 +145,7 @@ public class CommentActivity extends AppCompatActivity {
         Log.i(TAG, "roomID is: " + RoomFragment.currentRoomID);
         Log.i(TAG, "postID is: " + PostAdapter.currentPostId);
 
-        FirebaseRecyclerOptions<FBPost> options = new FirebaseRecyclerOptions.Builder<FBPost>().setQuery(roomsRef.child(RoomFragment.currentRoomID).child("posts").orderByKey().equalTo(PostAdapter.currentPostId), FBPost.class).build();
+        FirebaseRecyclerOptions<FBPost> options = new FirebaseRecyclerOptions.Builder<FBPost>().setQuery(roomsRef.child(RoomFragment.currentRoomID.toString()).child("posts").orderByKey().equalTo(PostAdapter.currentPostId), FBPost.class).build();
 
         PostAdapter adapter = new PostAdapter(options);
         rvCurrentPost.setAdapter(adapter);

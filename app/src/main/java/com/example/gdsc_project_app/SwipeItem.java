@@ -2,6 +2,9 @@ package com.example.gdsc_project_app;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.mindorks.placeholderview.SwipeDirection;
 import com.mindorks.placeholderview.SwipeDirectionalView;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
@@ -17,7 +20,9 @@ import com.mindorks.placeholderview.annotations.swipe.SwipeView;
 import com.mindorks.placeholderview.annotations.swipe.SwipingDirection;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Point;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -26,6 +31,13 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.content.Context;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+
+
 
 @Layout(R.layout.item_swipe_card)
 public class SwipeItem {
@@ -43,6 +55,9 @@ public class SwipeItem {
     private Point mCardViewHolderSize;
     private SwipePlaceHolderView mHolderView;
     private Activity mActivity;
+
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference usersRef = database.getReference("Users");
 
     public SwipeItem(Activity activity, SwipePlaceHolderView holderView, Context context, String question, Point CardViewHolderSize){
         mContext = context;
@@ -116,12 +131,22 @@ public class SwipeItem {
         popupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);
 
         // dismiss the popup window when touched
-        popupView.setOnTouchListener(new android.view.View.OnTouchListener() {
-            @Override
-            public boolean onTouch(android.view.View v, MotionEvent event) {
+//        popupView.setOnTouchListener(new android.view.View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(android.view.View v, MotionEvent event) {
+//                popupWindow.dismiss();
+//                return true;
+//            }
+//        });
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                String currentUserID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                usersRef.child(currentUserID).child("swipe").setValue(true);
                 popupWindow.dismiss();
-                return true;
             }
-        });
+        }, 5000);   //5 second
     }
+
+
 }
