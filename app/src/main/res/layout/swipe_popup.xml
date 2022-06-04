@@ -14,7 +14,7 @@
         android:layout_marginBottom="30dp"
         android:fontFamily="sans-serif"
         android:gravity="center"
-        android:text="You have swipted all the cards, you will be put into a new room in a moment......"
+        android:text="You have swiped all the cards, you will be put into a new room in a moment......"
         android:textColor="@color/white"
         android:textSize="22sp"
         android:textStyle="bold" />
