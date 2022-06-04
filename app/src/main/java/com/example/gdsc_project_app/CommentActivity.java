@@ -26,6 +26,7 @@ import com.bumptech.glide.Glide;
 import com.example.gdsc_project_app.adapters.CommentsAdapter;
 import com.example.gdsc_project_app.adapters.PostAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -57,6 +58,7 @@ public class CommentActivity extends AppCompatActivity {
     private List<Comment> allComments;
 //    private List<Post> selectedPost;
 
+    private Timestamp timestamp = Timestamp.now();
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference usersRef = database.getReference("Users");
     private DatabaseReference roomsRef = database.getReference("Rooms");
@@ -123,7 +125,7 @@ public class CommentActivity extends AppCompatActivity {
 
     private void queryComment() {
         rvComments.setLayoutManager(new LinearLayoutManager(CommentActivity.this));
-        FirebaseRecyclerOptions<FBComment> options = new FirebaseRecyclerOptions.Builder<FBComment>().setQuery(roomsRef.child(currentRoomID).child("posts").child(PostAdapter.currentPostId).child("comments"), FBComment.class).build();
+        FirebaseRecyclerOptions<FBComment> options = new FirebaseRecyclerOptions.Builder<FBComment>().setQuery(roomsRef.child(currentRoomID).child("posts").child(PostAdapter.currentPostId).child("comments").orderByChild("timestamp"), FBComment.class).build();
         CommentsAdapter adapter = new CommentsAdapter(options);
         rvComments.setAdapter(adapter);
         adapter.startListening();
@@ -165,7 +167,8 @@ public class CommentActivity extends AppCompatActivity {
                         description,
                         0,
                         0,
-                        UUID.randomUUID().toString()
+                        UUID.randomUUID().toString(),
+                        timestamp.getSeconds()
                 );
                 roomsRef.child(currentRoomID).child("posts").child(PostAdapter.currentPostId).child("comments").child(comment.commentID).setValue(comment);
             }

@@ -112,7 +112,7 @@ public class SignUpActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "User has been registered successfully.");
                             String profileImage = "https://firebasestorage.googleapis.com/v0/b/chatterbox-58447.appspot.com/o/icons8-penguin-100.png?alt=media&token=56ff0168-73e0-47b3-90de-b227bd16801f";
-                            FBUser user = new FBUser(email, username, password, "", profileImage);
+                            FBUser user = new FBUser(email, username, password, "", profileImage, false);
                             FirebaseDatabase.getInstance().getReference("Users")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                     .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
