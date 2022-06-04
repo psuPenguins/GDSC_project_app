@@ -138,7 +138,7 @@ public class RoomFragment extends Fragment {
                 currentRoomID = (String) snapshot.getValue();
 
                 rvPosts.setLayoutManager(new LinearLayoutManager(getContext()));
-                FirebaseRecyclerOptions<FBPost> options = new FirebaseRecyclerOptions.Builder<FBPost>().setQuery(roomsRef.child(currentRoomID).child("posts"), FBPost.class).build();
+                FirebaseRecyclerOptions<FBPost> options = new FirebaseRecyclerOptions.Builder<FBPost>().setQuery(roomsRef.child(currentRoomID).child("posts").orderByChild("order"), FBPost.class).build();
                 PostAdapter adapter = new PostAdapter(options);
                 rvPosts.setAdapter(adapter);
                 adapter.startListening();
