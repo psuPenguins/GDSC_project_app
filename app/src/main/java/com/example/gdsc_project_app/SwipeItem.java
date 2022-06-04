@@ -99,6 +99,7 @@ public class SwipeItem {
     @SwipeOut
     public void onSwipedOut() {
         Log.i("DEBUG", "onSwipedLeft");
+        SwipeFragment.addSwipeProgress();
         if (mHolderView.getChildCount() == 1) {
             popup();
         }
@@ -108,6 +109,7 @@ public class SwipeItem {
     @SwipeIn
     public void onSwipeIn() {
         Log.i("DEBUG", "onSwipedRight");
+        SwipeFragment.addSwipeProgress();
         if (mHolderView.getChildCount() == 1) {
             popup();
         }

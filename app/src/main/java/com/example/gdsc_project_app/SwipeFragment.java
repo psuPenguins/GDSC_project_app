@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.ProgressBar;
 
 import androidx.fragment.app.Fragment;
 
@@ -34,11 +35,15 @@ import com.parse.ParseQuery;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class SwipeFragment extends Fragment {
 
     public static final String TAG = "SwipeFragment";
     private SwipePlaceHolderView swipeView;
+    private static ProgressBar pbSwipeProgress;
+    private static int currentProgress = 0;
 
     //FBUser user;
     ArrayList<String> questions = new ArrayList<String>();
@@ -60,13 +65,14 @@ public class SwipeFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         swipeView = (SwipePlaceHolderView) view.findViewById(R.id.swipeView);
-        //someContext = getApplicationContext();
+        pbSwipeProgress = (ProgressBar) view.findViewById(R.id.pbSwipeProgress);
 
         swipeView.getBuilder()
                 .setSwipeType(SwipePlaceHolderView.SWIPE_TYPE_HORIZONTAL);
 
         // generate the cards from database.
         queryQuestion();
+        pbSwipeProgress.setMax(100);
     }
 
 
@@ -104,4 +110,8 @@ public class SwipeFragment extends Fragment {
         getActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
+    public static void addSwipeProgress(){
+        currentProgress = currentProgress + 14;
+        pbSwipeProgress.setProgress(currentProgress);
+    }
 }
