@@ -32,6 +32,7 @@ import java.util.List;
 import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.Timestamp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -56,10 +57,27 @@ public class CommentsAdapter extends FirebaseRecyclerAdapter<FBComment, Comments
 
     @Override
     protected void onBindViewHolder(@NonNull commentsViewholder holder, int position, @NonNull FBComment comment) {
+        long duration = Timestamp.now().getSeconds() - comment.timestamp;
         holder.tvUsername.setText(comment.username.toString());
         holder.tvCommentText.setText(comment.description.toString());
         holder.tvLikeAmount.setText(comment.likeCount.toString());
         holder.tvDislikeAmount.setText(comment.dislikeCount.toString());
+
+        if (duration >=  2628288){
+            holder.tvTime.setText((duration/2628288)+"m");
+        }
+        else if (duration >= 86400){
+            holder.tvTime.setText((duration/86400)+"d");
+        }
+        else if (duration >= 3600){
+            holder.tvTime.setText((duration/3600)+"h");
+        }
+        else if (duration >= 60){
+            holder.tvTime.setText((duration/60)+"min");
+        }
+        else{
+            holder.tvTime.setText(duration+"sec");
+        }
 
         ArrayList<String> userIDs = new ArrayList<>();
         ArrayList<String> urls = new ArrayList<>();
