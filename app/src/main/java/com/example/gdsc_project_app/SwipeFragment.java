@@ -70,6 +70,8 @@ public class SwipeFragment extends Fragment {
         swipeView.getBuilder()
                 .setSwipeType(SwipePlaceHolderView.SWIPE_TYPE_HORIZONTAL);
 
+        instructionPopup();
+
         // generate the cards from database.
         queryQuestion();
         pbSwipeProgress.setMax(100);
@@ -113,5 +115,29 @@ public class SwipeFragment extends Fragment {
     public static void addSwipeProgress(){
         currentProgress = currentProgress + 14;
         pbSwipeProgress.setProgress(currentProgress);
+    }
+
+    public void instructionPopup(){
+        // inflate the layout of the popup window
+        LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(LAYOUT_INFLATER_SERVICE);
+        android.view.View popupView = inflater.inflate(R.layout.swipe_instruction_popup, null);
+
+        // create the popup window
+        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+        boolean focusable = true; // lets taps outside the popup also dismiss it
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, 1500, focusable);
+
+        // show the popup window
+        // which view you pass in doesn't matter, it is only used for the window token
+        popupWindow.showAtLocation(popupView, Gravity.CENTER, 0, -150);
+
+        // dismiss the popup window when touched
+        popupView.setOnTouchListener(new android.view.View.OnTouchListener() {
+            @Override
+            public boolean onTouch(android.view.View view, MotionEvent motionEvent) {
+                popupWindow.dismiss();
+                return true;
+            }
+        });
     }
 }

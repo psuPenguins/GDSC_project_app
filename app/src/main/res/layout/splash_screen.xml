@@ -14,10 +14,10 @@
         android:layout_height="wrap_content"
         android:contentDescription="@string/app_icon"
         android:scaleX=".7"
+        android:src="@drawable/icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:scaleY=".7"
-        android:src="@drawable/icon" />
+        tools:scaleY=".7" />
 </androidx.constraintlayout.motion.widget.MotionLayout>

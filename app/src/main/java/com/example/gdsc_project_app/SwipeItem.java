@@ -6,7 +6,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.mindorks.placeholderview.SwipeDirection;
-import com.mindorks.placeholderview.SwipeDirectionalView;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
 import com.mindorks.placeholderview.annotations.Layout;
 import com.mindorks.placeholderview.annotations.Resolve;
@@ -20,7 +19,6 @@ import com.mindorks.placeholderview.annotations.swipe.SwipeView;
 import com.mindorks.placeholderview.annotations.swipe.SwipingDirection;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Point;
 import android.os.Handler;
 import android.util.Log;
@@ -31,12 +29,6 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.content.Context;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
-
 
 
 @Layout(R.layout.item_swipe_card)
@@ -101,7 +93,7 @@ public class SwipeItem {
         Log.i("DEBUG", "onSwipedLeft");
         SwipeFragment.addSwipeProgress();
         if (mHolderView.getChildCount() == 1) {
-            popup();
+            doneSwipingPopup();
         }
     }
 
@@ -111,13 +103,12 @@ public class SwipeItem {
         Log.i("DEBUG", "onSwipedRight");
         SwipeFragment.addSwipeProgress();
         if (mHolderView.getChildCount() == 1) {
-            popup();
+            doneSwipingPopup();
         }
     }
 
-
     // popup screen telling user that there is no more questions
-    public void popup(){
+    public void doneSwipingPopup(){
         // inflate the layout of the popup window
         LayoutInflater inflater = (LayoutInflater) mActivity.getSystemService(LAYOUT_INFLATER_SERVICE);
         android.view.View popupView = inflater.inflate(R.layout.swipe_popup, null);
