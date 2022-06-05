@@ -1,9 +1,9 @@
 # 2022_GDSC_project_app-- ChatterBox
-Contributors: Nicholas Chan, Selina Fu, Chen-Kuan Liao, Ved Walavalker
+Contributors: Nicholas Chan, Selina Fu, Chen-Kuan Liao, Ved Walavalkar
 DEMO video: https://www.youtube.com/watch?v=bl8KSIxrp9w
 
 ## Summary
-Built by four students from Pennsylvaia State University during 2022, this project was build to compete in the 2022 Google Solution Challenge, and was able to got into the global top 50 round!
+Built by four students from Pennsylvania State University during 2022, this project was built to compete in the 2022 Google Solution Challenge, and was able to get into the global top 50 round!
 
 Goals that meet:
 - [X] Goal 4: Quality Education 
