@@ -10,14 +10,26 @@ Goals that meet:
 Specifically, Goal 4, target 7. The app helps to spread awareness about topic that poeple don't usually notice. It also provides a free platform for users to discuss their thoughts on these topics.
 
 ## New update functions for the APP
--[X] Our database has been switch from Back4App to Google Firebase Realtime Database
--[X] Users are now able to sign up for an account using our new user interface
--[X] Different activites, room page, post page, swipe page, an others, have been moved into fragments to improve user's experience
--[X] Swipe page, post page, and comment page interfaces have been renewed to improve the user experience
+- [X] Our database has been switch from Back4App to Google Firebase Realtime Database
+- [X] Users are now able to sign up for an account using our new user interface
+- [X] Different activites, room page, post page, swipe page, an others, have been moved into fragments to improve user's experience
+- [X] Swipe page, post page, and comment page interfaces have been renewed to improve the user experience
 
 ## User Experience Flow Chart
-#Sign up page
+Sign up page
+![alt text](https://github.com/psuPenguins/GDSC_project_app/blob/Firebase/flow%20chart/signup%20page.png)
+
+Login page
 ![alt text](https://github.com/psuPenguins/GDSC_project_app/blob/Firebase/flow%20chart/login%20page.png)
+
+Swipe page
+![alt text](https://github.com/psuPenguins/GDSC_project_app/blob/Firebase/flow%20chart/after%20login.png)
+
+Post page
+![alt text](https://github.com/psuPenguins/GDSC_project_app/blob/Firebase/flow%20chart/post%20room.png)
+
+Comment page
+![alt text](https://github.com/psuPenguins/GDSC_project_app/blob/Firebase/flow%20chart/comment%20room.png)
 
 
 
