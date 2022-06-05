@@ -1,20 +1,29 @@
-# GDSC_project_app-- ChatterBox
+# 2022_GDSC_project_app-- ChatterBox
 Contributors: Nicholas Chan, Selina Fu, Chen-Kuan Liao, Ved Walavalker
-
-Full introduction video: https://www.youtube.com/watch?v=h0dlxgpdf7E
-
-2 minutes DEMO: https://www.youtube.com/watch?v=CDzLdAcu3e8
+DEMO video: https://www.youtube.com/watch?v=bl8KSIxrp9w
 
 ## Summary
-Built by four students from Pennsylvaia State University, this project was build to compete in the 2022 Google Solution Challenge. 
+Built by four students from Pennsylvaia State University during 2022, this project was build to compete in the 2022 Google Solution Challenge, and was able to got into the global top 50 round!
 
 Goals that meet:
 - [X] Goal 4: Quality Education 
 Specifically, Goal 4, target 7. The app helps to spread awareness about topic that poeple don't usually notice. It also provides a free platform for users to discuss their thoughts on these topics.
 
+## New update functions for the APP
+-[X] Our database has been switch from Back4App to Google Firebase Realtime Database
+-[X] Users are now able to sign up for an account using our new user interface
+-[X] Different activites, room page, post page, swipe page, an others, have been moved into fragments to improve user's experience
+-[X] Swipe page, post page, and comment page interfaces have been renewed to improve the user experience
+
+## User Experience Flow Chart
+#Sign up page
+<img src='(https://github.com/psuPenguins/GDSC_project_app/blob/Firebase/flow%20chart/login%20page.png)' title='Video Walkthrough' width='300px' alt='Video Walkthrough' />
+https://github.com/psuPenguins/GDSC_project_app/blob/Firebase/flow%20chart/login%20page.png
+
+
 ## User Stories
 
-The following functionality is completed:
+The following functionality is completed before getting in the GDSC 2022 Global top 50:
 - [X] Login room
   - [X] Users are able to login, if either the user name or passoword is entered incorrectly, it will prompt a message
   - [X] There are two buttons in the main room to enter the Swipe room and the Question room
@@ -66,10 +75,9 @@ Here's a walkthrough of implemented user stories:
 ![Imgur Image](https://i.imgur.com/8LcXaHj.mp4)
 GIF created with [Kap](https://getkap.co/).
 
-## Notes
-- We used Back4App as our data base for our app
 ## Open-source libraries used
 
+- [Firebase Realtime Database] (https://firebase.google.com/) - Set as our backend service
 - [PlaceViewHolder](https://github.com/janishar/PlaceHolderView) - Creating the swipe functions in the Swipe room
 - [Glide](https://github.com/bumptech/glide) - Image loading and caching library for Android
 
