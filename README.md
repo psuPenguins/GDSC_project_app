@@ -16,26 +16,26 @@ Specifically, Goal 4, target 7. The app helps to spread awareness about topic th
 - [X] Swipe page, post page, and comment page interfaces have been renewed to improve the user experience
 
 ## User Experience Flow Chart
-Sign up page
-![alt text](https://github.com/psuPenguins/GDSC_project_app/blob/Firebase/flow%20chart/signup%20page.png)
+###### Sign up page
+<img src="https://github.com/psuPenguins/GDSC_project_app/blob/Firebase/flow%20chart/signup%20page.png" width="800px">
 
-Login page
-![alt text](https://github.com/psuPenguins/GDSC_project_app/blob/Firebase/flow%20chart/login%20page.png)
+###### Login page
+<img src="https://github.com/psuPenguins/GDSC_project_app/blob/Firebase/flow%20chart/login%20page.png" width="900px">
 
-Swipe page
-![alt text](https://github.com/psuPenguins/GDSC_project_app/blob/Firebase/flow%20chart/after%20login.png)
+###### Swipe page
+<img src="https://github.com/psuPenguins/GDSC_project_app/blob/Firebase/flow%20chart/after%20login.png" width="900px">
 
-Post page
-![alt text](https://github.com/psuPenguins/GDSC_project_app/blob/Firebase/flow%20chart/post%20room.png)
+###### Post page
+<img src="https://github.com/psuPenguins/GDSC_project_app/blob/Firebase/flow%20chart/post%20room.png" width="900px">
 
-Comment page
-![alt text](https://github.com/psuPenguins/GDSC_project_app/blob/Firebase/flow%20chart/comment%20room.png)
+###### Comment page
+<img src="https://github.com/psuPenguins/GDSC_project_app/blob/Firebase/flow%20chart/comment%20room.png" width="900px">
 
 
 
 ## User Stories
 
-The following functionality is completed before getting in the GDSC 2022 Global top 50:
+The following functionality is completed ***before*** getting in the GDSC 2022 Global top 50:
 - [X] Login room
   - [X] Users are able to login, if either the user name or passoword is entered incorrectly, it will prompt a message
   - [X] There are two buttons in the main room to enter the Swipe room and the Question room
@@ -70,26 +70,30 @@ The following features are some furtue features we would like to add:
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
-- [X] Users are able to login, if either the user name or passoword is entered incorrectly, it will prompt a message
+- [X] Signup for an account
 
-<img src='https://github.com/psuPenguins/GDSC_project_app/blob/main/gifs/login_fail.gif' title='Video Walkthrough' width='300px' alt='Video Walkthrough' />
+<img src='https://github.com/psuPenguins/GDSC_project_app/blob/Firebase/GIFs/signupgif1.gif' title='Video Walkthrough' width='300px' alt='Video Walkthrough' />
 
-- [X] Users will be able to login and enter different rooms
+- [X] Login page
 
-<img src='https://github.com/psuPenguins/GDSC_project_app/blob/main/gifs/login_back_buttons.gif' title='Video Walkthrough' width='300px' alt='Video Walkthrough' />
+<img src='https://github.com/psuPenguins/GDSC_project_app/blob/Firebase/GIFs/logingif1.gif' title='Video Walkthrough' width='300px' alt='Video Walkthrough' />
 
 - [X] Swipe room
 
-<img src='https://github.com/psuPenguins/GDSC_project_app/blob/main/gifs/swipe.gif' title='Video Walkthrough' width='300px' alt='Video Walkthrough' />
+<img src='https://github.com/psuPenguins/GDSC_project_app/blob/Firebase/GIFs/swipegif1.gif' title='Video Walkthrough' width='300px' alt='Video Walkthrough' />
 
-- [X] Question room and adding comments
+- [X] Post room
 
-![Imgur Image](https://i.imgur.com/8LcXaHj.mp4)
-GIF created with [Kap](https://getkap.co/).
+<img src='https://github.com/psuPenguins/GDSC_project_app/blob/Firebase/GIFs/postgif1.gif' title='Video Walkthrough' width='300px' alt='Video Walkthrough' />
+
+- [X] Comment room
+
+<img src='https://github.com/psuPenguins/GDSC_project_app/blob/Firebase/GIFs/commentsgif1.gif' title='Video Walkthrough' width='300px' alt='Video Walkthrough' />
+
 
 ## Open-source libraries used
 
-- [Firebase Realtime Database] (https://firebase.google.com/) - Set as our backend service
+- [Firebase Realtime Database](https://firebase.google.com/) - Set as our backend service
 - [PlaceViewHolder](https://github.com/janishar/PlaceHolderView) - Creating the swipe functions in the Swipe room
 - [Glide](https://github.com/bumptech/glide) - Image loading and caching library for Android
 
