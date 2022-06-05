@@ -17,8 +17,8 @@ Specifically, Goal 4, target 7. The app helps to spread awareness about topic th
 
 ## User Experience Flow Chart
 #Sign up page
-<img src='(https://github.com/psuPenguins/GDSC_project_app/blob/Firebase/flow%20chart/login%20page.png)' title='Video Walkthrough' width='300px' alt='Video Walkthrough' />
-https://github.com/psuPenguins/GDSC_project_app/blob/Firebase/flow%20chart/login%20page.png
+![alt text](https://github.com/psuPenguins/GDSC_project_app/blob/Firebase/flow%20chart/login%20page.png)
+
 
 
 ## User Stories
